@@ -1,10 +1,22 @@
 {
-  "name": "Greystone",
+  "name": "schatten-ueber-greystone",
   "version": "1.0.0",
-  "description": "",
+  "description": "Ein interaktives Text-Adventure",
   "main": "index.js",
   "scripts": {
+    "start": "webpack serve --open",
+    "build": "webpack --mode=production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "private": true
+  "keywords": [
+    "text-adventure",
+    "game",
+    "interactive-fiction"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
 }

@@ -179,7 +179,7 @@ function createNoiseGenerator(audioContext) {
 }
 
 // Notizbuch ein-/ausklappen
-notebookToggle.addEventListener('click', () => {
+function toggleNotebook() {
     const notebook = document.getElementById('notebook');
     if (notebookExpanded) {
         notebook.style.maxHeight = '45px';
@@ -189,6 +189,12 @@ notebookToggle.addEventListener('click', () => {
         notebookToggle.textContent = 'Einklappen';
     }
     notebookExpanded = !notebookExpanded;
+}
+
+notebookToggle.addEventListener('click', toggleNotebook);
+notebookToggle.addEventListener('touchend', function (e) {
+    e.preventDefault(); // Verhindert Ghost-Klicks
+    toggleNotebook();
 });
 
 // Funktion zum Aktualisieren des Notizbuchs
@@ -254,6 +260,8 @@ function typeWriter(text, element, speed = 30, onComplete) {
 
 // Funktion zum Laden einer Szene
 function loadScene(sceneId) {
+    console.log("Lade Szene:", sceneId);
+
     // Wenn Audio initialisiert ist, abspielen
     if (audioInitialized && ambientSound) {
         ambientSound.play();
@@ -261,6 +269,11 @@ function loadScene(sceneId) {
 
     currentSceneId = sceneId;
     const scene = gameData[sceneId];
+
+    if (!scene) {
+        console.error("Szene nicht gefunden:", sceneId);
+        return;
+    }
 
     // Choices leeren
     choicesElement.innerHTML = '';
@@ -280,7 +293,22 @@ function loadScene(sceneId) {
                 const button = document.createElement('button');
                 button.className = 'choice-btn';
                 button.textContent = choice.text;
+
+                // Click-Handler für Desktop
                 button.addEventListener('click', () => {
+                    // Hinweis zum Notizbuch hinzufügen, falls vorhanden
+                    if (choice.addClue) {
+                        playerClues[choice.addClue.id] = choice.addClue.text;
+                        updateNotebook();
+                    }
+
+                    // Nächste Szene laden
+                    loadScene(choice.nextId);
+                });
+
+                // Touch-Handler für mobile Geräte
+                button.addEventListener('touchend', (e) => {
+                    e.preventDefault(); // Verhindert doppelte Klicks
                     // Hinweis zum Notizbuch hinzufügen, falls vorhanden
                     if (choice.addClue) {
                         playerClues[choice.addClue.id] = choice.addClue.text;
@@ -325,6 +353,8 @@ function initializeAudio() {
 
 // Spiel starten mit Start-Button anstelle von automatischem Start
 window.onload = function () {
+    console.log("Seite geladen, erstelle Start-Button...");
+
     const startButtonContainer = document.createElement('div');
     startButtonContainer.style.textAlign = 'center';
     startButtonContainer.style.marginTop = '40px';
@@ -335,10 +365,20 @@ window.onload = function () {
     startButton.style.display = 'inline-block';
     startButton.style.minWidth = '200px';
 
+    // Click-Handler für Desktop
     startButton.addEventListener('click', () => {
         console.log("Spiel-Start-Button geklickt");
         // initializeAudio(); // Audio nach Benutzerinteraktion initialisieren
-        // startButtonContainer.remove(); // Button entfernen
+        startButtonContainer.remove(); // Button entfernen
+        loadScene('start'); // Spiel starten
+    });
+
+    // Touch-Handler für mobile Geräte
+    startButton.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        console.log("Spiel-Start-Button getippt");
+        // initializeAudio(); // Audio nach Benutzerinteraktion initialisieren
+        startButtonContainer.remove(); // Button entfernen
         loadScene('start'); // Spiel starten
     });
 

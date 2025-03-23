@@ -4,7 +4,7 @@ const gameData = {
     start: {
         text: "Der Regen peitscht dir ins Gesicht, als das kleine Boot an der verwitterten Anlegestelle der Ashcliff-Klinik anlegt. Die düstere Silhouette des viktorianischen Gebäudes zeichnet sich gegen den grauen Himmel ab. 'Willkommen auf Greystone, Marshal', sagt der Bootsführer mit einem seltsamen Unterton. 'Sie wurden erwartet.' Du bist hier, um das mysteriöse Verschwinden von Patient 67 zu untersuchen. Ein schwerer Sturm zieht auf, und du weißt, dass du für mindestens drei Tage auf dieser Insel festsitzen wirst.",
         choices: [{
-            text: "Mit dem Klinikdirektor Dr. Cawley sprechen", nextId: "meet_director"
+            text: "Mit dem Klinikdirektor Prof. Freystatt sprechen", nextId: "meet_director"
         }, {
             text: "Zuerst einen Rundgang durch die Anlage machen", nextId: "explore_grounds"
         }, {
@@ -17,7 +17,7 @@ const gameData = {
 
     // Begegnung mit dem Direktor - Einstieg in Handlungsstrang 1
     meet_director: {
-        text: "Dr. Cawley empfängt dich in seinem holzgetäfelten Büro. 'Ah, der Ermittler vom Festland. Ihr Timing ist... interessant.' Er mustert dich mit durchdringenden Augen. 'Patient 67 ist vor drei Tagen verschwunden. Aus einem verschlossenen Zimmer im Hochsicherheitstrakt C. Unmöglich, sagen meine Mitarbeiter. Aber hier sind wir.' Er reicht dir eine dünne Akte. 'Das ist alles, was wir über ihn haben.' Als du die Akte öffnest, stockt dir der Atem - die meisten Seiten sind geschwärzt oder fehlen komplett.",
+        text: "Prof. Freystatt empfängt dich in seinem holzgetäfelten Büro. 'Ah, der Ermittler vom Festland. Ihr Timing ist... interessant.' Er mustert dich mit durchdringenden Augen. 'Patient 67 ist vor drei Tagen verschwunden. Aus einem verschlossenen Zimmer im Hochsicherheitstrakt C. Unmöglich, sagen meine Mitarbeiter. Aber hier sind wir.' Er reicht dir eine dünne Akte. 'Das ist alles, was wir über ihn haben.' Als du die Akte öffnest, stockt dir der Atem - die meisten Seiten sind geschwärzt oder fehlen komplett.",
         choices: [{
             text: "Nach dem Grund für die unvollständige Akte fragen", nextId: "incomplete_file"
         }, {
@@ -34,11 +34,11 @@ const gameData = {
 
     // Erkundung der Anlage - Einstieg in Handlungsstrang 2
     explore_grounds: {
-        text: "Der Klinikwächter McPherson führt dich über das weitläufige Gelände. 'Die Hauptgebäude stammen aus dem späten 19. Jahrhundert', erklärt er. 'Aber der Ostflügel wurde erst vor 15 Jahren angebaut.' Er deutet auf einen moderneren Gebäudeteil, der durch einen langen Gang mit dem Hauptgebäude verbunden ist. Ein Schild warnt: 'Nur autorisiertes Personal - Experimentelle Therapien'. Als ihr an einer Gruppe Patienten vorbeikommt, starrt dich einer intensiv an und flüstert: 'Sie verändern unsere Gedanken dort drin. Sie machen uns zu anderen Menschen.'",
+        text: "Der Klinikwächter C. Malberg führt dich über das weitläufige Gelände. 'Die Hauptgebäude stammen aus dem späten 19. Jahrhundert', erklärt er. 'Aber der Ostflügel wurde erst vor 15 Jahren angebaut.' Er deutet auf einen moderneren Gebäudeteil, der durch einen langen Gang mit dem Hauptgebäude verbunden ist. Ein Schild warnt: 'Nur autorisiertes Personal - Experimentelle Therapien'. Als ihr an einer Gruppe Patienten vorbeikommt, starrt dich einer intensiv an und flüstert: 'Sie verändern unsere Gedanken dort drin. Sie machen uns zu anderen Menschen.'",
         choices: [{
             text: "Den Patienten nach seinen Erfahrungen befragen", nextId: "patient_testimonial"
         }, {
-            text: "McPherson nach dem Ostflügel fragen", nextId: "east_wing_inquiry"
+            text: "C. Malberg nach dem Ostflügel fragen", nextId: "east_wing_inquiry"
         }, {
             text: "Zum Hauptgebäude gehen und mit dem Personal sprechen", nextId: "meet_staff"
         }]
@@ -63,7 +63,7 @@ const gameData = {
 
     // Nach dem Treffen mit dem Direktor
     incomplete_file: {
-        text: "Dr. Cawley wirkt kurz verunsichert. 'Staatsgeheimnisse', sagt er schließlich mit einem falschen Lächeln. 'Patient 67 war... ist ein besonderer Fall. Die Regierung hat ein Interesse daran, bestimmte Details unter Verschluss zu halten.' Er trommelt mit den Fingern auf seinen Schreibtisch. 'Was ich Ihnen sagen kann: Er wurde vor sechs Monaten eingeliefert. Diagnose: Wahnvorstellungen und gefährliche Fixierung auf Verschwörungstheorien.' Als du weiter nachfragst, schneidet er dir das Wort ab: 'Sheriff Wilson wird Sie zu Ihrer Unterkunft bringen. Der Sturm wird bald hier sein.'",
+        text: "Prof. Freystatt wirkt kurz verunsichert. 'Staatsgeheimnisse', sagt er schließlich mit einem falschen Lächeln. 'Patient 67 war... ist ein besonderer Fall. Die Regierung hat ein Interesse daran, bestimmte Details unter Verschluss zu halten.' Er trommelt mit den Fingern auf seinen Schreibtisch. 'Was ich Ihnen sagen kann: Er wurde vor sechs Monaten eingeliefert. Diagnose: Wahnvorstellungen und gefährliche Fixierung auf Verschwörungstheorien.' Als du weiter nachfragst, schneidet er dir das Wort ab: 'Sheriff Wilson wird Sie zu Ihrer Unterkunft bringen. Der Sturm wird bald hier sein.'",
         choices: [{
             text: "Darauf bestehen, mehr über den Patienten zu erfahren",
             nextId: "insist_information"
@@ -77,9 +77,9 @@ const gameData = {
 
     // Auf mehr Informationen bestehen
     insist_information: {
-        text: "Du lehnst dich vor. 'Dr. Cawley, ich bin im Auftrag der US-Marshals hier. Wenn ein gefährlicher Patient entkommen ist, brauche ich alle verfügbaren Informationen.' Cawleys Lächeln verschwindet. 'Sie verstehen nicht, Marshal. Es gibt... Protokolle. Ich würde Ihnen gerne helfen, aber meine Hände sind gebunden.' Er geht zum Fenster. 'Dieser Patient... er war brillant. Ein ehemaliger Arzt, der zu tief in Dinge eingetaucht ist, die er nicht hätte sehen sollen.' Er dreht sich zu dir um. 'Suchen Sie Dr. Sheehan. Er war sein Therapeut. Aber seien Sie vorsichtig – nicht jeder hier will, dass dieser Patient gefunden wird.'",
+        text: "Du lehnst dich vor. 'Prof. Freystatt, ich bin im Auftrag der US-Marshals hier. Wenn ein gefährlicher Patient entkommen ist, brauche ich alle verfügbaren Informationen.' Freystatts Lächeln verschwindet. 'Sie verstehen nicht, Marshal. Es gibt... Protokolle. Ich würde Ihnen gerne helfen, aber meine Hände sind gebunden.' Er geht zum Fenster. 'Dieser Patient... er war brillant. Ein ehemaliger Arzt, der zu tief in Dinge eingetaucht ist, die er nicht hätte sehen sollen.' Er dreht sich zu dir um. 'Suchen Sie Dr. Bleich. Er war sein Therapeut. Aber seien Sie vorsichtig – nicht jeder hier will, dass dieser Patient gefunden wird.'",
         choices: [{
-            text: "Nach Dr. Sheehan suchen", nextId: "find_sheehan", addClue: {
+            text: "Nach Dr. Bleich suchen", nextId: "find_sheehan", addClue: {
                 id: "doctor_patient",
                 text: "Patient 67 war angeblich selbst ein Arzt, bevor er in die Klinik eingeliefert wurde."
             }
@@ -93,13 +93,13 @@ const gameData = {
 
     // Wer will den Patienten verstecken?
     who_wants_hiding: {
-        text: "Dr. Cawley zögert, dann senkt er die Stimme. 'Der Aufsichtsrat. Sie haben... Interesse an den Forschungsergebnissen aus dem Ostflügel.' Er schaut nervös zur Tür. 'Patient 67 hatte Zugang zu Informationen, die besser verborgen bleiben. Er begann, Fragen zu stellen. Unbequeme Fragen.' Ein lautes Donnergrollen unterbricht das Gespräch. 'Der Sturm kommt früher als erwartet', sagt Cawley, sichtlich erleichtert über die Ablenkung. 'Wir sollten dieses Gespräch später fortsetzen. Finden Sie Dr. Sheehan. Aber erwähnen Sie nicht, dass ich Sie geschickt habe.'",
+        text: "Prof. Freystatt zögert, dann senkt er die Stimme. 'Der Aufsichtsrat. Sie haben... Interesse an den Forschungsergebnissen aus dem Ostflügel.' Er schaut nervös zur Tür. 'Patient 67 hatte Zugang zu Informationen, die besser verborgen bleiben. Er begann, Fragen zu stellen. Unbequeme Fragen.' Ein lautes Donnergrollen unterbricht das Gespräch. 'Der Sturm kommt früher als erwartet', sagt Freystatt, sichtlich erleichtert über die Ablenkung. 'Wir sollten dieses Gespräch später fortsetzen. Finden Sie Dr. Bleich. Aber erwähnen Sie nicht, dass ich Sie geschickt habe.'",
         choices: [{
             text: "Nach dem Aufsichtsrat fragen", nextId: "board_inquiry"
         }, {
-            text: "Dr. Cawley nach seiner eigenen Rolle fragen", nextId: "cawley_role"
+            text: "Prof. Freystatt nach seiner eigenen Rolle fragen", nextId: "Freystatt_role"
         }, {
-            text: "Das Gespräch beenden und nach Dr. Sheehan suchen",
+            text: "Das Gespräch beenden und nach Dr. Bleich suchen",
             nextId: "find_sheehan",
             addClue: {
                 id: "board_interest",
@@ -110,9 +110,9 @@ const gameData = {
 
     // Die Akte im Quartier studieren
     examine_file: {
-        text: "In deinem spartanischen Quartier breitest du die dünne Akte aus. Trotz der vielen geschwärzten Stellen findest du einige brauchbare Informationen: Patient 67 wurde vor genau sechs Monaten und drei Tagen eingeliefert. Diagnose: Paranoide Schizophrenie mit Wahnvorstellungen. Auf einem Foto sieht man nur einen verschwommenen Schatten. Interessant ist ein Therapiebericht von Dr. Sheehan: 'Patient zeigt außergewöhnliches Wissen über medizinische Verfahren und Institutionen. Behauptet, selbst in ähnlicher Einrichtung gearbeitet zu haben. Fixiert auf Verschwörungstheorie zu experimentellen Behandlungen.' Jemand hat am Rand notiert: 'Zu viel Wissen. Gefährlich.'",
+        text: "In deinem spartanischen Quartier breitest du die dünne Akte aus. Trotz der vielen geschwärzten Stellen findest du einige brauchbare Informationen: Patient 67 wurde vor genau sechs Monaten und drei Tagen eingeliefert. Diagnose: Paranoide Schizophrenie mit Wahnvorstellungen. Auf einem Foto sieht man nur einen verschwommenen Schatten. Interessant ist ein Therapiebericht von Dr. Bleich: 'Patient zeigt außergewöhnliches Wissen über medizinische Verfahren und Institutionen. Behauptet, selbst in ähnlicher Einrichtung gearbeitet zu haben. Fixiert auf Verschwörungstheorie zu experimentellen Behandlungen.' Jemand hat am Rand notiert: 'Zu viel Wissen. Gefährlich.'",
         choices: [{
-            text: "Dr. Sheehan aufsuchen", nextId: "find_sheehan", addClue: {
+            text: "Dr. Bleich aufsuchen", nextId: "find_sheehan", addClue: {
                 id: "medical_knowledge",
                 text: "Patient 67 verfügt über medizinisches Fachwissen und behauptet, in einer ähnlichen Einrichtung gearbeitet zu haben."
             }
@@ -126,9 +126,9 @@ const gameData = {
 
     // Nach anderen Kontakten fragen
     patient_contacts: {
-        text: "Dr. Cawley überlegt. 'Patient 67 hatte begrenzten Kontakt.' Er konsultiert ein Notizbuch. 'Dr. Sheehan war sein Therapeut. Schwester Rachel hat ihn beaufsichtigt. Und dann wäre da noch Wärter McPherson.' Er klappt das Buch zu. 'Merkwürdig ist, dass er außerdem jeden zweiten Mittwoch für... spezielle Behandlungen in den Ostflügel gebracht wurde. Dr. Jenkins könnte mehr wissen, aber...' Er verstummt. 'Dr. Jenkins ist schwer zu erreichen. Er verlässt den Ostflügel selten.' Cawley wirft einen Blick auf die Uhr. 'Sheriff Wilson wartet, um Sie zu Ihrem Quartier zu bringen.'",
+        text: "Prof. Freystatt überlegt. 'Patient 67 hatte begrenzten Kontakt.' Er konsultiert ein Notizbuch. 'Dr. Bleich war sein Therapeut. Schwester Rachel hat ihn beaufsichtigt. Und dann wäre da noch Wärter C. Malberg.' Er klappt das Buch zu. 'Merkwürdig ist, dass er außerdem jeden zweiten Mittwoch für... spezielle Behandlungen in den Ostflügel gebracht wurde. Dr. Jenkins könnte mehr wissen, aber...' Er verstummt. 'Dr. Jenkins ist schwer zu erreichen. Er verlässt den Ostflügel selten.' Freystatt wirft einen Blick auf die Uhr. 'Sheriff Wilson wartet, um Sie zu Ihrem Quartier zu bringen.'",
         choices: [{
-            text: "Nach Dr. Sheehan fragen", nextId: "find_sheehan"
+            text: "Nach Dr. Bleich fragen", nextId: "find_sheehan"
         }, {
             text: "Mit Schwester Rachel sprechen wollen", nextId: "talk_rachel"
         }, {
@@ -141,15 +141,15 @@ const gameData = {
         }]
     },
 
-    // Suche nach Dr. Sheehan
+    // Suche nach Dr. Bleich
     find_sheehan: {
-        text: "Die Suche nach Dr. Sheehan führt dich durch die düsteren Korridore der Klinik. Vom Personal erfährst du, dass er heute im B-Flügel Therapiesitzungen hat. Als du den Therapieraum erreichst, ist die Tür verschlossen. Ein Schild zeigt: 'Bitte nicht stören'. Durch das Fenster in der Tür siehst du einen Mann mittleren Alters, der mit einem Patienten spricht. Als er deinen Blick bemerkt, wirkt er überrascht, fast erschrocken. Er entschuldigt sich bei seinem Patienten und kommt zur Tür. 'Kann ich Ihnen helfen?', fragt er nervös.",
+        text: "Die Suche nach Dr. Bleich führt dich durch die düsteren Korridore der Klinik. Vom Personal erfährst du, dass er heute im B-Flügel Therapiesitzungen hat. Als du den Therapieraum erreichst, ist die Tür verschlossen. Ein Schild zeigt: 'Bitte nicht stören'. Durch das Fenster in der Tür siehst du einen Mann mittleren Alters, der mit einem Patienten spricht. Als er deinen Blick bemerkt, wirkt er überrascht, fast erschrocken. Er entschuldigt sich bei seinem Patienten und kommt zur Tür. 'Kann ich Ihnen helfen?', fragt er nervös.",
         choices: [{
             text: "Dich als US-Marshal vorstellen und nach Patient 67 fragen",
             nextId: "formal_inquiry_sheehan"
         }, {
-            text: "Erwähnen, dass Dr. Cawley dich geschickt hat",
-            nextId: "mention_cawley",
+            text: "Erwähnen, dass Prof. Freystatt dich geschickt hat",
+            nextId: "mention_Freystatt",
             requireClue: "board_interest"
         }, {
             text: "Beiläufig nach dem Ostflügel fragen",
@@ -158,9 +158,9 @@ const gameData = {
         }]
     },
 
-    // Formales Gespräch mit Dr. Sheehan
+    // Formales Gespräch mit Dr. Bleich
     formal_inquiry_sheehan: {
-        text: "Dr. Sheehan wirkt erleichtert, als du dich als Ermittler vorstellst. 'Patient 67. Ja, ein faszinierender Fall.' Er führt dich in ein leeres Büro. 'Ich bin besorgt um ihn. Er hatte große Fortschritte gemacht, begann, seine Wahnvorstellungen zu hinterfragen.' Sheehan senkt die Stimme. 'Er vertraute mir an, dass er glaubte, hier gefangen gehalten zu werden, nicht als Patient, sondern als... Gefangener. Wegen dem, was er wusste.' Er zögert. 'Kurz vor seinem Verschwinden sagte er mir, er hätte Beweise gefunden. In seinem Zimmer. Er wollte sie mir am nächsten Tag zeigen. Aber dann war er weg.'",
+        text: "Dr. Bleich wirkt erleichtert, als du dich als Ermittler vorstellst. 'Patient 67. Ja, ein faszinierender Fall.' Er führt dich in ein leeres Büro. 'Ich bin besorgt um ihn. Er hatte große Fortschritte gemacht, begann, seine Wahnvorstellungen zu hinterfragen.' Sheehan senkt die Stimme. 'Er vertraute mir an, dass er glaubte, hier gefangen gehalten zu werden, nicht als Patient, sondern als... Gefangener. Wegen dem, was er wusste.' Er zögert. 'Kurz vor seinem Verschwinden sagte er mir, er hätte Beweise gefunden. In seinem Zimmer. Er wollte sie mir am nächsten Tag zeigen. Aber dann war er weg.'",
         choices: [{
             text: "Fragen, welche Art von Beweisen er meinte", nextId: "evidence_nature"
         }, {
@@ -181,7 +181,7 @@ const gameData = {
         choices: [{
             text: "Das Notizbuch nehmen und gehen", nextId: "take_notes", addClue: {
                 id: "sheehan_notes",
-                text: "Dr. Sheehans Notizen erwähnen einen versteckten Safe hinter dem Gemälde in Zimmer 67."
+                text: "Dr. Bleichs Notizen erwähnen einen versteckten Safe hinter dem Gemälde in Zimmer 67."
             }
         }, {
             text: "Nach Dr. Jenkins fragen", nextId: "jenkins_inquiry"
@@ -270,7 +270,7 @@ const gameData = {
             text: "Einen Umweg suchen, vielleicht gibt es einen alternativen Eingang",
             nextId: "find_alternative_entrance"
         }, {
-            text: "Zurückgehen und Dr. Sheehan nach Projekt JANUS fragen",
+            text: "Zurückgehen und Dr. Bleich nach Projekt JANUS fragen",
             nextId: "ask_sheehan_janus",
             addClue: {
                 id: "project_janus_door",
@@ -279,15 +279,15 @@ const gameData = {
         }]
     },
 
-    // Dr. Sheehan über Projekt JANUS befragen
+    // Dr. Bleich über Projekt JANUS befragen
     ask_sheehan_janus: {
-        text: "Du findest Dr. Sheehan in seinem Büro, vertieft in Akten. Als du 'Projekt JANUS' erwähnst, erstarrt er. Er steht auf, schließt die Tür und senkt seine Stimme. 'Wo haben Sie davon gehört?' Du erzählst ihm von der Tür im Keller und den Hinweisen im Notizbuch. Er wird blass. 'Das ist... gefährliches Wissen, Marshal.' Er überlegt. 'JANUS - der römische Gott mit zwei Gesichtern. Passend.' Er seufzt schwer. 'Es begann als Therapie für Kriegstraumata. Selektives Vergessen. Aber Dr. Jenkins... er hat es weiterentwickelt. Nicht nur Vergessen, sondern Ersetzen. Neue Identitäten erschaffen.' Er holt einen Schlüssel hervor. 'Hiermit kommen Sie durch die Wartungstür neben der Haupttür. Aber wenn Sie gehen - seien Sie vorsichtig. Und vertrauen Sie niemandem.'",
+        text: "Du findest Dr. Bleich in seinem Büro, vertieft in Akten. Als du 'Projekt JANUS' erwähnst, erstarrt er. Er steht auf, schließt die Tür und senkt seine Stimme. 'Wo haben Sie davon gehört?' Du erzählst ihm von der Tür im Keller und den Hinweisen im Notizbuch. Er wird blass. 'Das ist... gefährliches Wissen, Marshal.' Er überlegt. 'JANUS - der römische Gott mit zwei Gesichtern. Passend.' Er seufzt schwer. 'Es begann als Therapie für Kriegstraumata. Selektives Vergessen. Aber Dr. Jenkins... er hat es weiterentwickelt. Nicht nur Vergessen, sondern Ersetzen. Neue Identitäten erschaffen.' Er holt einen Schlüssel hervor. 'Hiermit kommen Sie durch die Wartungstür neben der Haupttür. Aber wenn Sie gehen - seien Sie vorsichtig. Und vertrauen Sie niemandem.'",
         choices: [{
             text: "Den Schlüssel nehmen und zum Keller zurückkehren",
             nextId: "return_basement",
             addClue: {
                 id: "janus_key",
-                text: "Dr. Sheehan hat dir einen Schlüssel für eine Nebentür zum Projekt JANUS gegeben."
+                text: "Dr. Bleich hat dir einen Schlüssel für eine Nebentür zum Projekt JANUS gegeben."
             }
         }, {
             text: "Fragen, ob Patient 67 Teil dieses Projekts war",
@@ -300,7 +300,7 @@ const gameData = {
 
     // Verbindung zwischen Patient 67 und Projekt JANUS
     patient_janus_connection: {
-        text: "Dr. Sheehan schaut dich lange an, als würde er abwägen, wie viel er dir anvertrauen kann. 'Patient 67 war nicht nur Teil des Projekts,' sagt er schließlich. 'Er hat es mitentwickelt. Er und Dr. Jenkins waren Kollegen, führten gemeinsam die ersten klinischen Versuche durch.' Sheehan geht zu seinem Schreibtisch und zieht ein altes Foto hervor. Es zeigt zwei Männer in Laborkitteln, lächelnd vor einer Tafel voller Formeln. 'Das sind sie – Dr. Jenkins und Dr. Edward Wilson. Bevor Wilson zu Patient 67 wurde.' Er legt das Foto weg. 'Etwas ging schief. Wilson begann, das Projekt zu hinterfragen. Er wollte es stoppen. Kurz darauf erlitt er einen 'Nervenzusammenbruch' und wurde hier eingeliefert. Als Patient.'",
+        text: "Dr. Bleich schaut dich lange an, als würde er abwägen, wie viel er dir anvertrauen kann. 'Patient 67 war nicht nur Teil des Projekts,' sagt er schließlich. 'Er hat es mitentwickelt. Er und Dr. Jenkins waren Kollegen, führten gemeinsam die ersten klinischen Versuche durch.' Sheehan geht zu seinem Schreibtisch und zieht ein altes Foto hervor. Es zeigt zwei Männer in Laborkitteln, lächelnd vor einer Tafel voller Formeln. 'Das sind sie – Dr. Jenkins und Dr. Edward Wilson. Bevor Wilson zu Patient 67 wurde.' Er legt das Foto weg. 'Etwas ging schief. Wilson begann, das Projekt zu hinterfragen. Er wollte es stoppen. Kurz darauf erlitt er einen 'Nervenzusammenbruch' und wurde hier eingeliefert. Als Patient.'",
         choices: [{
             text: "Das Foto mitnehmen und den Schlüssel für den Keller nehmen",
             nextId: "take_photo_key",
@@ -319,7 +319,7 @@ const gameData = {
 
     // Mit dem Schlüssel zum Keller zurückkehren
     return_basement: {
-        text: "Mit Dr. Sheehans Schlüssel kehrst du in den Keller zurück. Neben der Haupttür findest du tatsächlich eine unscheinbare Wartungstür. Der Schlüssel passt, die Tür öffnet sich quietschend. Du betrittst einen sterilen weißen Korridor – ein erschreckender Kontrast zum modrigen Keller. Neonlicht flackert über deinem Kopf. Zu beiden Seiten befinden sich Labore mit Sichtfenstern. In einem siehst du Reihen von Medikamenten, in einem anderen medizinische Geräte. Am Ende des Ganges steht eine Tür mit der Aufschrift 'Archiv'. Als du näher kommst, hörst du Stimmen von der anderen Seite.",
+        text: "Mit Dr. Bleichs Schlüssel kehrst du in den Keller zurück. Neben der Haupttür findest du tatsächlich eine unscheinbare Wartungstür. Der Schlüssel passt, die Tür öffnet sich quietschend. Du betrittst einen sterilen weißen Korridor – ein erschreckender Kontrast zum modrigen Keller. Neonlicht flackert über deinem Kopf. Zu beiden Seiten befinden sich Labore mit Sichtfenstern. In einem siehst du Reihen von Medikamenten, in einem anderen medizinische Geräte. Am Ende des Ganges steht eine Tür mit der Aufschrift 'Archiv'. Als du näher kommst, hörst du Stimmen von der anderen Seite.",
         choices: [{
             text: "An der Tür lauschen", nextId: "eavesdrop_archive"
         }, {
@@ -407,7 +407,7 @@ const gameData = {
                 text: "Ein Hinweis deutet darauf hin, dass Wilson möglicherweise zum Leuchtturm an der Nordküste geflohen ist."
             }
         }, {
-            text: "Die Akte mitnehmen und Dr. Sheehan konfrontieren", nextId: "confront_sheehan"
+            text: "Die Akte mitnehmen und Dr. Bleich konfrontieren", nextId: "confront_sheehan"
         }, {
             text: "Die Akte mitnehmen und das Labor verlassen", nextId: "exit_with_file", addClue: {
                 id: "wilson_escape",
@@ -537,15 +537,15 @@ const gameData = {
 
     // Verbindung zum großen Twist - Identitätsenthüllung
     decoy_clinic_return: {
-        text: "Du setzt das Boot ins Wasser und startest den Motor, steuerst es aber unbemannt auf einen Kurs Richtung offenes Meer. Mit den Beweisen im wasserdichten Beutel schwimmst du ein Stück die Küste entlang, bevor du wieder an Land gehst. Durchnässt und erschöpft, aber entschlossen, machst du dich auf den Weg zurück zur Klinik. Sie werden dich dort nicht erwarten. Mit deinem wiedererlangten Wissen weißt du, wo du suchen musst, um die letzten Beweise zu sichern. Als du die Klinik erreichst, ist sie in seltsamer Stille gehüllt. Der Sturm hat nachgelassen. Du schleichst dich durch einen Nebeneingang hinein, die Waffe gezogen. In der Eingangshalle stehst du plötzlich vor Dr. Cawley. 'Andrew', sagt er mit einem traurigen Lächeln. 'Wir haben dich erwartet.'",
+        text: "Du setzt das Boot ins Wasser und startest den Motor, steuerst es aber unbemannt auf einen Kurs Richtung offenes Meer. Mit den Beweisen im wasserdichten Beutel schwimmst du ein Stück die Küste entlang, bevor du wieder an Land gehst. Durchnässt und erschöpft, aber entschlossen, machst du dich auf den Weg zurück zur Klinik. Sie werden dich dort nicht erwarten. Mit deinem wiedererlangten Wissen weißt du, wo du suchen musst, um die letzten Beweise zu sichern. Als du die Klinik erreichst, ist sie in seltsamer Stille gehüllt. Der Sturm hat nachgelassen. Du schleichst dich durch einen Nebeneingang hinein, die Waffe gezogen. In der Eingangshalle stehst du plötzlich vor Prof. Freystatt. 'Andrew', sagt er mit einem traurigen Lächeln. 'Wir haben dich erwartet.'",
         choices: [{
-            text: "Cawley konfrontieren und die Beweise vorzeigen", nextId: "identity_revelation"
+            text: "Freystatt konfrontieren und die Beweise vorzeigen", nextId: "identity_revelation"
         }, {
             text: "Versuchen zu fliehen", nextId: "attempt_escape_clinic"
         }, {
             text: "Vorgeben, immer noch der Marshal zu sein", nextId: "pretend_marshal", addClue: {
                 id: "clinic_return",
-                text: "Du bist zur Klinik zurückgekehrt, wo Dr. Cawley dich als Andrew erkannt hat."
+                text: "Du bist zur Klinik zurückgekehrt, wo Prof. Freystatt dich als Andrew erkannt hat."
             }
         }]
     },
@@ -555,11 +555,11 @@ const gameData = {
 
     // Nachfrage zum Ostflügel
     east_wing_inquiry: {
-        text: "McPhersons Gesicht verhärtet sich. 'Der Ostflügel steht nicht zur Debatte. Dr. Jenkins' Arbeit dort ist revolutionär, aber... vertraulich.' Er senkt die Stimme. 'Es gab Vorfälle. Patienten, die nicht mehr dieselben waren, nachdem sie dort behandelt wurden.' Er schaut sich nervös um. 'Vergessen Sie, was ich gesagt habe. Wenn Sie wissen, was gut für Sie ist, halten Sie sich vom Ostflügel fern.' Während er spricht, bemerkst du einen Patienten, der euch beobachtet. Er tippt sich bedeutungsvoll an die Schläfe und deutet dann auf dich.",
+        text: "C. Malbergs Gesicht verhärtet sich. 'Der Ostflügel steht nicht zur Debatte. Dr. Jenkins' Arbeit dort ist revolutionär, aber... vertraulich.' Er senkt die Stimme. 'Es gab Vorfälle. Patienten, die nicht mehr dieselben waren, nachdem sie dort behandelt wurden.' Er schaut sich nervös um. 'Vergessen Sie, was ich gesagt habe. Wenn Sie wissen, was gut für Sie ist, halten Sie sich vom Ostflügel fern.' Während er spricht, bemerkst du einen Patienten, der euch beobachtet. Er tippt sich bedeutungsvoll an die Schläfe und deutet dann auf dich.",
         choices: [{
             text: "Den beobachtenden Patienten ansprechen", nextId: "approach_watching_patient"
         }, {
-            text: "McPherson nach den 'Vorfällen' fragen", nextId: "ask_about_incidents"
+            text: "C. Malberg nach den 'Vorfällen' fragen", nextId: "ask_about_incidents"
         }, {
             text: "Einen Weg finden, heimlich in den Ostflügel zu gelangen",
             nextId: "plan_east_wing_access",
@@ -572,9 +572,9 @@ const gameData = {
 
     // Den beobachtenden Patienten ansprechen
     approach_watching_patient: {
-        text: "Du bewegst dich langsam auf den Patienten zu. McPherson ruft: 'Halt! Er ist gefährlich!' Aber etwas an dem Mann – seine klaren Augen inmitten des verwirrten Gesichtsausdrucks – lässt dich weitergehen. 'Sie sind neu', flüstert der Mann. 'Noch nicht programmiert.' Er schaut nervös zu McPherson. 'George Noyce. Ich war dort drin. Im Ostflügel. Sie verändern dich dort.' Er greift plötzlich dein Handgelenk. 'Sie beobachten uns. Jetzt dich. Pass auf, was du trinkst, was du isst. Die Medikamente...' McPherson zieht dich weg. 'Genug, Noyce! Zurück zu deinem Zimmer!' Als du weggeführt wirst, ruft Noyce: 'Finde Raum 22! Sieh dir die Fenster an!'",
+        text: "Du bewegst dich langsam auf den Patienten zu. C. Malberg ruft: 'Halt! Er ist gefährlich!' Aber etwas an dem Mann – seine klaren Augen inmitten des verwirrten Gesichtsausdrucks – lässt dich weitergehen. 'Sie sind neu', flüstert der Mann. 'Noch nicht programmiert.' Er schaut nervös zu C. Malberg. 'George Noyce. Ich war dort drin. Im Ostflügel. Sie verändern dich dort.' Er greift plötzlich dein Handgelenk. 'Sie beobachten uns. Jetzt dich. Pass auf, was du trinkst, was du isst. Die Medikamente...' C. Malberg zieht dich weg. 'Genug, Noyce! Zurück zu deinem Zimmer!' Als du weggeführt wirst, ruft Noyce: 'Finde Raum 22! Sieh dir die Fenster an!'",
         choices: [{
-            text: "McPherson nach George Noyce fragen", nextId: "ask_about_noyce"
+            text: "C. Malberg nach George Noyce fragen", nextId: "ask_about_noyce"
         }, {
             text: "Nach Raum 22 suchen", nextId: "find_room_22", addClue: {
                 id: "room_22_clue",
@@ -625,7 +625,7 @@ const gameData = {
             nextId: "secure_evidence",
             requireClue: "camera_found"
         }, {
-            text: "Den Raum verlassen und Dr. Sheehan aufsuchen",
+            text: "Den Raum verlassen und Dr. Bleich aufsuchen",
             nextId: "consult_sheehan",
             addClue: {
                 id: "identity_implantation",
@@ -636,9 +636,9 @@ const gameData = {
         }]
     },
 
-    // Dr. Sheehan aufsuchen
+    // Dr. Bleich aufsuchen
     consult_sheehan: {
-        text: "Mit den verstörenden Bildern der Behandlung im Kopf suchst du Dr. Sheehan auf. Du findest ihn allein in seinem Büro, vertieft in Krankenakten. Als du von deinen Beobachtungen im Ostflügel berichtest, wird er blass. 'Sie hätten dort nicht sein dürfen', sagt er leise. 'Es ist gefährlich.' Er schließt die Tür und senkt die Stimme. 'Was Sie beschreiben, ist Teil von Projekt JANUS. Es begann als experimentelle Behandlung für schwere Traumata – selektives Vergessen. Aber Jenkins hat es weiterentwickelt.' Er zögert. 'Nicht nur Vergessen, sondern Ersetzen. Komplette Identitäten werden gelöscht und durch neue ersetzt.' Er sieht dich durchdringend an. 'Sie sollten vorsichtig sein, Marshal. Besonders mit dem, was Sie essen oder trinken. Manche... werden ohne ihr Wissen Teil des Projekts.'",
+        text: "Mit den verstörenden Bildern der Behandlung im Kopf suchst du Dr. Bleich auf. Du findest ihn allein in seinem Büro, vertieft in Krankenakten. Als du von deinen Beobachtungen im Ostflügel berichtest, wird er blass. 'Sie hätten dort nicht sein dürfen', sagt er leise. 'Es ist gefährlich.' Er schließt die Tür und senkt die Stimme. 'Was Sie beschreiben, ist Teil von Projekt JANUS. Es begann als experimentelle Behandlung für schwere Traumata – selektives Vergessen. Aber Jenkins hat es weiterentwickelt.' Er zögert. 'Nicht nur Vergessen, sondern Ersetzen. Komplette Identitäten werden gelöscht und durch neue ersetzt.' Er sieht dich durchdringend an. 'Sie sollten vorsichtig sein, Marshal. Besonders mit dem, was Sie essen oder trinken. Manche... werden ohne ihr Wissen Teil des Projekts.'",
         choices: [{
             text: "Fragen, ob Patient 67 etwas mit dem Projekt zu tun hatte",
             nextId: "patient67_connection"
@@ -649,7 +649,7 @@ const gameData = {
             nextId: "jenkins_motivation",
             addClue: {
                 id: "sheehan_warning",
-                text: "Dr. Sheehan hat dich gewarnt, dass Patienten ohne ihr Wissen Teil von Projekt JANUS werden können."
+                text: "Dr. Bleich hat dich gewarnt, dass Patienten ohne ihr Wissen Teil von Projekt JANUS werden können."
             }
         }]
     },
@@ -714,7 +714,7 @@ const gameData = {
             text: "Nach Fotos oder anderen Beweisen für deine Identität suchen",
             nextId: "search_identity_proof"
         }, {
-            text: "Dr. Sheehan mit der Akte konfrontieren", nextId: "confront_sheehan_file"
+            text: "Dr. Bleich mit der Akte konfrontieren", nextId: "confront_sheehan_file"
         }, {
             text: "Deine eigenen Erinnerungen in Frage stellen",
             nextId: "question_memories",
@@ -729,7 +729,7 @@ const gameData = {
     question_memories: {
         text: "Allein in deinem Quartier versuchst du, deine Erinnerungen zu ordnen. Wie war deine Anreise zur Insel? Die Details verschwimmen. Dein Leben als Marshal – Einzelheiten deiner Fälle, deiner Kollegen? Alles bleibt seltsam vage. Du greifst nach deiner Brieftasche und untersuchst sie gründlich. Die Marke sieht echt aus, aber als du sie genauer betrachtest, bemerkst du feine Unstimmigkeiten. Deine Dienstwaffe – wann hast du sie zuletzt benutzt? Du kannst dich nicht erinnern. Auf dem Nachttisch steht ein Glas Wasser. Warst du immer schon so durstig? Oder... könnte etwas im Wasser sein? Die Kopfschmerzen, die dich seit der Ankunft plagen – sind sie ein Symptom? Ein Blick in den Spiegel zeigt dir dein Gesicht, aber zum ersten Mal siehst du den Mann auf dem Foto in der Akte.",
         choices: [{
-            text: "Dr. Sheehan aufsuchen und ihm von deinen Zweifeln erzählen",
+            text: "Dr. Bleich aufsuchen und ihm von deinen Zweifeln erzählen",
             nextId: "share_doubts_sheehan"
         }, {
             text: "Das Wasser und deine Medikamente untersuchen", nextId: "examine_water_meds"
@@ -770,7 +770,7 @@ const gameData = {
         }, {
             text: "Rachel konfrontieren und Antworten verlangen", nextId: "confront_rachel"
         }, {
-            text: "Dr. Sheehan aufsuchen und ihm von den zurückkehrenden Erinnerungen erzählen",
+            text: "Dr. Bleich aufsuchen und ihm von den zurückkehrenden Erinnerungen erzählen",
             nextId: "tell_sheehan_memories",
             addClue: {
                 id: "returning_memories",
@@ -781,7 +781,7 @@ const gameData = {
 
     // Verbindung zum Haupttwist
     tell_sheehan_memories: {
-        text: "Du findest Dr. Sheehan allein in seinem Büro. Als du von deinen zurückkehrenden Erinnerungen berichtest, wirkt er nicht überrascht, sondern erleichtert. 'Es funktioniert also', murmelt er. 'Andrews Abwehrmechanismen sind stärker, als Jenkins dachte.' Er sieht dich direkt an. 'Du kommst zurück, nicht wahr, Andrew?' Die Anrede mit diesem Namen löst weitere Erinnerungsfragmente aus – Sheehan als dein Kollege, gemeinsame Forschung, Freundschaft. 'Wilson hat dich gefunden, oder?', fragt Sheehan. 'Deshalb bist du zur Besinnung gekommen.' Er reicht dir einen Schlüssel. 'Im Archiv, unterer Schrank, ganz hinten. Dort liegt deine wahre Akte. Du musst dich beeilen – Jenkins wird bald bemerken, dass die Medikation nicht wirkt. Finde Wilson. Er kann dir helfen, vollständig zurückzukommen.'",
+        text: "Du findest Dr. Bleich allein in seinem Büro. Als du von deinen zurückkehrenden Erinnerungen berichtest, wirkt er nicht überrascht, sondern erleichtert. 'Es funktioniert also', murmelt er. 'Andrews Abwehrmechanismen sind stärker, als Jenkins dachte.' Er sieht dich direkt an. 'Du kommst zurück, nicht wahr, Andrew?' Die Anrede mit diesem Namen löst weitere Erinnerungsfragmente aus – Sheehan als dein Kollege, gemeinsame Forschung, Freundschaft. 'Wilson hat dich gefunden, oder?', fragt Sheehan. 'Deshalb bist du zur Besinnung gekommen.' Er reicht dir einen Schlüssel. 'Im Archiv, unterer Schrank, ganz hinten. Dort liegt deine wahre Akte. Du musst dich beeilen – Jenkins wird bald bemerken, dass die Medikation nicht wirkt. Finde Wilson. Er kann dir helfen, vollständig zurückzukommen.'",
         choices: [{
             text: "Zum Archiv gehen und die Akte holen", nextId: "identity_revelation"
         }, {
@@ -793,7 +793,7 @@ const gameData = {
             nextId: "ask_true_identity",
             addClue: {
                 id: "sheehan_confirmation",
-                text: "Dr. Sheehan hat bestätigt, dass du Andrew bist und dass deine Identität als Marshal künstlich erschaffen wurde."
+                text: "Dr. Bleich hat bestätigt, dass du Andrew bist und dass deine Identität als Marshal künstlich erschaffen wurde."
             }
         }]
     },
@@ -820,7 +820,7 @@ const gameData = {
 
     // Vision teilen
     share_vision: {
-        text: "Du beschließt, offen zu sein. 'Ich hatte gerade ein seltsames Bild vor Augen – als ob ich selbst hier gewesen wäre, an dieser Wand kratzend.' Rachels Gesicht verändert sich kaum merklich. Sie tauscht einen kurzen Blick mit dem Wachmann an der Tür aus. 'Das Gehirn spielt manchmal Streiche, Marshal. Besonders in einer Umgebung wie dieser.' Sie macht eine Notiz auf ihrem Klemmbrett. 'Haben Sie in letzter Zeit gut geschlafen? Kopfschmerzen?' Ihre scheinbare Besorgnis wirkt einstudiert. 'Dr. Cawley sollte davon wissen. Solche... Episoden können ein Zeichen von Stress sein. Vielleicht brauchen Sie etwas zur Beruhigung.'",
+        text: "Du beschließt, offen zu sein. 'Ich hatte gerade ein seltsames Bild vor Augen – als ob ich selbst hier gewesen wäre, an dieser Wand kratzend.' Rachels Gesicht verändert sich kaum merklich. Sie tauscht einen kurzen Blick mit dem Wachmann an der Tür aus. 'Das Gehirn spielt manchmal Streiche, Marshal. Besonders in einer Umgebung wie dieser.' Sie macht eine Notiz auf ihrem Klemmbrett. 'Haben Sie in letzter Zeit gut geschlafen? Kopfschmerzen?' Ihre scheinbare Besorgnis wirkt einstudiert. 'Prof. Freystatt sollte davon wissen. Solche... Episoden können ein Zeichen von Stress sein. Vielleicht brauchen Sie etwas zur Beruhigung.'",
         choices: [{
             text: "Die Medikation ablehnen und auf der Vision beharren", nextId: "refuse_medication"
         }, {
@@ -828,7 +828,7 @@ const gameData = {
             nextId: "fake_agreement",
             addClue: {
                 id: "rachel_concern",
-                text: "Schwester Rachel zeigte ungewöhnliches Interesse an deiner Vision und wollte sofort Dr. Cawley informieren."
+                text: "Schwester Rachel zeigte ungewöhnliches Interesse an deiner Vision und wollte sofort Prof. Freystatt informieren."
             }
         }, {
             text: "Das Thema wechseln und nach anderen Patienten fragen",
@@ -838,9 +838,9 @@ const gameData = {
 
     // Medikation ablehnen
     refuse_medication: {
-        text: "'Ich brauche keine Medikamente', sagst du bestimmt. 'Was ich brauche, sind Antworten.' Du deutest auf die Wandritze. 'Diese Karte wurde nicht zufällig gezeichnet. Sie zeigt einen spezifischen Ort.' Rachel wird angespannt. 'Marshal, bitte verstehen Sie, dass viele unserer Patienten Wahnvorstellungen haben. Nicht alles hat eine tiefere Bedeutung.' Als du weiter auf der Karte bestehst, erscheint Dr. Cawley in der Tür. 'Alles in Ordnung hier?' fragt er mit einem durchdringenden Blick. 'Schwester Rachel meinte, Sie hätten eine... ungewöhnliche Erfahrung.' Die Schnelligkeit, mit der er informiert wurde, macht dich misstrauisch.",
+        text: "'Ich brauche keine Medikamente', sagst du bestimmt. 'Was ich brauche, sind Antworten.' Du deutest auf die Wandritze. 'Diese Karte wurde nicht zufällig gezeichnet. Sie zeigt einen spezifischen Ort.' Rachel wird angespannt. 'Marshal, bitte verstehen Sie, dass viele unserer Patienten Wahnvorstellungen haben. Nicht alles hat eine tiefere Bedeutung.' Als du weiter auf der Karte bestehst, erscheint Prof. Freystatt in der Tür. 'Alles in Ordnung hier?' fragt er mit einem durchdringenden Blick. 'Schwester Rachel meinte, Sie hätten eine... ungewöhnliche Erfahrung.' Die Schnelligkeit, mit der er informiert wurde, macht dich misstrauisch.",
         choices: [{
-            text: "Cawley direkt nach deinen Visionen befragen", nextId: "ask_cawley_visions"
+            text: "Freystatt direkt nach deinen Visionen befragen", nextId: "ask_Freystatt_visions"
         }, {
             text: "Behaupten, es sei ein Missverständnis gewesen", nextId: "claim_misunderstanding"
         }, {
@@ -848,7 +848,7 @@ const gameData = {
             nextId: "sneak_basement",
             addClue: {
                 id: "quick_response",
-                text: "Dr. Cawley wurde ungewöhnlich schnell über deine Vision informiert, was auf eine besondere Überwachung hindeutet."
+                text: "Prof. Freystatt wurde ungewöhnlich schnell über deine Vision informiert, was auf eine besondere Überwachung hindeutet."
             }
         }]
     },
@@ -874,7 +874,7 @@ const gameData = {
     reflect_vision: {
         text: "Du lehnst dich gegen die kühle Kellerwand und schließt die Augen, versuchst, die Vision festzuhalten. Fragmente weiterer Erinnerungen tauchen auf: Du in einem Laborkittel, Notizen machend, Diskussionen mit Wilson und Jenkins. Eine Gleichung an einer Tafel, chemische Formeln. Das Gefühl von Begeisterung, dann von wachsendem Unbehagen. Ein heftiger Streit. Drohungen. Dann Dunkelheit. Als du die Augen öffnest, ist etwas anders. Du betrachtest deine Hände – sie erscheinen vertraut und doch fremd. Sind dies die Hände eines Marshals? Oder eines Arztes? Auf deinem linken Handrücken bemerkst du eine kleine Narbe. Woher stammt sie? Du erinnerst dich plötzlich: ein zerbrochenes Reagenzglas während eines Experiments.",
         choices: [{
-            text: "Dr. Sheehan aufsuchen und von den Erinnerungen berichten",
+            text: "Dr. Bleich aufsuchen und von den Erinnerungen berichten",
             nextId: "tell_sheehan_visions"
         }, {
             text: "In der Patientenkartei nach deinem eigenen Namen suchen",
@@ -891,9 +891,10 @@ const gameData = {
 
     // In der Patientenkartei suchen
     search_own_name: {
-        text: "Du schleichst dich in das Verwaltungsbüro, als das Personal in der Mittagspause ist. Die Patientenakten sind alphabetisch geordnet. Du suchst unter 'L' – ein Impuls, den du nicht erklären kannst. Tatsächlich findest du eine Akte: 'Laeddis, Andrew'. Mit klopfendem Herzen öffnest du sie. Das Foto zeigt eindeutig dich, wenn auch mit längerem Haar und Bart. Die Diagnose lautet: 'Schwere dissoziative Identitätsstörung mit Wahnvorstellungen. Patient entwickelte nach traumatischen Ereignissen eine komplexe Scheinidentität.' Ein handschriftlicher Vermerk von Dr. Cawley: 'Subjekt reagiert gut auf experimentelle Therapie. Identität als US-Marshal erfolgreich implantiert. Beobachtung unter kontrollierten Bedingungen fortsetzen.' Du lässt die Akte fallen, als wäre sie glühend heiß.",
+        text: "Du schleichst dich in das Verwaltungsbüro, als das Personal in der Mittagspause ist. Die Patientenakten sind alphabetisch geordnet. Du suchst unter 'L' – ein Impuls, den du nicht erklären kannst. Tatsächlich findest du eine Akte: 'Laeddis, Andrew'. Mit klopfendem Herzen öffnest du sie. Das Foto zeigt eindeutig dich, wenn auch mit längerem Haar und Bart. Die Diagnose lautet: 'Schwere dissoziative Identitätsstörung mit Wahnvorstellungen. Patient entwickelte nach traumatischen Ereignissen eine komplexe Scheinidentität.' Ein handschriftlicher Vermerk von Prof. Freystatt: 'Subjekt reagiert gut auf experimentelle Therapie. Identität als US-Marshal erfolgreich implantiert. Beobachtung unter kontrollierten Bedingungen fortsetzen.' Du lässt die Akte fallen, als wäre sie glühend heiß.",
         choices: [{
-            text: "Die Akte mitnehmen und konfrontiere Dr. Cawley", nextId: "confront_cawley_file"
+            text: "Die Akte mitnehmen und konfrontiere Prof. Freystatt",
+            nextId: "confront_Freystatt_file"
         }, {
             text: "Nach weiteren Hinweisen in der Akte suchen", nextId: "examine_file_further"
         }, {
@@ -912,7 +913,7 @@ const gameData = {
         choices: [{
             text: "Nach dieser 'Dolores' suchen", nextId: "search_dolores"
         }, {
-            text: "Dr. Sheehan mit den Entdeckungen konfrontieren",
+            text: "Dr. Bleich mit den Entdeckungen konfrontieren",
             nextId: "confront_sheehan_discoveries"
         }, {
             text: "Das Foto und den Brief mitnehmen und einen ruhigen Ort zum Nachdenken suchen",
@@ -943,10 +944,10 @@ const gameData = {
 
     // Versuch, sich an den Verlust zu erinnern
     remember_loss: {
-        text: "Du schließt die Augen und konzentrierst dich auf das Gefühl von Verlust. Die Bilder werden schärfer: Ein heißer Sommertag. Du arbeitest spät. Dolores ruft an, klingt besorgt über das alte Elektrosystem im Haus. Du versprichst, es am Wochenende zu prüfen, bist aber vertieft in Forschungsnotizen. Später – Sirenen, blinkende Lichter. Dein Haus in Flammen. Feuerwehrleute, die dich zurückhalten. Die schreckliche Gewissheit, dass niemand überlebt hat. Deine Schuld – du hättest es verhindern können. Das Bild einer Flasche Whiskey, tagelanger Trance. Dann die Klinik, Dr. Cawley, das Angebot: 'Wir können den Schmerz nehmen, Andrew. Für immer.' Du öffnest die Augen, Tränen strömen über dein Gesicht. Die Erinnerung ist echt – du spürst es bis in dein Mark.",
+        text: "Du schließt die Augen und konzentrierst dich auf das Gefühl von Verlust. Die Bilder werden schärfer: Ein heißer Sommertag. Du arbeitest spät. Dolores ruft an, klingt besorgt über das alte Elektrosystem im Haus. Du versprichst, es am Wochenende zu prüfen, bist aber vertieft in Forschungsnotizen. Später – Sirenen, blinkende Lichter. Dein Haus in Flammen. Feuerwehrleute, die dich zurückhalten. Die schreckliche Gewissheit, dass niemand überlebt hat. Deine Schuld – du hättest es verhindern können. Das Bild einer Flasche Whiskey, tagelanger Trance. Dann die Klinik, Prof. Freystatt, das Angebot: 'Wir können den Schmerz nehmen, Andrew. Für immer.' Du öffnest die Augen, Tränen strömen über dein Gesicht. Die Erinnerung ist echt – du spürst es bis in dein Mark.",
         choices: [{
-            text: "Dr. Cawley konfrontieren und ihm vorwerfen, deine Erinnerungen manipuliert zu haben",
-            nextId: "confront_cawley_memories"
+            text: "Prof. Freystatt konfrontieren und ihm vorwerfen, deine Erinnerungen manipuliert zu haben",
+            nextId: "confront_Freystatt_memories"
         }, {
             text: "Mit diesem Wissen Wilson im Leuchtturm suchen",
             nextId: "find_wilson_truth",
@@ -965,7 +966,7 @@ const gameData = {
     question_identity: {
         text: "In deinem Quartier untersuchst du jeden Aspekt deiner angeblichen Marshal-Identität. Deine Dienstmarke – bei genauerem Hinsehen erkennst du feine Unstimmigkeiten im Prägedruck. Deine Erinnerungen an die Ausbildung, an frühere Fälle – alles bleibt seltsam verschwommen, ohne konkrete Details. Selbst deine Ankunft auf der Insel – wie genau kamst du hierher? Die Einzelheiten entgleiten dir. Du öffnest dein Notizbuch und durchblätterst deine eigenen Aufzeichnungen seit der Ankunft. Die Handschrift in den ersten Einträgen unterscheidet sich subtil von deinen späteren Notizen – als hätte jemand anderes sie geschrieben. Oder als hättest du selbst dich verändert. Als würdest du zu jemand anderem werden – oder zurückkehren.",
         choices: [{
-            text: "Mit Dr. Sheehan über deine Entdeckungen sprechen",
+            text: "Mit Dr. Bleich über deine Entdeckungen sprechen",
             nextId: "talk_sheehan_identity"
         }, {
             text: "Einen Fluchtplan von der Insel schmieden", nextId: "plan_escape_island"
@@ -981,7 +982,7 @@ const gameData = {
 
     // Mit Sheehan über die Identität sprechen
     talk_sheehan_identity: {
-        text: "Du findest Dr. Sheehan allein in seinem Büro. Als du eintrittst, scheint er nicht überrascht. 'Sie erinnern sich, nicht wahr?', fragt er leise. Du nickst stumm und legst das Familienfoto auf seinen Schreibtisch. 'Wer bin ich wirklich?' Sheehan seufzt tief. 'Sie sind Dr. Andrew Laeddis. Ein brillanter Psychiater. Wir waren Kollegen... und Freunde.' Er nimmt ein Buch aus seinem Regal und zeigt dir den Einband: 'Neurochemische Grundlagen der Gedächtnisbildung' von Dr. A. Laeddis und Dr. E. Wilson. 'Sie und Wilson entwickelten die Grundlagen für Projekt JANUS. Aber nach dem Tod Ihrer Familie...' Er hält inne. 'Sie zerbrachen. Die Schuld war unerträglich. Sie stimmten der experimentellen Behandlung zu – Ihre eigene Schöpfung, gegen Sie selbst eingesetzt.'",
+        text: "Du findest Dr. Bleich allein in seinem Büro. Als du eintrittst, scheint er nicht überrascht. 'Sie erinnern sich, nicht wahr?', fragt er leise. Du nickst stumm und legst das Familienfoto auf seinen Schreibtisch. 'Wer bin ich wirklich?' Sheehan seufzt tief. 'Sie sind Dr. Andrew Laeddis. Ein brillanter Psychiater. Wir waren Kollegen... und Freunde.' Er nimmt ein Buch aus seinem Regal und zeigt dir den Einband: 'Neurochemische Grundlagen der Gedächtnisbildung' von Dr. A. Laeddis und Dr. E. Wilson. 'Sie und Wilson entwickelten die Grundlagen für Projekt JANUS. Aber nach dem Tod Ihrer Familie...' Er hält inne. 'Sie zerbrachen. Die Schuld war unerträglich. Sie stimmten der experimentellen Behandlung zu – Ihre eigene Schöpfung, gegen Sie selbst eingesetzt.'",
         choices: [{
             text: "Fragen, warum Sheehan dir hilft, dich zu erinnern", nextId: "why_sheehan_helps"
         }, {
@@ -991,7 +992,7 @@ const gameData = {
             nextId: "ask_recovery_possibility",
             addClue: {
                 id: "sheehan_confirmation_identity",
-                text: "Dr. Sheehan hat bestätigt, dass du Dr. Andrew Laeddis bist, ein ehemaliger Psychiater und Mitentwickler von Projekt JANUS."
+                text: "Dr. Bleich hat bestätigt, dass du Dr. Andrew Laeddis bist, ein ehemaliger Psychiater und Mitentwickler von Projekt JANUS."
             }
         }]
     },
@@ -1015,7 +1016,7 @@ const gameData = {
 
     // Das verdünnte Gegenmittel nehmen
     take_diluted_antidote: {
-        text: "Mit entschlossenem Blick nimmst du das Fläschchen und trinkst den Inhalt in einem Zug. Zunächst spürst du nichts. Dann beginnt ein leichtes Pochen in deinen Schläfen, das schnell intensiver wird. Bilder fluten deinen Geist: Du im Labor mit Wilson und Jenkins. Eure Entdeckung der Verbindung RX-78. Die ersten erfolgreichen Tests. Deine Bedenken, als du die tiefgreifenden Veränderungen bei den Testpersonen bemerkst. Der Streit mit Jenkins über die militärische Anwendung. Der Tod deiner Familie. Dein Zusammenbruch. Cawleys 'Angebot', die Schmerzen zu nehmen. Du keuchst und greifst nach Sheehans Schreibtisch, um nicht zu fallen. 'Andrew? Bist du in Ordnung?' Seine Stimme klingt weit entfernt. 'Ich erinnere mich', flüsterst du. 'Nicht an alles, aber... ich weiß, wer ich bin.'",
+        text: "Mit entschlossenem Blick nimmst du das Fläschchen und trinkst den Inhalt in einem Zug. Zunächst spürst du nichts. Dann beginnt ein leichtes Pochen in deinen Schläfen, das schnell intensiver wird. Bilder fluten deinen Geist: Du im Labor mit Wilson und Jenkins. Eure Entdeckung der Verbindung RX-78. Die ersten erfolgreichen Tests. Deine Bedenken, als du die tiefgreifenden Veränderungen bei den Testpersonen bemerkst. Der Streit mit Jenkins über die militärische Anwendung. Der Tod deiner Familie. Dein Zusammenbruch. Freystatts 'Angebot', die Schmerzen zu nehmen. Du keuchst und greifst nach Sheehans Schreibtisch, um nicht zu fallen. 'Andrew? Bist du in Ordnung?' Seine Stimme klingt weit entfernt. 'Ich erinnere mich', flüsterst du. 'Nicht an alles, aber... ich weiß, wer ich bin.'",
         choices: [{
             text: "Mit Sheehan einen Plan schmieden, um Jenkins zu konfrontieren",
             nextId: "plan_confront_jenkins"
@@ -1055,13 +1056,13 @@ const gameData = {
 
     // Mittlerer Twist: Der Klinikleiter führt ein Doppelleben
     director_office_secret: {
-        text: "Während die Klinik im nächtlichen Sturm schläft, schleichst du dich in Dr. Cawleys Büro. In einer versteckten Schublade findest du ein Tagebuch. Die Einträge sind verstörend: 'Subjekt 67 zeigt Anzeichen von Widerstand gegen die Behandlung. Erinnerungsmuster bleiben hartnäckig. Müssen aggressivere Methoden anwenden.' Ein Foto fällt heraus - es zeigt Dr. Cawley in Militäruniform neben einem Mann in Laborkittel. Auf der Rückseite steht: 'Projekt JANUS - Bewusstseinsmodifikation - Phase 2 erfolgreich'. Plötzlich hörst du Schritte auf dem Flur.",
+        text: "Während die Klinik im nächtlichen Sturm schläft, schleichst du dich in Prof. Freystatts Büro. In einer versteckten Schublade findest du ein Tagebuch. Die Einträge sind verstörend: 'Subjekt 67 zeigt Anzeichen von Widerstand gegen die Behandlung. Erinnerungsmuster bleiben hartnäckig. Müssen aggressivere Methoden anwenden.' Ein Foto fällt heraus - es zeigt Prof. Freystatt in Militäruniform neben einem Mann in Laborkittel. Auf der Rückseite steht: 'Projekt JANUS - Bewusstseinsmodifikation - Phase 2 erfolgreich'. Plötzlich hörst du Schritte auf dem Flur.",
         choices: [{
             text: "Das Tagebuch mitnehmen und schnell verschwinden",
             nextId: "take_journal",
             addClue: {
                 id: "project_janus",
-                text: "Dr. Cawley ist in ein geheimes Projekt namens JANUS involviert, das sich mit Bewusstseinsmodifikation beschäftigt."
+                text: "Prof. Freystatt ist in ein geheimes Projekt namens JANUS involviert, das sich mit Bewusstseinsmodifikation beschäftigt."
             }
         }, {
             text: "Alles zurücklegen und dich verstecken", nextId: "hide_office"
@@ -1079,7 +1080,8 @@ const gameData = {
             text: "Die Akte vernichten und an deiner Identität als Ermittler festhalten",
             nextId: "deny_reality"
         }, {
-            text: "Dr. Cawley konfrontieren und die Wahrheit verlangen", nextId: "confront_cawley"
+            text: "Prof. Freystatt konfrontieren und die Wahrheit verlangen",
+            nextId: "confront_Freystatt"
         }, {
             text: "Versuchen, dich an deine wahre Vergangenheit zu erinnern",
             nextId: "remember_past",
@@ -1107,7 +1109,7 @@ const gameData = {
 
     // Akzeptanz-Ende
     ending_acceptance: {
-        text: "Du sitzt auf einer Bank im sonnendurchfluteten Garten der Klinik. Die letzten Wochen waren schmerzhaft, aber klärend. Die Erinnerungen an den Brand, den Tod deiner Familie durch deine Nachlässigkeit, dein Abrutschen in Wahnvorstellungen - all das hast du schließlich akzeptiert. Dr. Cawley setzt sich neben dich. 'Es ist selten, dass jemand so tief in Wahnvorstellungen versinkt und dann zurückfindet', sagt er anerkennend. 'Du hast einen langen Weg vor dir, Andrew, aber den schwersten Teil hast du geschafft: der Wahrheit ins Auge zu sehen.' Er lächelt mitfühlend. 'Bereit für die Therapiesitzung heute?'",
+        text: "Du sitzt auf einer Bank im sonnendurchfluteten Garten der Klinik. Die letzten Wochen waren schmerzhaft, aber klärend. Die Erinnerungen an den Brand, den Tod deiner Familie durch deine Nachlässigkeit, dein Abrutschen in Wahnvorstellungen - all das hast du schließlich akzeptiert. Prof. Freystatt setzt sich neben dich. 'Es ist selten, dass jemand so tief in Wahnvorstellungen versinkt und dann zurückfindet', sagt er anerkennend. 'Du hast einen langen Weg vor dir, Andrew, aber den schwersten Teil hast du geschafft: der Wahrheit ins Auge zu sehen.' Er lächelt mitfühlend. 'Bereit für die Therapiesitzung heute?'",
         choices: [{
             text: "Spiel neu starten", nextId: "start"
         }]
@@ -1131,7 +1133,7 @@ const gameData = {
 
     // Zyklus-Ende
     ending_cycle: {
-        text: "Der Regen peitscht dir ins Gesicht, als das kleine Boot an der verwitterten Anlegestelle der Ashcliff-Klinik anlegt. Die düstere Silhouette des viktorianischen Gebäudes zeichnet sich gegen den grauen Himmel ab. Dr. Cawley und Sheriff Wilson erwarten dich bereits. 'Willkommen zurück, Marshal', sagt Cawley mit einem wissenden Blick. 'Bereit für eine neue Runde?' Du runzelst verwirrt die Stirn. 'Zurück? Ich war noch nie hier.' Wilson und Cawley tauschen Blicke aus. 'Natürlich nicht', sagt Cawley sanft. 'Sie sind hier, um das mysteriöse Verschwinden von Patient 67 zu untersuchen.' Ein Déjà-vu überkommt dich, aber du schiebst es beiseite. 'Genau', sagst du und greifst nach deiner Dienstmarke. 'Bringen wir es hinter uns.'",
+        text: "Der Regen peitscht dir ins Gesicht, als das kleine Boot an der verwitterten Anlegestelle der Ashcliff-Klinik anlegt. Die düstere Silhouette des viktorianischen Gebäudes zeichnet sich gegen den grauen Himmel ab. Prof. Freystatt und Sheriff Wilson erwarten dich bereits. 'Willkommen zurück, Marshal', sagt Freystatt mit einem wissenden Blick. 'Bereit für eine neue Runde?' Du runzelst verwirrt die Stirn. 'Zurück? Ich war noch nie hier.' Wilson und Freystatt tauschen Blicke aus. 'Natürlich nicht', sagt Freystatt sanft. 'Sie sind hier, um das mysteriöse Verschwinden von Patient 67 zu untersuchen.' Ein Déjà-vu überkommt dich, aber du schiebst es beiseite. 'Genau', sagst du und greifst nach deiner Dienstmarke. 'Bringen wir es hinter uns.'",
         choices: [{
             text: "Spiel neu starten", nextId: "start"
         }]

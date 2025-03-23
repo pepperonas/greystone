@@ -182,10 +182,12 @@ function createNoiseGenerator(audioContext) {
 function toggleNotebook() {
     const notebook = document.getElementById('notebook');
     if (notebookExpanded) {
-        notebook.style.maxHeight = '45px';
+        notebook.style.maxHeight = '30px'; // Reduzierte Höhe beim Einklappen
+        notebook.style.overflow = 'hidden'; // Inhalte ausblenden, die nicht in die max-height passen
         notebookToggle.textContent = 'Ausklappen';
     } else {
         notebook.style.maxHeight = '150px';
+        notebook.style.overflow = 'auto';   // Overflow auf auto stellen, um Scrollen zu ermöglichen
         notebookToggle.textContent = 'Einklappen';
     }
     notebookExpanded = !notebookExpanded;
@@ -258,6 +260,184 @@ function typeWriter(text, element, speed = 30, onComplete) {
     }, speed);
 }
 
+// Funktion zum Erstellen eines Choice-Buttons mit visueller Fortschrittsanimation
+function createChoiceButton(choice) {
+    // Wrapper für den Button erstellen (für relative Positionierung)
+    const buttonWrapper = document.createElement('div');
+    buttonWrapper.className = 'button-wrapper';
+    buttonWrapper.style.position = 'relative';
+    buttonWrapper.style.overflow = 'hidden';
+    buttonWrapper.style.borderRadius = '5px';
+    buttonWrapper.style.marginBottom = '10px';
+
+    // Button erstellen
+    const button = document.createElement('button');
+    button.className = 'choice-btn';
+    button.textContent = choice.text;
+    button.style.position = 'relative';
+    button.style.width = '100%';
+    button.style.zIndex = '2'; // Höherer z-index, damit Text über dem Overlay liegt
+    button.style.background = 'transparent'; // Transparenter Hintergrund
+
+    // Hintergrund-Element erstellen, das hinter dem Button liegt
+    const buttonBackground = document.createElement('div');
+    buttonBackground.className = 'button-background';
+    buttonBackground.style.position = 'absolute';
+    buttonBackground.style.top = '0';
+    buttonBackground.style.left = '0';
+    buttonBackground.style.width = '100%';
+    buttonBackground.style.height = '100%';
+    buttonBackground.style.backgroundColor = '#2a3b40'; // Ursprüngliche Button-Farbe
+    buttonBackground.style.borderRadius = '5px';
+    buttonBackground.style.zIndex = '0'; // Niedrigster z-index
+
+    // Long-Press-Variablen
+    const requiredPressTime = 2000; // 2 Sekunden Haltezeit
+    let pressTimer = null;
+    let animationTimer = null;
+    let startX, startY;
+
+    // Hilfsfunktion zur Ausführung der Aktion
+    function executeAction() {
+        // Hinweis zum Notizbuch hinzufügen, falls vorhanden
+        if (choice.addClue) {
+            playerClues[choice.addClue.id] = choice.addClue.text;
+            updateNotebook();
+        }
+
+        // Nächste Szene laden
+        loadScene(choice.nextId);
+    }
+
+    // Fortschritts-Element erstellen und einfügen
+    function createProgressElement() {
+        // Entferne vorhandene Progress-Elemente, falls vorhanden
+        const existingProgress = buttonWrapper.querySelector('.progress-overlay');
+        if (existingProgress) {
+            buttonWrapper.removeChild(existingProgress);
+        }
+
+        // Erstelle neues Progress-Element
+        const progressOverlay = document.createElement('div');
+        progressOverlay.className = 'progress-overlay';
+        progressOverlay.style.position = 'absolute';
+        progressOverlay.style.left = '0';
+        progressOverlay.style.top = '0';
+        progressOverlay.style.height = '100%';
+        progressOverlay.style.width = '0%';
+        progressOverlay.style.backgroundColor = 'rgba(80, 120, 140, 0.7)'; // Etwas stärker für bessere Sichtbarkeit
+        progressOverlay.style.borderRadius = '5px';
+        progressOverlay.style.pointerEvents = 'none'; // Damit Klick-Events durchgehen
+        progressOverlay.style.transition = 'width 0.1s linear';
+        progressOverlay.style.zIndex = '1'; // Zwischen Hintergrund und Button
+
+        buttonWrapper.appendChild(progressOverlay);
+        return progressOverlay;
+    }
+
+    // Touch/Maus-Start: Timer starten
+    function startTimer(e) {
+        // Position speichern, falls es ein Touch-Event ist
+        if (e.type === 'touchstart') {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        }
+
+        // Progress-Element erstellen
+        const progressElement = createProgressElement();
+
+        // Timer für die Fortschrittsanzeige
+        let elapsedTime = 0;
+        const updateInterval = 20; // Aktualisiere alle 20ms für flüssigere Animation
+
+        // Timer starten, der nach 2 Sekunden die Aktion ausführt
+        pressTimer = setTimeout(() => {
+            // Volle Zeit erreicht - Aktion ausführen
+            progressElement.style.backgroundColor = '#A3C2C3'; // Grünliche Erfolgsfarbe
+            progressElement.style.width = '100%';
+
+            // Verzögerung, damit der Nutzer die erfolgreiche Aktivierung sieht
+            setTimeout(() => {
+                executeAction();
+            }, 200);
+        }, requiredPressTime);
+
+        // Animation-Timer für die schrittweise Fortschrittsanzeige
+        let progress = 0;
+        animationTimer = setInterval(() => {
+            elapsedTime += updateInterval;
+            progress = (elapsedTime / requiredPressTime) * 100;
+
+            if (progress <= 100) {
+                progressElement.style.width = progress + '%';
+            } else {
+                clearInterval(animationTimer);
+            }
+        }, updateInterval);
+    }
+
+    // Touch/Maus-Ende: Timer abbrechen, wenn vorzeitig losgelassen
+    function cancelTimer(e) {
+        // Bei Touch-Events: Prüfen, ob eine signifikante Bewegung stattgefunden hat
+        if (e.type === 'touchend' || e.type === 'touchcancel') {
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+
+            // Wenn zu viel Bewegung stattgefunden hat, würden wir hier abbrechen
+            const moveThreshold = 20;
+            if (Math.abs(endX - startX) > moveThreshold || Math.abs(endY - startY) > moveThreshold) {
+                // Signifikante Bewegung - Timer auf jeden Fall abbrechen
+            }
+        }
+
+        if (pressTimer) {
+            clearTimeout(pressTimer);
+            pressTimer = null;
+        }
+
+        if (animationTimer) {
+            clearInterval(animationTimer);
+            animationTimer = null;
+        }
+
+        // Fortschrittsanzeige zurücksetzen
+        const progressElement = buttonWrapper.querySelector('.progress-overlay');
+        if (progressElement) {
+            // Sanfte Animation zurück zu 0
+            progressElement.style.transition = 'width 0.3s ease-out';
+            progressElement.style.width = '0%';
+
+            // Nach der Animation entfernen
+            setTimeout(() => {
+                if (progressElement && progressElement.parentNode === buttonWrapper) {
+                    buttonWrapper.removeChild(progressElement);
+                }
+            }, 300);
+        }
+    }
+
+    // Event-Listener für Maus
+    button.addEventListener('mousedown', startTimer);
+    button.addEventListener('mouseup', cancelTimer);
+    button.addEventListener('mouseleave', cancelTimer);
+
+    // Event-Listener für Touch
+    button.addEventListener('touchstart', startTimer);
+    button.addEventListener('touchend', cancelTimer);
+    button.addEventListener('touchcancel', cancelTimer);
+
+    // Standard-Verhalten verhindern
+    button.addEventListener('click', (e) => {
+        e.preventDefault(); // Verhindert Standard-Klick-Verhalten
+    });
+
+    // Elemente zusammenfügen
+    buttonWrapper.appendChild(buttonBackground);
+    buttonWrapper.appendChild(button);
+
+    return buttonWrapper;
+}
+
 // Funktion zum Laden einer Szene
 function loadScene(sceneId) {
     console.log("Lade Szene:", sceneId);
@@ -290,35 +470,8 @@ function loadScene(sceneId) {
                     return; // Diese Entscheidung nicht anzeigen
                 }
 
-                const button = document.createElement('button');
-                button.className = 'choice-btn';
-                button.textContent = choice.text;
-
-                // Click-Handler für Desktop
-                button.addEventListener('click', () => {
-                    // Hinweis zum Notizbuch hinzufügen, falls vorhanden
-                    if (choice.addClue) {
-                        playerClues[choice.addClue.id] = choice.addClue.text;
-                        updateNotebook();
-                    }
-
-                    // Nächste Szene laden
-                    loadScene(choice.nextId);
-                });
-
-                // Touch-Handler für mobile Geräte
-                button.addEventListener('touchend', (e) => {
-                    e.preventDefault(); // Verhindert doppelte Klicks
-                    // Hinweis zum Notizbuch hinzufügen, falls vorhanden
-                    if (choice.addClue) {
-                        playerClues[choice.addClue.id] = choice.addClue.text;
-                        updateNotebook();
-                    }
-
-                    // Nächste Szene laden
-                    loadScene(choice.nextId);
-                });
-
+                // Erstelle Button mit visueller Fortschrittsanimation
+                const button = createChoiceButton(choice);
                 choicesElement.appendChild(button);
             });
         });
@@ -351,37 +504,189 @@ function initializeAudio() {
     }
 }
 
-// Spiel starten mit Start-Button anstelle von automatischem Start
-window.onload = function () {
-    console.log("Seite geladen, erstelle Start-Button...");
-
+// Funktion zum Erstellen des Start-Buttons mit visueller Fortschrittsanimation
+function createStartButton() {
     const startButtonContainer = document.createElement('div');
     startButtonContainer.style.textAlign = 'center';
     startButtonContainer.style.marginTop = '40px';
 
+    // Wrapper für den Button erstellen
+    const buttonWrapper = document.createElement('div');
+    buttonWrapper.className = 'button-wrapper';
+    buttonWrapper.style.position = 'relative';
+    buttonWrapper.style.overflow = 'hidden';
+    buttonWrapper.style.borderRadius = '5px';
+    buttonWrapper.style.display = 'inline-block';
+    buttonWrapper.style.minWidth = '200px';
+
+    // Button erstellen
     const startButton = document.createElement('button');
     startButton.textContent = 'Spiel starten';
     startButton.className = 'choice-btn';
-    startButton.style.display = 'inline-block';
-    startButton.style.minWidth = '200px';
+    startButton.style.position = 'relative';
+    startButton.style.width = '100%';
+    startButton.style.zIndex = '2'; // Höherer z-index, damit Text über dem Overlay liegt
+    startButton.style.background = 'transparent';
 
-    // Click-Handler für Desktop
-    startButton.addEventListener('click', () => {
-        console.log("Spiel-Start-Button geklickt");
+    // Hintergrund-Element erstellen
+    const buttonBackground = document.createElement('div');
+    buttonBackground.className = 'button-background';
+    buttonBackground.style.position = 'absolute';
+    buttonBackground.style.top = '0';
+    buttonBackground.style.left = '0';
+    buttonBackground.style.width = '100%';
+    buttonBackground.style.height = '100%';
+    buttonBackground.style.backgroundColor = '#2a3b40'; // Ursprüngliche Button-Farbe
+    buttonBackground.style.borderRadius = '5px';
+    buttonBackground.style.zIndex = '0';
+
+    // Long-Press-Variablen
+    const requiredPressTime = 2000; // 2 Sekunden Haltezeit
+    let pressTimer = null;
+    let animationTimer = null;
+    let startX, startY;
+
+    // Hilfsfunktion zur Ausführung der Start-Aktion
+    function executeStartAction() {
+        console.log("Spiel wird gestartet!");
         // initializeAudio(); // Audio nach Benutzerinteraktion initialisieren
         startButtonContainer.remove(); // Button entfernen
         loadScene('start'); // Spiel starten
+    }
+
+    // Fortschritts-Element erstellen und einfügen
+    function createProgressElement() {
+        // Entferne vorhandene Progress-Elemente, falls vorhanden
+        const existingProgress = buttonWrapper.querySelector('.progress-overlay');
+        if (existingProgress) {
+            buttonWrapper.removeChild(existingProgress);
+        }
+
+        // Erstelle neues Progress-Element
+        const progressOverlay = document.createElement('div');
+        progressOverlay.className = 'progress-overlay';
+        progressOverlay.style.position = 'absolute';
+        progressOverlay.style.left = '0';
+        progressOverlay.style.top = '0';
+        progressOverlay.style.height = '100%';
+        progressOverlay.style.width = '0%';
+        progressOverlay.style.backgroundColor = 'rgba(80, 120, 140, 0.7)'; // Etwas stärker für bessere Sichtbarkeit
+        progressOverlay.style.borderRadius = '5px';
+        progressOverlay.style.pointerEvents = 'none'; // Damit Klick-Events durchgehen
+        progressOverlay.style.transition = 'width 0.1s linear';
+        progressOverlay.style.zIndex = '1'; // Zwischen Hintergrund und Button
+
+        buttonWrapper.appendChild(progressOverlay);
+        return progressOverlay;
+    }
+
+    // Touch/Maus-Start: Timer starten
+    function startTimer(e) {
+        // Position speichern, falls es ein Touch-Event ist
+        if (e.type === 'touchstart') {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        }
+
+        // Progress-Element erstellen
+        const progressElement = createProgressElement();
+
+        // Timer für die Fortschrittsanzeige
+        let elapsedTime = 0;
+        const updateInterval = 20; // Aktualisiere alle 20ms für flüssigere Animation
+
+        // Timer starten, der nach 2 Sekunden die Aktion ausführt
+        pressTimer = setTimeout(() => {
+            // Volle Zeit erreicht - Aktion ausführen
+            progressElement.style.backgroundColor = '#A3C2C3'; // Grünliche Erfolgsfarbe
+            progressElement.style.width = '100%';
+
+            // Verzögerung, damit der Nutzer die erfolgreiche Aktivierung sieht
+            setTimeout(() => {
+                executeStartAction();
+            }, 200);
+        }, requiredPressTime);
+
+        // Animation-Timer für die schrittweise Fortschrittsanzeige
+        let progress = 0;
+        animationTimer = setInterval(() => {
+            elapsedTime += updateInterval;
+            progress = (elapsedTime / requiredPressTime) * 100;
+
+            if (progress <= 100) {
+                progressElement.style.width = progress + '%';
+            } else {
+                clearInterval(animationTimer);
+            }
+        }, updateInterval);
+    }
+
+    // Touch/Maus-Ende: Timer abbrechen, wenn vorzeitig losgelassen
+    function cancelTimer(e) {
+        // Bei Touch-Events: Prüfen, ob eine signifikante Bewegung stattgefunden hat
+        if (e.type === 'touchend' || e.type === 'touchcancel') {
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+
+            // Wenn zu viel Bewegung stattgefunden hat, würden wir hier abbrechen
+            const moveThreshold = 20;
+            if (Math.abs(endX - startX) > moveThreshold || Math.abs(endY - startY) > moveThreshold) {
+                // Signifikante Bewegung - Timer auf jeden Fall abbrechen
+            }
+        }
+
+        if (pressTimer) {
+            clearTimeout(pressTimer);
+            pressTimer = null;
+        }
+
+        if (animationTimer) {
+            clearInterval(animationTimer);
+            animationTimer = null;
+        }
+
+        // Fortschrittsanzeige zurücksetzen
+        const progressElement = buttonWrapper.querySelector('.progress-overlay');
+        if (progressElement) {
+            // Sanfte Animation zurück zu 0
+            progressElement.style.transition = 'width 0.3s ease-out';
+            progressElement.style.width = '0%';
+
+            // Nach der Animation entfernen
+            setTimeout(() => {
+                if (progressElement && progressElement.parentNode === buttonWrapper) {
+                    buttonWrapper.removeChild(progressElement);
+                }
+            }, 300);
+        }
+    }
+
+    // Event-Listener für Maus
+    startButton.addEventListener('mousedown', startTimer);
+    startButton.addEventListener('mouseup', cancelTimer);
+    startButton.addEventListener('mouseleave', cancelTimer);
+
+    // Event-Listener für Touch
+    startButton.addEventListener('touchstart', startTimer);
+    startButton.addEventListener('touchend', cancelTimer);
+    startButton.addEventListener('touchcancel', cancelTimer);
+
+    // Standard-Verhalten verhindern
+    startButton.addEventListener('click', (e) => {
+        e.preventDefault(); // Verhindert Standard-Klick-Verhalten
     });
 
-    // Touch-Handler für mobile Geräte
-    startButton.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        console.log("Spiel-Start-Button getippt");
-        // initializeAudio(); // Audio nach Benutzerinteraktion initialisieren
-        startButtonContainer.remove(); // Button entfernen
-        loadScene('start'); // Spiel starten
-    });
+    // Elemente zusammenfügen
+    buttonWrapper.appendChild(buttonBackground);
+    buttonWrapper.appendChild(startButton);
+    startButtonContainer.appendChild(buttonWrapper);
 
-    startButtonContainer.appendChild(startButton);
+    return startButtonContainer;
+}
+
+// Spiel starten mit Start-Button anstelle von automatischem Start
+window.onload = function () {
+    console.log("Seite geladen, erstelle Start-Button...");
+    const startButtonContainer = createStartButton();
     document.querySelector('.game-container').appendChild(startButtonContainer);
 };

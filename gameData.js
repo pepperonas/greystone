@@ -1325,24 +1325,6 @@ const gameData = {
         }]
     },
 
-// Nach Dr. Jenkins und seiner Motivation fragen
-    jenkins_motivation: {
-        text: "Du fragst nach Dr. Jenkins und seinen Motiven. Dr. Bleich wirkt beunruhigt. 'Er war einst ein idealistischer Arzt. Brillant. Sein Ziel war, PTSD bei Kriegsveteranen zu heilen, indem er traumatische Erinnerungen selektiv entfernte.' Seine Stimme wird bitter. 'Dann kamen die Militärverträge. Das Geld. Die Macht.' Er senkt die Stimme. 'Sie fragen nach seiner Motivation? Kontrolle. Die Fähigkeit, Menschen neu zu programmieren. Loyalitäten zu ändern. Identitäten zu erschaffen.' Er schüttelt den Kopf. 'Er glaubt, dass Bewusstsein nur ein chemischer Prozess ist, den man manipulieren kann. Und er hat bewiesen, dass er recht hat. Das macht ihn so gefährlich.'",
-        choices: [{
-            text: "Fragen, warum die Klinikleitung diese Arbeit zulässt",
-            nextId: "ask_administration_approval"
-        }, {
-            text: "Fragen, ob Dr. Bleich selbst an dem Projekt mitgewirkt hat",
-            nextId: "ask_Bleich_involvement",
-            addClue: {
-                id: "jenkins_control",
-                text: "Dr. Jenkins' Hauptmotivation ist Kontrolle und die Macht, menschliches Bewusstsein zu manipulieren und neu zu programmieren."
-            }
-        }, {
-            text: "Nach dem verschwundenen Dr. Wilson fragen", nextId: "patient67_connection"
-        }]
-    },
-
 // HANDLUNGSSTRANG 3: FEHLENDE SZENEN
 
 // Die Karte heimlich abzeichnen
@@ -1682,5 +1664,1689 @@ const gameData = {
         }, {
             text: "Leise im Tunnel verharren und lauschen", nextId: "listen_tunnel"
         }]
+    },
+
+    approach_elena: {
+        text: "Du wartest, bis Elena ihre Rede beendet hat und sich unter die Gäste mischt. Mit einem Champagnerglas in der Hand näherst du dich ihr, als sie gerade allein steht.\n\n\"Ms. Blackwood\", sprichst du sie an. \"Eine beeindruckende Präsentation. Dieses Projekt Tiefenleuchten klingt faszinierend.\"\n\nSie mustert dich mit kühlem Interesse. \"Danke. Und Sie sind...?\"\n\n\"Alex Carver. Ich bin neu in der Stadt und interessiere mich für innovative Umweltprojekte.\"\n\nIhr Lächeln erreicht ihre Augen nicht. \"Wie schön. Greystone kann immer engagierte neue Bürger gebrauchen.\" Sie nimmt einen Schluck Champagner. \"Was führt Sie in unsere kleine Stadt, Mr. Carver?\"\n\nIhr Ton ist freundlich, aber du spürst, wie sie dich gründlich studiert.",
+        choices: [{
+            text: "Eine Halbwahrheit erzählen - du suchst nach Investitionsmöglichkeiten",
+            nextId: "investment_lie"
+        }, {
+            text: "Eine direkte Frage zu Tom stellen", nextId: "ask_elena_tom"
+        }, {
+            text: "Mehr über Projekt Tiefenleuchten erfahren wollen", nextId: "ask_about_deeplight"
+        }]
+    },
+
+    // Halbwahrheit über Investitionen
+    investment_lie: {
+        text: "\"Ich bin auf der Suche nach Investitionsmöglichkeiten an der Küste\", erklärst du mit einem geschäftsmäßigen Lächeln. \"Erneuerbare Energien, nachhaltige Fischerei, Umweltforschung - Bereiche mit Zukunft.\"\n\nElenas Augen leuchten mit plötzlichem Interesse auf. \"Tatsächlich? Dann sind Sie hier genau richtig.\" Sie winkt einem Mann in teurem Anzug zu. \"James, komm kurz her. Mr. Carver hier ist Investor, interessiert an nachhaltigen Projekten.\"\n\nDer Mann – offenbar einer ihrer Geschäftspartner – gesellt sich zu euch, und bald befindest du dich in einem Gespräch über Investitionssummen und Renditeerwartungen.\n\n\"Projekt Tiefenleuchten könnte genau das Richtige für Sie sein\", sagt Elena. \"Wir suchen immer nach... diskreten Investoren. Vielleicht könnten wir morgen in meinem Büro detaillierter sprechen?\"\n\nDu bemerkst, wie Sheriff Malone dich von der anderen Seite des Raumes beobachtet.",
+        choices: [{
+            text: "Die Einladung annehmen",
+            nextId: "accept_meeting"
+        }, {text: "Höflich ablehnen und dich zurückziehen", nextId: "politely_decline"}, {
+            text: "Nach Tom Harrow fragen - vielleicht kennt sie den 'Umweltjournalisten'",
+            nextId: "mention_tom_casually"
+        }]
+    },
+
+    // Tom direkt ansprechen
+    ask_elena_tom: {
+        text: "\"Eigentlich bin ich auf der Suche nach einem Freund\", sagst du direkt. \"Tom Harrow. Er ist Journalist, recherchierte hier in Greystone und ist seit einigen Tagen verschwunden.\"\n\nElenas Lächeln gefriert für einen kurzen Moment, bevor sie ihre Fassung wiedererlangt. \"Ah, Mr. Harrow. Ja, er hat mich für ein Profil über lokale Unternehmen interviewt.\" Sie nimmt einen Schluck Champagner. \"Ich habe gehört, er hätte die Stadt verlassen. Etwas über einen dringenden Auftrag in Seattle, glaube ich.\"\n\nDu bemerkst, wie ihr Blick kurz zu Sheriff Malone wandert, der sofort in eure Richtung zu kommen beginnt.\n\n\"Seltsam\", erwiderst du. \"Er hätte mich informiert, wenn er wegfahren würde.\"\n\n\"Wissen Sie\", sagt Elena mit leicht gesenkter Stimme, \"Ihr Freund stellte viele... unangemessene Fragen. Über alte Geschichten. Vergangene Tragödien, die diese Stadt längst hinter sich gelassen hat.\"",
+        choices: [{text: "Nach dem Leuchtturm-Unfall fragen", nextId: "ask_elena_lighthouse"}, {
+            text: "Dich entschuldigen und zurückziehen, bevor der Sheriff ankommt",
+            nextId: "retreat_from_elena"
+        }, {text: "Konfrontieren: 'Was haben Sie mit ihm gemacht?'", nextId: "confront_elena"}]
+    },
+
+    // Nach Projekt Tiefenleuchten fragen
+    ask_about_deeplight: {
+        text: "\"Dieses Projekt Tiefenleuchten hat meine Neugier geweckt\", sagst du. \"Könnten Sie mir mehr darüber erzählen? Die Technologie klingt revolutionär.\"\n\nElena nickt anerkennend. \"Es ist unser Vorzeigeprojekt. Eine Reihe von Offshore-Plattformen, die sowohl Meeresforschung betreiben als auch saubere Energie gewinnen.\" Sie führt dich zu einer digitalen Darstellung im hinteren Teil des Saals.\n\n\"Hier können Sie sehen, wie die Plattformen aussehen werden. Die erste ist bereits in der Bauphase.\"\n\nDie Animationen zeigen beeindruckende Strukturen im Meer. Doch als du genauer hinsiehst, bemerkst du Diskrepanzen zwischen der Darstellung und einigen technischen Daten am Rand des Bildschirms. Die Konstruktion scheint für wissenschaftliche Arbeit überdimensioniert, mit seltsam großen Laderäumen und verstärkten Strukturen, die für Forschungsplattformen untypisch sind.",
+        choices: [{text: "Nach den technischen Details fragen", nextId: "ask_technical_details"}, {
+            text: "Fragen, ob es Umweltgutachten für das Projekt gibt",
+            nextId: "ask_environmental_studies"
+        }, {
+            text: "Erwähnen, dass ein Freund als Journalist darüber recherchiert",
+            nextId: "mention_tom_researching"
+        }]
+    },
+
+    // Nach dem Sheriff folgen
+    follow_sheriff: {
+        text: "Du behältst Sheriff Malone im Auge, während du dich unauffällig durch die Menge bewegst. Nach etwa zwanzig Minuten siehst du, wie er sich diskret aus dem Hauptsaal zurückzieht und durch eine Seitentür verschwindet.\n\nDu wartest einen Moment und folgst ihm dann. Der Korridor führt zu einem ruhigeren Teil des Rathauses. Die Stimme des Sheriffs ist zu hören, als du dich einer halb geöffneten Tür näherst.\n\n\"...wird heute Nacht erledigt\", hörst du ihn sagen. \"Das Boot ist bereit. Sobald Jenkins fertig ist, gibt es keine Beweise mehr.\"\n\nEine andere Stimme antwortet: \"Und was ist mit diesem Carver? Er stellt Fragen.\"\n\n\"Überlasst ihn mir\", erwidert Malone. \"Wenn er nicht schlau genug ist, die Stadt zu verlassen, bekommt er dieselbe Behandlung wie sein Freund.\"\n\nDu ziehst dich leise zurück, bevor jemand dich entdeckt.",
+        choices: [{
+            text: "Sofort das Rathaus verlassen",
+            nextId: "leave_charity_event"
+        }, {
+            text: "Versuchen, mehr zu belauschen",
+            nextId: "continue_eavesdropping_sheriff"
+        }, {text: "Fotos von den Dokumenten auf dem Tisch machen", nextId: "photograph_documents"}]
+    },
+
+    // Die Präsentation studieren
+    study_presentation: {
+        text: "Du bewegst dich zum hinteren Teil des Saals, wo die Präsentation über Projekt Tiefenleuchten in einer Endlosschleife läuft. Ohne viel Aufmerksamkeit zu erregen, studierst du die technischen Details und Grafiken.\n\nDie offizielle Darstellung zeigt eine Reihe von Offshore-Plattformen, die angeblich Meeresforschung betreiben und Daten über Meeresströmungen, Fischbestände und Wasserqualität sammeln. Doch beim genauen Hinsehen bemerkst du seltsame Unstimmigkeiten.\n\nDie Plattformen haben ungewöhnlich große Ladekapazitäten und verstärkte Strukturen, die für wissenschaftliche Arbeit überflüssig wären. Die angegebenen Positionen liegen zudem in einem Gebiet, das auf einer kleinen Navigationskarte als Naturschutzgebiet markiert ist.\n\nAls du dir Notizen machst, spürst du plötzlich eine Hand auf deiner Schulter.",
+        choices: [{
+            text: "Erschrocken umdrehen",
+            nextId: "turn_around_startled"
+        }, {text: "Ruhig bleiben und deine Notizen verstecken", nextId: "hide_notes_calmly"}, {
+            text: "So tun, als würdest du dich für eine Investition interessieren",
+            nextId: "feign_investment_interest"
+        }]
+    },
+
+    // Überraschend umdrehen
+    turn_around_startled: {
+        text: "Du drehst dich erschrocken um und siehst dich einem Mann mittleren Alters mit freundlichem Gesicht gegenüber. Er trägt einen teuren Anzug und hält ein Champagnerglas in der Hand.\n\n\"Verzeihen Sie, wenn ich Sie erschreckt habe\", sagt er lächelnd. \"James Porter, Blackwood Industries. Sie scheinen sich sehr für unser Projekt zu interessieren.\"\n\nDu versuchst, deine Nervosität zu verbergen. \"Ja, die Technologie ist faszinierend.\"\n\n\"Sind Sie vom Fach?\" fragt er, während sein Blick zu deinen Notizen wandert.\n\n\"Nein, nur ein interessierter Bürger\", erwiderst du ausweichend. \"Ich bin neu in Greystone und wollte mich über lokale Initiativen informieren.\"\n\nPorter nickt, aber sein Blick wird prüfender. \"Interessant. Die meisten 'neuen Bürger' kommen nicht direkt zu unseren Veranstaltungen.\" Er nimmt einen Schluck Champagner. \"Und Ihr Name war...?\"",
+        choices: [{
+            text: "Deinen echten Namen nennen",
+            nextId: "give_real_name"
+        }, {
+            text: "Einen falschen Namen nennen",
+            nextId: "give_fake_name"
+        }, {text: "Das Gespräch abbrechen und gehen", nextId: "exit_conversation"}]
+    },
+
+    // Ruhig bleiben und Notizen verstecken
+    hide_notes_calmly: {
+        text: "Du bleibst ruhig, lässt dein Notizbuch unauffällig in deine Jacketttasche gleiten und drehst dich mit einem freundlichen Lächeln um.\n\nVor dir steht Elena Blackwood selbst, mit einem berechnenden Blick in ihren Augen.\n\n\"Ich sehe, Sie interessieren sich für die technischen Details unseres Projekts\", sagt sie mit einem Lächeln, das ihre Augen nicht erreicht. \"Nicht viele Gäste nehmen sich die Zeit, die Präsentation so gründlich zu studieren.\"\n\n\"Es ist beeindruckend\", erwiderst du leichthin. \"Die Technologie scheint sehr... fortschrittlich.\"\n\n\"Das ist sie.\" Elena mustert dich genauer. \"Verzeihen Sie meine Direktheit, aber Sie kommen mir bekannt vor. Haben wir uns schon einmal getroffen?\"\n\nDu spürst, dass sie dich auf die Probe stellt.",
+        choices: [{
+            text: "Leugnen und das Thema wechseln",
+            nextId: "deny_and_deflect"
+        }, {
+            text: "Zugeben, dass du ein Freund von Tom Harrow bist",
+            nextId: "admit_tom_friend"
+        }, {text: "Vorgeben, ein potenzieller Investor zu sein", nextId: "pretend_investor"}]
+    }, mention_tom_researching: {
+        text: "\"Ein Freund von mir, Tom Harrow, ist Journalist. Er recherchierte über innovative Umweltprojekte wie dieses, bevor er... verschwunden ist\", sagst du und beobachtest aufmerksam Elenas Reaktion.\n\nIhr Gesicht verändert sich kaum, aber ihre Augen verengen sich leicht. \"Verschwunden? Das klingt beunruhigend.\" Sie nimmt einen Schluck Champagner. \"Ja, Mr. Harrow hat mich interviewt. Er schien besonders... interessiert an den historischen Aspekten unserer Unternehmungen. Fast besessen von alten Geschichten, die längst keine Relevanz mehr haben.\"\n\nSie winkt dezent, und du bemerkst, wie Sheriff Malone beginnt, sich durch die Menge zu euch zu bewegen.\n\n\"Leider musste er die Stadt überstürzt verlassen. Etwas über eine dringende Geschichte in Seattle, glaube ich\", fährt Elena fort. \"Haben Sie versucht, ihn anzurufen?\"",
+        choices: [{
+            text: "Behaupten, dass Tom nie von Seattle gesprochen hat", nextId: "deny_seattle_story"
+        }, {text: "Höflich verabschieden, bevor der Sheriff ankommt", nextId: "polite_exit"}, {
+            text: "Elena direkt mit den Unstimmigkeiten im Projekt konfrontieren",
+            nextId: "confront_project_flaws"
+        }]
+    },
+
+    // Sheriff-Büro aufsuchen
+    sheriff_office: {
+        text: "Das Büro des Sheriffs befindet sich in einem kleinen Backsteingebäude am Hauptplatz von Greystone. Als du die Tür öffnest, blickt eine junge Frau in Uniform von ihrem Schreibtisch auf.\n\n\"Kann ich Ihnen helfen?\" fragt sie freundlich.\n\n\"Ich würde gerne mit Sheriff Malone sprechen.\" Du setzt ein höfliches Lächeln auf. \"Es geht um meinen Freund Tom Harrow, der vermisst wird.\"\n\nIhr Gesichtsausdruck verändert sich kaum merklich. \"Der Sheriff ist momentan nicht im Büro. Er ist bei einem Einsatz.\" Sie schlägt ein Terminbuch auf. \"Ich kann Ihnen einen Termin für morgen Vormittag anbieten.\"\n\nWährend sie spricht, fällt dein Blick auf eine Pinnwand hinter ihr. Dort hängt eine Notiz mit Toms Namen und darunter der Vermerk: \"Kontakt: E.B. - erledigt\".",
+        choices: [{
+            text: "Einen Termin für morgen vereinbaren",
+            nextId: "schedule_appointment"
+        }, {text: "Nach der Notiz auf der Pinnwand fragen", nextId: "ask_about_note"}, {
+            text: "Vorgeben zu gehen, aber heimlich zurückkehren und im Büro nachsehen",
+            nextId: "sneak_back_office"
+        }]
+    },
+
+    // Nach der Notiz fragen
+    ask_about_note: {
+        text: "\"Entschuldigung, aber ist das Tom Harrows Name auf der Pinnwand dort?\" fragst du und deutest auf die Notiz.\n\nDie Deputy folgt deinem Blick und erbleicht leicht. Schnell steht sie auf und stellt sich so, dass sie die Pinnwand teilweise verdeckt.\n\n\"Das sind vertrauliche Polizeiangelegenheiten\", sagt sie mit plötzlicher Kühle. \"Wenn Sie einen Termin möchten, kann ich Sie für morgen einschreiben. Ansonsten muss ich Sie bitten zu gehen.\"\n\nIhr Tonfall hat sich merklich verändert, und ihre Hand gleitet langsam zu ihrem Funkgerät.\n\n\"Ihr Name war nochmal?\" fragt sie mit einem prüfenden Blick.",
+        choices: [{
+            text: "Einen falschen Namen angeben und einen Termin vereinbaren",
+            nextId: "give_false_name"
+        }, {
+            text: "Das Büro verlassen, aber die Umgebung beobachten",
+            nextId: "leave_and_observe"
+        }, {text: "Auf einer sofortigen Antwort bezüglich Tom bestehen", nextId: "insist_tom_info"}]
+    },
+
+    // Im Sheriffbüro einschleichen
+    sneak_back_office: {
+        text: "\"Ich verstehe. Dann komme ich morgen wieder\", sagst du höflich und verlässt das Gebäude.\n\nStatt dich jedoch zu entfernen, umrundest du den Block und beobachtest das Büro aus sicherer Entfernung. Nach etwa zwanzig Minuten siehst du, wie die Deputy das Gebäude verlässt und die Straße hinuntergeht, vermutlich für ihre Mittagspause.\n\nDu nutzt die Gelegenheit und schleichst dich durch den Hintereingang zurück ins Büro. Im leeren Raum gehst du direkt zur Pinnwand und untersuchst die Notiz genauer.\n\n\"Harrow, Thomas - Letzte Sichtung: Leuchtturm, 23.05. - Kontakt: E.B. - erledigt\"\n\nAuf Malones Schreibtisch liegt eine Akte mit dem Stempel \"VERTRAULICH - PROJEKT TIEFENLEUCHTEN\". Als du sie öffnen willst, hörst du plötzlich Schritte vor der Tür.",
+        choices: [{
+            text: "Schnell ein Foto von der Akte machen und verstecken", nextId: "quick_photo_hide"
+        }, {
+            text: "Die Akte mitnehmen und durch den Hinterausgang fliehen", nextId: "take_file_flee"
+        }, {text: "Ein Versteck im Büro suchen", nextId: "hide_in_office"}]
+    },
+
+    // Recherche über Unfälle und Todesfälle
+    research_accidents: {
+        text: "Du durchsuchst die Archive nach Unfällen oder Todesfällen, die mit den Blackwoods in Verbindung stehen könnten. Ein beunruhigendes Muster zeichnet sich ab.\n\n1976: Ein Umweltaktivist, der gegen Blackwoods Fischfabrik protestierte, ertrank bei einem \"Bootsunglück\".\n\n1987: Frank Miller und zwei Fischer starben bei dem \"Unfall\" am Leuchtturm.\n\n1995: Ein Lokalreporter, der über Korruption bei Stadtverträgen recherchierte, verließ \"plötzlich die Stadt\".\n\n2008: Ein Stadtratsmitglied, das gegen eine Blackwood-Erweiterung gestimmt hatte, starb bei einem \"Autounfall\".\n\nBesonders interessant ist ein Artikel von 2016, in dem ein ehemaliger Angestellter der Blackwoods wegen \"unbegründeter Anschuldigungen gegen die Familie\" verhaftet wurde. Der Mann hatte behauptet, die Blackwoods würden illegale Aktivitäten im alten Leuchtturm durchführen. Er wurde wegen Verleumdung verurteilt, von Sheriff Malone persönlich.",
+        choices: [{
+            text: "Nach dem ehemaligen Angestellten suchen",
+            nextId: "search_ex_employee"
+        }, {
+            text: "Deine Ergebnisse mit Martha teilen",
+            nextId: "share_findings_martha"
+        }, {text: "Zum Leuchtturm zurückkehren mit dem neuen Wissen", nextId: "lighthouse_return"}]
+    },
+
+    // Nach dem ehemaligen Angestellten suchen
+    search_ex_employee: {
+        text: "Du suchst nach weiteren Informationen über den ehemaligen Blackwood-Angestellten. Sein Name war Richard Gaines, ein ehemaliger Sicherheitsmann, der zehn Jahre für die Familie gearbeitet hatte.\n\nNach einigem Suchen findest du einen kurzen Artikel über seine Entlassung aus dem Gefängnis ein Jahr nach seiner Verurteilung - und einen Nachruf zwei Wochen später. \"Tragischer Suizid\", lautet die Überschrift.\n\nDie Bibliothekarin bemerkt dein Interesse. \"Armer Richard\", sagt sie leise, als sie an deinem Tisch vorbeigeht. \"Manche sagen, er hat sich nicht selbst umgebracht.\"\n\nSie blickt sich um, als wolle sie sichergehen, dass niemand zuhört. \"Er hat mit meiner Nichte Sandra im Diner gearbeitet. Vor seinem Tod sagte er ihr, er hätte Beweise im Leuchtturm versteckt. 'In der Laterne', sagte er. 'Der Schlüssel liegt im Licht.' Niemand hat je nachgesehen.\"",
+        choices: [{
+            text: "Nach Sandras Kontaktdaten fragen", nextId: "ask_sandra_contact"
+        }, {
+            text: "Zum Leuchtturm fahren und in der Laterne nachsehen",
+            nextId: "lighthouse_light",
+            addClue: {
+                id: "photo_clue",
+                text: "Der Ex-Angestellte Richard Gaines hat angeblich Beweise im Licht des Leuchtturms versteckt"
+            }
+        }, {
+            text: "Die Bibliothekarin nach ihrer Meinung zu den Blackwoods fragen",
+            nextId: "ask_librarian_opinion"
+        }]
+    },
+
+    // Nach Sandras Kontaktdaten fragen
+    ask_sandra_contact: {
+        text: "\"Könnte ich mit Ihrer Nichte Sandra sprechen?\" fragst du vorsichtig. \"Vielleicht weiß sie mehr über Richards Behauptungen.\"\n\nDie Bibliothekarin zögert und schaut sich erneut um. \"Sandra hat die Stadt verlassen, kurz nachdem Richard starb. Sie bekam Drohungen.\" Sie senkt die Stimme noch weiter. \"Aber sie hat mir etwas hinterlassen, für den Fall, dass jemand nachfragt.\"\n\nSie verschwindet kurz im Hinterzimmer und kehrt mit einem versiegelten Umschlag zurück. \"Sie sagte, ich solle ihn nur jemandem geben, der speziell nach Richard fragt. Das sind Sie seit sechs Jahren.\"\n\nDu öffnest den Umschlag und findest darin eine handgezeichnete Karte des Leuchtturms mit einer markierten Stelle in der Laterne sowie eine alte Ziffernfolge: 1-9-8-7.",
+        choices: [{
+            text: "Zum Leuchtturm fahren", nextId: "lighthouse", addClue: {
+                id: "code", text: "Der Zahlencode 1987 - Jahr des Unfalls am Leuchtturm"
+            }
+        }, {
+            text: "Die Bibliothekarin nach ihrer Meinung zu den Blackwoods fragen",
+            nextId: "ask_librarian_opinion"
+        }, {
+            text: "Sie nach anderen seltsamen Vorfällen in Greystone fragen",
+            nextId: "ask_strange_occurrences"
+        }]
+    },
+
+    // Meinung der Bibliothekarin zu den Blackwoods
+    ask_librarian_opinion: {
+        text: "\"Was halten Sie persönlich von den Blackwoods?\" fragst du die Bibliothekarin leise.\n\nSie blickt sich um, bevor sie antwortet, als fürchte sie, belauscht zu werden. \"Diese Stadt gehört ihnen\", flüstert sie. \"Nicht nur die Gebäude und Unternehmen. Die Menschen auch.\"\n\nSie rückt ihre Brille zurecht. \"Ich bin seit 40 Jahren Bibliothekarin hier. Habe Harold Blackwood gekannt und jetzt seine Tochter Elena. Sie lächeln in der Öffentlichkeit, spenden für wohltätige Zwecke, aber...\" Sie schüttelt den Kopf.\n\n\"Die alte Mrs. Peterson hat einmal bei einer Stadtratssitzung gegen ein Blackwood-Projekt gestimmt. Am nächsten Tag war ihr Haus abgebrannt. Ein 'elektrischer Defekt'. Seitdem widerspricht niemand mehr.\"\n\nSie legt eine Hand auf deinen Arm. \"Seien Sie vorsichtig. Die Wände in Greystone haben Ohren.\"",
+        choices: [{
+            text: "Nach dem Leuchtturm und Frank Miller fragen", nextId: "ask_lighthouse_miller"
+        }, {
+            text: "Die Bibliothek verlassen und zum Leuchtturm fahren", nextId: "lighthouse"
+        }, {
+            text: "Nach sicheren Verbündeten in der Stadt fragen", nextId: "ask_about_allies"
+        }]
+    },
+
+    // Tom kontaktiert einen Journalistenkollegen
+    contact_journalist: {
+        text: "\"Ich kenne einen Redakteur beim Boston Globe\", sagt Tom, während ihr auf der Autobahn Richtung Norden fahrt. \"Robert Jenkins. Wir haben zusammen studiert. Ihm können wir vertrauen.\"\n\nAn einer Raststätte hältst du an, und Tom nutzt eine Telefonzelle, um Jenkins anzurufen. Du beobachtest die Straße, um sicherzugehen, dass niemand euch verfolgt.\n\nTom kehrt mit einem erleichterten Lächeln zurück. \"Er trifft uns in zwei Stunden in einem Motel in Portsmouth. Er bringt ein Team mit.\"\n\nIm Motel angekommen, werdet ihr von Jenkins und zwei weiteren Journalisten begrüßt. Tom übergibt den USB-Stick und erklärt die Situation. Die Journalisten hören aufmerksam zu, machen Notizen und sichten die Beweise.\n\n\"Das ist eine Riesenstory\", sagt Jenkins schließlich. \"Umweltverschmutzung, Korruption, Mord - und alles durch eine der angesehensten Familien der Ostküste. Wir brauchen absolute Sicherheit, bevor wir das veröffentlichen.\"",
+        choices: [{
+            text: "Anbieten, nach Greystone zurückzukehren, um mehr Beweise zu sammeln",
+            nextId: "offer_return_evidence"
+        }, {
+            text: "Auf sofortige Veröffentlichung mit den vorhandenen Beweisen drängen",
+            nextId: "push_immediate_publication"
+        }, {text: "Vorschlagen, das FBI einzuschalten", nextId: "suggest_fbi"}]
+    },
+
+    // Auf sofortige Veröffentlichung drängen
+    push_immediate_publication: {
+        text: "\"Die Beweise sind erdrückend\", beharrst du. \"Jeder Tag, den wir warten, gibt den Blackwoods mehr Zeit, Spuren zu verwischen und weitere Zeugen zum Schweigen zu bringen.\"\n\nTom nickt zustimmend. \"Die Tonaufnahme allein ist belastend genug. Elena Blackwood und Sheriff Malone diskutieren offen meine Beseitigung.\"\n\nJenkins und sein Team beraten sich kurz, dann nickt er. \"Wir veröffentlichen morgen früh eine erste Story online, gefolgt von einer größeren Reportage in der Sonntagsausgabe. Außerdem informieren wir befreundete Redakteure bei anderen Medien, damit die Geschichte nicht unterdrückt werden kann.\"\n\nIn den nächsten Tagen explodiert die Geschichte national. Das FBI übernimmt die Ermittlungen, und eine Sondereinheit stürmt das Blackwood-Anwesen. Elena Blackwood, Sheriff Malone und mehrere Staatsbeamte werden verhaftet.\n\nDu und Tom werdet als Whistleblower gefeiert, aber ihr wisst beide, dass ihr für einige Zeit untertauchen müsst. Die Blackwoods mögen gefallen sein, aber ihre Verbindungen reichen weit.",
+        choices: [{
+            text: "Ein neues Leben beginnen",
+            nextId: "new_life"
+        }, {
+            text: "Ein Buch über die Ereignisse schreiben",
+            nextId: "write_book"
+        }, {text: "Weitere Korruptionsfälle aufdecken", nextId: "continue_investigations"}]
+    },
+
+    // Nach Greystone zurückkehren für mehr Beweise
+    offer_return_evidence: {
+        text: "\"Wir haben genug für einen ersten Artikel\", sagst du, \"aber ich könnte zurückgehen und mehr besorgen. Konkrete Beweise für die Verbindung zum Tod von Frank Miller zum Beispiel.\"\n\nTom schüttelt energisch den Kopf. \"Zu gefährlich. Sie wissen jetzt, dass wir entkommen sind.\"\n\n\"Ich habe Kontakte in Greystone\", erwiderst du. \"Martha würde helfen. Und ich könnte unauffällig bleiben.\"\n\nNach langer Diskussion wird ein Plan entwickelt. Du wirst zurückkehren, aber mit einer neuen Identität, während Tom mit den Journalisten an der Geschichte arbeitet. Jenkins gibt dir ein verschlüsseltes Handy für die Kommunikation.\n\n\"Drei Tage\", sagt er. \"Dann veröffentlichen wir, was wir haben.\"",
+        sneak_rescue: {
+            text: "Du schleichst dich langsam und vorsichtig die Kellertreppe hinab. Jede knarrende Stufe lässt dein Herz schneller schlagen. Unten angekommen, siehst du den Wächter, der mit dem Rücken zu dir steht und auf sein Telefon schaut.\n\nTom sitzt gefesselt auf einem Stuhl, sein Gesicht voller Blutergüsse. Seine Augen weiten sich, als er dich bemerkt, aber erstaunlicherweise verrät er dich nicht.\n\nDu greifst nach einem schweren Werkzeug, das auf einem Regal liegt, und näherst dich dem Wächter von hinten. Mit einem gezielten Schlag auf den Hinterkopf setzt du ihn außer Gefecht. Er sackt lautlos zu Boden.\n\n\"Alex!\" flüstert Tom heiser. \"Ich wusste, dass du kommen würdest. Aber wir müssen uns beeilen. Sie wollen mich morgen früh verschwinden lassen.\"",
+            choices: [{
+                text: "Toms Fesseln lösen und direkt fliehen",
+                nextId: "quick_escape"
+            }, {text: "Den Wächter fesseln und dann Tom befreien", nextId: "secure_guard"}, {
+                text: "Tom fragen, was er über Projekt Tiefenleuchten herausgefunden hat",
+                nextId: "ask_about_project"
+            }]
+        }
+    },
+
+    // Wächter anlocken
+    lure_guard: {
+        text: "Du entscheidest dich, den Wächter nach oben zu locken. Vorsichtig nimmst du eine kleine Vase von einem Regal und wirfst sie in einen anderen Raum. Das Klirren des zerbrechenden Porzellans hallt durch das leere Haus.\n\nKurz darauf hörst du fluchende Stimmen und Schritte auf der Treppe. \"Verdammte Ratten\", murmelt der Wächter, während er in den Raum tritt, aus dem das Geräusch kam.\n\nDu wartest hinter der Tür. Als er an dir vorbeigeht, springst du hervor und schlägst ihm mit einem schweren Kerzenständer auf den Hinterkopf. Er bricht bewusstlos zusammen.\n\nSchnell durchsuchst du seine Taschen und findest einen Pistole und einen Schlüsselbund. Mit pochendem Herzen machst du dich auf den Weg in den Keller.",
+        choices: [{
+            text: "Den Wächter fesseln, bevor du in den Keller gehst",
+            nextId: "secure_guard"
+        }, {
+            text: "Sofort in den Keller gehen, um Tom zu befreien", nextId: "free_tom_after_fight"
+        }, {
+            text: "Die Waffe des Wächters nehmen und vorsichtig vorgehen",
+            nextId: "take_guard_weapon"
+        }]
+    },
+
+    // Den Wächter sichern
+    secure_guard: {
+        text: "Du findest ein Seil in einem Schrank und fesselst den bewusstlosen Wächter schnell und effizient. Mit einem Tuch knebelst du ihn, um sicherzustellen, dass er keinen Alarm schlagen kann, wenn er aufwacht.\n\nSeine Waffe steckst du in deinen Gürtel - man weiß nie, wann sie nützlich sein könnte. Ein kurzer Blick in seine Taschen fördert ein Mobiltelefon, einen Autoschlüssel und eine Brieftasche mit einer ID-Karte zutage. \"Jason Miller, Blackwood Security\" steht auf der Karte.\n\nMit dem Wächter außer Gefecht machst du dich auf den Weg in den Keller, um Tom zu befreien.",
+        choices: [{text: "Tom befreien und sofort fliehen", nextId: "free_tom_escape"}, {
+            text: "Tom befragen, was er über die Blackwoods herausgefunden hat",
+            nextId: "ask_tom_blackwoods"
+        }, {text: "Das Fischerhaus nach weiteren Beweisen durchsuchen", nextId: "search_house"}]
+    },
+
+    // Waffe des Wächters nehmen
+    take_guard_weapon: {
+        text: "Du durchsuchst schnell den bewusstlosen Wächter und findest eine 9mm-Pistole, ein Messer und ein Mobiltelefon. Die Waffe steckst du in deinen Gürtel, und das Messer nimmst du in die Hand, während du die Kellertreppe hinabsteigst.\n\nIm düsteren Licht des Kellers siehst du Tom, der an einen Stuhl gefesselt ist. Sein Gesicht ist geschwollen und blutig, aber seine Augen leuchten auf, als er dich sieht.\n\n\"Alex?\", flüstert er ungläubig. \"Wie hast du mich gefunden?\"\n\n\"Lange Geschichte\", erwiderst du, während du seine Fesseln durchschneidest. \"Kannst du laufen?\"\n\n\"Ich denke schon\", sagt er und reibt sich die wunden Handgelenke. \"Aber wir müssen vorsichtig sein. Elena Blackwood hat eine ganze Sicherheitsmannschaft, und sie werden bald merken, dass etwas nicht stimmt.\"",
+        choices: [{
+            text: "Direkt fliehen, solange der Weg frei ist",
+            nextId: "direct_escape"
+        }, {
+            text: "Tom nach den wichtigsten Beweisen fragen",
+            nextId: "ask_key_evidence"
+        }, {text: "Einen Anruf mit dem Telefon des Wächters tätigen", nextId: "make_call"}]
+    },
+
+    // Tom befreien und fliehen
+    free_tom_escape: {
+        text: "Mit dem Messer schneidest du rasch Toms Fesseln durch. Er stöhnt vor Schmerz, als er versucht aufzustehen.\n\n\"Sie haben mich ziemlich übel zugerichtet\", sagt er mit einem schwachen Lächeln. \"Aber ich lebe noch, dank dir.\"\n\nDu hilfst ihm die Treppe hinauf, wobei er sich schwer auf deine Schulter stützt. Oben angekommen, wirfst du einen Blick aus dem Fenster, um sicherzugehen, dass kein weiteres Sicherheitspersonal in der Nähe ist.\n\n\"Wir müssen die Beweise sichern\", flüstert Tom dringlich. \"Ich habe alles dokumentiert - die Umweltverschmutzung, die Bestechung, die Morde. Es ist alles auf diesem USB-Stick.\" Er zieht einen kleinen Gegenstand aus seinem Schuh. \"Ich konnte ihn verstecken, bevor sie mich schnappten.\"",
+        choices: [{
+            text: "Zum Boot am alten Pier fliehen",
+            nextId: "escape_to_boat",
+            requireClue: "boat_key"
+        }, {text: "Mit dem Auto des Wächters fliehen", nextId: "take_guard_car"}, {
+            text: "Zu Martha zurückkehren, um einen sicheren Plan zu schmieden",
+            nextId: "return_to_martha"
+        }]
+    },
+
+    // Tom nach den Blackwoods befragen
+    ask_tom_blackwoods: {
+        text: "\"Tom, was genau hast du über die Blackwoods herausgefunden?\", fragst du, während du an seinen Fesseln arbeitest.\n\n\"Es ist größer, als ich dachte\", keucht er. \"Projekt Tiefenleuchten ist nur die Spitze des Eisbergs. Die Bohrplattformen sind real, aber sie sind nur ein Ablenkungsmanöver. Das eigentliche Geschäft ist Waffenschmuggel.\"\n\nTom hustet und fährt fort: \"Der Leuchtturm war ein Kontrollpunkt. Frank Miller entdeckte es 1987 und wollte zur Küstenwache gehen. Also haben sie ihn beseitigt und es als Unfall getarnt.\"\n\nEr greift nach deinem Arm. \"Alex, ich habe Beweise. Fotos, Dokumente, Aufnahmen. Alles ist auf einem USB-Stick im Leuchtturm versteckt. 'Der Schlüssel liegt im Licht' - das war mein Hinweis für dich.\"",
+        choices: [{
+            text: "Erwähnen, dass du den USB-Stick bereits gefunden hast",
+            nextId: "mention_usb",
+            requireClue: "usb"
+        }, {
+            text: "Fragen, wer noch in die Sache verwickelt ist",
+            nextId: "ask_accomplices"
+        }, {text: "Drängen, dass ihr sofort fliehen müsst", nextId: "urge_escape"}]
+    },
+
+    // Mit dem Boot fliehen
+    escape_to_boat: {
+        text: "\"Ich kenne einen Weg raus\", sagst du und zeigst Tom den Bootschlüssel. \"Martha hat mir einen Fluchtweg gezeigt.\"\n\nIhr schleicht durch das hohe Gras hinter dem Fischerhaus, wobei du Tom stützen musst. Der Weg zum alten Pier ist glücklicherweise nicht weit. Die salzige Meeresluft erfrischt eure Gesichter, während ihr euch dem Versteck nähert.\n\nWie Martha beschrieben hat, liegt ein kleines Motorboot versteckt hinter einer Sandbank. Mit zitternden Händen steckst du den Schlüssel ins Zündschloss. Der Motor springt beim ersten Versuch an.\n\n\"Wohin fahren wir?\", fragt Tom, während er sich auf eine der Bänke sinken lässt.\n\n\"Zur nächsten Großstadt. Dort gehen wir direkt zum FBI\", antwortest du, während du das Boot durch die dunklen Wellen lenkst. Hinter euch bleibt Greystone zurück, seine Lichter verblassen langsam am Horizont.",
+        choices: [{text: "Zum FBI-Büro in der nächsten Stadt fahren", nextId: "ending_fbi"}, {
+            text: "Kontakt zu einem befreundeten Journalisten aufnehmen",
+            nextId: "contact_journalist"
+        }, {
+            text: "Einen Plan schmieden, um Elena Blackwood zur Rechenschaft zu ziehen",
+            nextId: "plan_justice"
+        }]
+    },
+
+    // Mit dem Auto des Wächters fliehen
+    take_guard_car: {
+        text: "\"Wir nehmen sein Auto\", sagst du und zeigst den Schlüssel, den du dem Wächter abgenommen hast. Tom nickt schwach.\n\nVorsichtig schleicht ihr zur Vorderseite des Hauses, wo ein schwarzer SUV parkt. Du hilfst Tom auf den Beifahrersitz und steigst dann selbst ein. Der Motor startet mit einem leisen Brummen.\n\n\"Sie werden uns verfolgen\", warnt Tom, während er sich den Sicherheitsgurt anlegt. \"Die Blackwoods haben überall in der Stadt Augen.\"\n\n\"Dann fahren wir nicht durch die Stadt\", erwiderst du. \"Martha erwähnte einen alten Forstweg, der direkt zum Highway führt.\"\n\nMit einem letzten Blick auf das verlassene Fischerhaus trittst du aufs Gaspedal. Der SUV schießt vorwärts, und bald verschwindet Hansen Bay in der Dunkelheit hinter euch.",
+        choices: [{
+            text: "Den Forstweg zum Highway nehmen",
+            nextId: "forest_road"
+        }, {
+            text: "Unterwegs die Behörden anrufen",
+            nextId: "call_police_car"
+        }, {text: "Tom nach einem sicheren Versteck fragen", nextId: "ask_hideout"}]
+    },
+
+    // Den Forstweg nehmen
+    forest_road: {
+        text: "Du lenkst den SUV auf den kaum sichtbaren Waldweg, der sich zwischen dichten Bäumen hindurchschlängelt. Die Scheinwerfer kämpfen gegen die Dunkelheit an, während der Wagen über die unebene Strecke holpert.\n\n\"Woher wusstest du von diesem Weg?\", fragt Tom, der sich am Armaturenbrett festhält.\n\n\"Martha hat mir davon erzählt. Sie kennt jeden Winkel dieser Gegend.\"\n\nPlötzlich leuchten Scheinwerfer hinter euch auf. Ein Fahrzeug nähert sich mit hoher Geschwindigkeit.\n\n\"Sie haben uns gefunden\", sagt Tom mit angespannter Stimme.\n\nDu trittst das Gaspedal durch, und der SUV schießt vorwärts, während Äste an den Fenstern kratzen. Der Verfolger bleibt dran, kommt sogar näher.",
+        choices: [{
+            text: "Weiter beschleunigen und versuchen zu entkommen",
+            nextId: "speed_escape"
+        }, {
+            text: "Einen Hinterhalt vorbereiten",
+            nextId: "prepare_ambush"
+        }, {text: "Vom Weg abweichen und im Wald verstecken", nextId: "hide_forest"}]
+    },
+
+    // Eine Verfolgungsjagd
+    speed_escape: {
+        text: "Du drückst das Gaspedal bis zum Anschlag durch. Der Motor heult auf, und der SUV schießt über den holprigen Waldweg. Ihr werdet in euren Sitzen durchgeschüttelt, während das Fahrzeug über Wurzeln und Steine holpert.\n\nDer Verfolger bleibt hartnäckig dran. Ein Scheinwerferpaar, das mal näher kommt, mal zurückfällt.\n\n\"Da vorne!\", ruft Tom plötzlich und zeigt nach vorn. Ein Lichtschein ist zu sehen - der Highway!\n\nMit letzter Kraft zwingst du den SUV den steilen Hang hinauf. Als ihr auf den Asphalt einbiegt, siehst du in deinem Rückspiegel, wie der Verfolger vergeblich versucht, den schlammigen Hang zu erklimmen. Sein Fahrzeug rutscht zurück.\n\n\"Wir haben es geschafft\", keucht Tom. \"Für den Moment zumindest.\"\n\nDu nickst grimmig und drückst aufs Gas. Die Lichter von Greystone verschwinden endgültig hinter euch.",
+        choices: [{
+            text: "Zur nächsten Polizeistation fahren",
+            nextId: "drive_police_station"
+        }, {
+            text: "Ein Motel suchen, um sich zu verstecken und auszuruhen",
+            nextId: "find_motel"
+        }, {text: "Die Beweise durchgehen und einen Plan schmieden", nextId: "review_evidence"}]
+    },
+
+    // Zur Polizeistation fahren
+    drive_police_station: {
+        text: "Nach einer Stunde Fahrt erreicht ihr die Außenbezirke der nächsten größeren Stadt. Lichter von Straßenlaternen und Gebäuden ersetzen die bedrohliche Dunkelheit des Waldes.\n\n\"Wir können nicht zur lokalen Polizei\", sagt Tom schwach. \"Wir wissen nicht, wie weit der Einfluss der Blackwoods reicht.\"\n\n\"Dann fahren wir direkt zum FBI-Büro\", entscheidest du. \"Diese Sache ist zu groß für die lokale Polizei.\"\n\nIhr findet das Bundesgebäude im Zentrum der Stadt. Trotz der späten Stunde sind noch Lichter zu sehen. Mit den gesammelten Beweisen - dem USB-Stick, den Dokumenten und Toms Aussage - betretet ihr das Gebäude.\n\nEin Agent nimmt eure Geschichte ernst, besonders nachdem er einen kurzen Blick auf die Dokumente geworfen hat. Innerhalb von Stunden wird eine Task Force zusammengestellt.",
+        choices: [{
+            text: "Den Agenten alles erzählen",
+            nextId: "ending_fbi"
+        }, {text: "Nur die wichtigsten Beweise vorlegen", nextId: "selective_evidence"}, {
+            text: "Darauf bestehen, unter Zeugenschutz gestellt zu werden",
+            nextId: "witness_protection"
+        }]
+    },
+
+    // FBI-Ende
+    ending_fbi: {
+        text: "Drei Wochen später sitzt du mit Tom auf einer Parkbank und beobachtest das Treiben in der Stadt. Die Narben in seinem Gesicht beginnen zu verblassen, aber die Erinnerungen werden bleiben.\n\n\"Hast du die Nachrichten gesehen?\", fragt er und reicht dir eine Zeitung. Die Schlagzeile lautet: \"GROSSRAZZIA IN GREYSTONE - ILLEGALES ÖLBOHR- UND SCHMUGGELRING ZERSCHLAGEN\".\n\nDarunter ein Foto von Elena Blackwood und Sheriff Malone in Handschellen, eskortiert von FBI-Agenten.\n\n\"Sie haben alle erwischt\", sagt Tom mit Genugtuung. \"Elena, Malone, die Sicherheitsleute, sogar einige korrupte Beamte in der Staatsregierung. Deine Aussage und die Beweise waren entscheidend.\"\n\nDu nickst langsam. \"Frank Miller hat endlich Gerechtigkeit bekommen. Und all die anderen auch.\"\n\nTom lächelt. \"Weißt du, ich denke, ich werde ein Buch darüber schreiben. 'Die Geheimnisse von Greystone'. Was meinst du?\"\n\nENDE: Gerechtigkeit siegt",
+        choices: [{text: "Spiel neu starten", nextId: "start"}]
+    },
+
+    // Verhandlung mit den Blackwoods
+    negotiate: {
+        text: "\"Ich will nur meinen Freund zurück\", sagst du ruhig. \"Ich habe bereits gesehen, worum es geht - Projekt Tiefenleuchten, die manipulierten Umweltstudien, die Bestechungen. Aber das ist nicht mein Kampf.\"\n\nDu hältst Toms Laptop hoch. \"Hier sind alle Beweise. Bringen Sie mich zu Tom, lassen Sie uns beide gehen, und das bleibt unter uns.\"\n\nElena und der Sheriff tauschen Blicke aus.\n\n\"Woher sollen wir wissen, dass Sie keine Kopien haben?\" fragt Elena misstrauisch.\n\n\"Das wissen Sie nicht\", antwortest du. \"Aber wenn Tom und ich unbehelligt bleiben, gibt es keinen Grund, sie zu benutzen. Ansonsten gehen sie direkt an jede Nachrichtenagentur im Land.\"\n\nNach einer angespannten Pause nickt der Sheriff. \"Klug gespielt. Tom ist im alten Fischerhaus am Ende der Bucht. Wir begleiten Sie dorthin.\"\n\nStunden später sitzt du mit Tom in deinem Wagen, die Lichter von Greystone verblassen im Rückspiegel. Er ist erschöpft, aber lebend.\n\n\"Danke, Alex\", sagt er leise. \"Ich wusste, du würdest kommen.\"\n\nIhr beide habt überlebt, aber die dunklen Geheimnisse von Greystone bleiben verborgen, und die Blackwoods behalten ihre Macht. Zumindest für jetzt.\n\nENDE: Tom gerettet, Beweise aufgegeben",
+        choices: [{text: "Spiel neu starten", nextId: "start"}]
+    },
+
+    // Kampf und Flucht
+    fight_escape: {
+        text: "Du reagierst blitzschnell, stößt eine schwere Aktenschublade um und rennst los, während der Sheriff und Elena überrascht zurückweichen. Ein Schuss hallt durch den Leuchtturm, verfehlt dich aber knapp.\n\nIn einer waghalsigen Flucht rennst du die Wendeltreppe hinauf statt hinunter. Oben angekommen, hast du einen kurzen Moment Zeit, bevor deine Verfolger dich erreichen. Du siehst ein schmales Fenster, das groß genug sein könnte...\n\nOhne zu zögern, klemmst du die Festplatte aus Toms Laptop unter deine Jacke, nimmst Anlauf und springst durch das Fenster. Das Glas zersplittert, und du landest hart auf einem Vorsprung der Klippe einige Meter unterhalb.\n\nBenommen, aber entschlossen kletterst du weiter abwärts, während über dir Rufe und ein weiterer Schuss zu hören sind. Du erreichst den Strand und rennst zu deinem Wagen.\n\nStunden später bist du auf der Autobahn, weit weg von Greystone. Die Beweise auf der Festplatte könnten die Blackwoods zu Fall bringen, aber du konntest Tom nicht retten. Seine Worte verfolgen dich: \"Komm nach Greystone, wenn du in drei Tagen nichts von mir hörst.\" Er hatte dir vertraut.\n\nENDE: Flucht mit Beweisen, aber ohne Tom",
+        choices: [{text: "Spiel neu starten", nextId: "start"}]
+    }, bluff: {
+        text: "\"Sie sind zu spät\", sagst du mit überraschend ruhiger Stimme. \"Ich bin nicht so dumm, wie Sie denken. Ich habe alles bereits gesichert - Projekt Tiefenleuchten, die gefälschten Umweltgutachten, die Bestechungen, der Mord am Leuchtturmwärter 1987.\"\n\nElena erbleicht. \"Sie bluffen.\"\n\n\"Bin ich das?\" Du lächelst kalt. \"Die Dokumente wurden heute Morgen an drei verschiedene Anwälte geschickt, mit der Anweisung, sie zu veröffentlichen, falls Tom oder mir etwas zustößt. Also, wo ist er?\"\n\nElena und der Sheriff tauschen nervöse Blicke aus. Nach einem angespannten Moment senkt Malone langsam seine Waffe.\n\n\"Im Keller des alten Lagerhauses am Hafen\", gibt er widerwillig zu. \"Aber Sie verstehen nicht, was auf dem Spiel steht. Dieses Projekt würde Greystone retten, Arbeitsplätze schaffen...\"\n\n\"Auf Kosten von Menschenleben\", entgegnest du. \"Das ist vorbei.\"\n\nVierundzwanzig Stunden später ist Tom frei, die Beweise sind den Bundesbehörden übergeben, und die ersten Verhaftungen beginnen. Die Blackwood-Dynastie bricht zusammen, und die Stadt muss sich ihrer dunklen Vergangenheit stellen.\n\nTom schüttelt den Kopf, während ihr beide die Morgennachrichten verfolgt. \"Ich wusste, dass du kommen würdest, Alex. Aber ich hätte nie gedacht, dass wir es tatsächlich schaffen.\"\n\nENDE: Tom gerettet, Blackwoods entlarvt",
+        choices: [{text: "Spiel neu starten", nextId: "start"}]
+    },
+
+    // Bibliotheksrecherche
+    library: {
+        text: "Die Stadtbibliothek von Greystone ist in einem alten viktorianischen Gebäude untergebracht. Innen riecht es nach altem Papier und Holzpolitur. Eine ältere Bibliothekarin mit Brille führt dich zum Archiv, nachdem du erklärt hast, dass du historische Recherchen zum Leuchtturm anstellst.\n\n\"Hier haben wir alle Ausgaben des 'Greystone Chronicle' auf Mikrofilm\", erklärt sie. \"Wenn Sie Hilfe brauchen, rufen Sie mich.\"\n\nDu suchst nach Berichten über den Unfall von 1987 und wirst schnell fündig. Die Titelseite vom 17. Oktober zeigt ein Foto des rauchenden Leuchtturms mit der Schlagzeile: \"TRAGÖDIE AM LEUCHTTURM - DREI TOTE BEI NÄCHTLICHEM FEUER\".\n\nDer Artikel beschreibt, wie Leuchtturmwärter Frank Miller und zwei Fischer bei einem \"tragischen Unfall\" starben, als ein Treibstoffleck Feuer fing. Interessanterweise wird Harold Blackwood als erster am Unfallort genannt.",
+        choices: [{
+            text: "Nach Artikeln über die Blackwood-Familie suchen", nextId: "research_blackwoods"
+        }, {
+            text: "Nach anderen Unfällen oder Todesfällen in Verbindung mit den Blackwoods suchen",
+            nextId: "research_accidents"
+        }, {text: "Die Bibliothekarin nach Frank Miller befragen", nextId: "ask_librarian"}]
+    },
+
+    // Recherche über die Blackwood-Familie
+    research_blackwoods: {
+        text: "Du verbringst Stunden damit, Artikel über die Blackwood-Familie zu durchforsten. Ein Muster beginnt sich abzuzeichnen: Wann immer jemand ihre Geschäftspraktiken in Frage stellte, verschwand die Person oder erlitt einen \"Unfall\".\n\n1976: Ein Umweltaktivist, der gegen Blackwoods Fischfabrik protestierte, ertrank bei einem \"Bootsunglück\".\n\n1987: Frank Miller und zwei Fischer starben bei dem \"Unfall\" am Leuchtturm.\n\n1995: Ein Lokalreporter, der über Korruption bei Stadtverträgen recherchierte, verließ \"plötzlich die Stadt\".\n\nBesonders interessant ist ein kleiner Artikel von 2018, in dem Elena Blackwood die neue Offshore-Initiative \"Projekt Tiefenleuchten\" ankündigt, die angeblich \"revolutionäre Meeresforschung\" betreiben soll.\n\nDaneben findest du Fotos von Spendenveranstaltungen, auf denen Sheriff Malone stets an der Seite der Blackwoods zu sehen ist.",
+        choices: [{
+            text: "Zum Leuchtturm zurückkehren mit dem neuen Wissen",
+            nextId: "lighthouse_return"
+        }, {
+            text: "Versuchen, mehr über Projekt Tiefenleuchten herauszufinden",
+            nextId: "research_deeplight"
+        }, {
+            text: "Die Wohltätigkeitsveranstaltung der Blackwoods besuchen",
+            nextId: "blackwood_event"
+        }]
+    },
+
+    // Besuch der Blackwood-Veranstaltung
+    blackwood_event: {
+        text: "Am Abend schlüpfst du in dein bestes Hemd und fährst zum Rathaus. Die Eingangshalle ist festlich geschmückt, und Greystones Elite ist versammelt, um Spenden für die \"Blackwood-Stiftung für Küstenschutz\" zu sammeln.\n\nNiemand hält dich auf, als du den Saal betrittst. Du nimmst ein Champagnerglas von einem Tablett und mischst dich unter die Gäste. Im Zentrum des Raumes steht eine elegante Frau mittleren Alters - Elena Blackwood, ohne Zweifel. Sie ist umgeben von wichtigen Persönlichkeiten der Stadt.\n\nAuf einer Leinwand laufen Präsentationen über Umweltschutzprojekte, darunter eine Darstellung mit dem Titel \"Projekt Tiefenleuchten: Forschung für eine nachhaltige Zukunft\".\n\nDu bemerkst Sheriff Malone, der am Rand steht und den Raum beobachtet. Sein Blick gleitet über die Menge, und für einen Moment begegnen sich eure Augen.\n\nPlötzlich hörst du Elena Blackwood, die eine Rede beginnt: \"Meine Damen und Herren, willkommen zu unserem jährlichen Benefizabend. Die Blackwood-Familie ist seit Generationen mit dem Meer und dieser Stadt verbunden...\"",
+        choices: [{
+            text: "Dich Elena Blackwood nähern und sie direkt ansprechen", nextId: "approach_elena"
+        }, {text: "Den Sheriff beobachten und ihm später folgen", nextId: "follow_sheriff"}, {
+            text: "Die Präsentation über 'Projekt Tiefenleuchten' genauer studieren",
+            nextId: "study_presentation"
+        }]
+    }, plan_rescue: {
+        text: "Du untersuchst vorsichtig deine Umgebung. Das alte Fischerhaus hat ein Fenster im Keller, das zum Meer hinausgeht. Es ist eng, aber ein schlanker Mann wie Tom könnte hindurchpassen. Du bemerkst außerdem ein Motorboot, das am Steg vor dem Haus festgemacht ist - vermutlich der Fluchtweg der Wachen.\n\nDu zählst die Stimmen und schätzt, dass zwei oder drei Personen bei Tom im Keller sind. Direkte Konfrontation wäre riskant.\n\nPlötzlich hörst du, wie jemand die Kellertreppe heraufkommt. Du hast nur wenige Sekunden, um zu handeln.",
+        choices: [{
+            text: "Verstecken und warten, bis du allein mit Tom bist",
+            nextId: "hide_wait_chance"
+        }, {
+            text: "Das Boot sabotieren, um ihre Flucht zu verhindern",
+            nextId: "sabotage_boat"
+        }, {text: "Einen Ablenkung im oberen Stockwerk verursachen", nextId: "create_diversion"}]
+    },
+
+    // Sofortige Intervention
+    immediate_intervention: {
+        text: "Du entscheidest dich für sofortiges Handeln. Das Element der Überraschung könnte dein einziger Vorteil sein.\n\nMit pochendem Herzen stürmst du die Kellertreppe hinunter. Im schwach beleuchteten Raum siehst du Tom, gefesselt an einen Stuhl, sein Gesicht voller Blutergüsse. Sheriff Malone und ein kräftiger Mann in schwarzem Anzug drehen sich überrascht zu dir um.\n\n\"Was zum Teufel-\" Der Sheriff greift nach seiner Waffe, aber du bist schneller.\n\nDu schlägst ihm mit voller Wucht ins Gesicht, und er taumelt rückwärts. Der Mann im Anzug zieht ebenfalls eine Waffe. Es ist eine gefährliche Situation, und du bist zahlenmäßig unterlegen.",
+        choices: [{text: "Weiterkämpfen und versuchen, Tom zu befreien", nextId: "fight_for_tom"}, {
+            text: "Die Waffe benutzen, falls du eine hast", nextId: "use_gun", requireClue: "gun"
+        }, {text: "Tom zurufen, dass du Hilfe holst, und fliehen", nextId: "promise_return"}]
+    },
+
+    // Sich verstecken und auf eine Chance warten
+    hide_wait_chance: {
+        text: "Du versteckst dich hinter einer alten Kommode im Erdgeschoss, während die Schritte näher kommen. Sheriff Malone und ein großer Mann in einem schwarzen Anzug steigen die Treppe hoch.\n\n\"Ich muss zurück in die Stadt\", sagt der Sheriff. \"Die Wohltätigkeitsveranstaltung fängt bald an, und Elena erwartet mich dort.\"\n\n\"Keine Sorge\", antwortet der Mann. \"Ich bleibe hier und passe auf unseren Gast auf. Jenkins kommt um sechs Uhr morgen früh.\"\n\nDu hörst, wie die Vordertür auf- und zugeht, gefolgt vom Motorengeräusch eines Autos, das wegfährt. Jetzt ist nur noch ein Wächter bei Tom. Das verbessert deine Chancen erheblich.",
+        choices: [{
+            text: "Warten, bis der Wächter nach oben kommt, und ihn überwältigen",
+            nextId: "ambush_guard"
+        }, {
+            text: "In den Keller schleichen und versuchen, Tom heimlich zu befreien",
+            nextId: "sneak_rescue"
+        }, {
+            text: "Ein Geräusch machen, um den Wächter nach oben zu locken", nextId: "lure_guard"
+        }]
+    },
+
+    // Den Wächter überwältigen
+    ambush_guard: {
+        text: "Du positionierst dich neben der Tür und wartest geduldig. Nach etwa zwanzig Minuten hörst du schwere Schritte auf der Kellertreppe. Der Wächter kommt nach oben, vermutlich um eine Runde zu drehen oder sich etwas zu trinken zu holen.\n\nAls er durch die Tür tritt, schlägst du mit aller Kraft zu. Der Überraschungsangriff trifft ihn am Kinn, aber er ist groß und stark. Er taumelt zurück, zieht seine Waffe.\n\nIn einem verzweifelten Manöver stürzt du dich auf ihn, bevor er zielen kann. Ihr beide fallt zu Boden, die Waffe gleitet über die Dielen. Ein heftiger Kampf entbrennt. Er ist stärker, aber du kämpfst um dein Leben - und um Toms.\n\nSchließlich gelingt es dir, ihn mit einer schweren Vase niederzuschlagen. Keuchend und mit schmerzenden Rippen stehst du auf.",
+        choices: [{text: "Den Wächter fesseln und knebeln", nextId: "secure_guard"}, {
+            text: "Sofort in den Keller gehen, um Tom zu befreien", nextId: "free_tom_after_fight"
+        }, {
+            text: "Nach der Waffe des Wächters suchen", nextId: "take_guard_weapon"
+        }]
+    },
+
+    // Heimliche Rettung
+    sneak_rescue: {
+        text: "Du schleichst dich langsam und vorsichtig die Kellertreppe hinab. Jede knarrende Stufe lässt dein Herz schneller schlagen. Unten angekommen, siehst du den Wächter, der mit dem Rücken zu dir steht und auf sein Telefon schaut.\n\nTom sitzt gefesselt auf einem Stuhl, sein Gesicht voller Blutergüsse. Seine Augen weiten sich, als er dich bemerkt, aber erstaunlicherweise verrät er dich nicht.\n\nDu greifst nach einem schweren Werkzeug, das Vortäuschen eines Touristen.",
+        tourist_lie: {
+            text: "\"Oh, entschuldigen Sie\", sagst du mit überraschter Stimme. \"Ich bin nur ein Tourist. Die Tür stand offen, und ich dachte, man könnte den Leuchtturm besichtigen. Steht der unter Denkmalschutz?\"\n\nDer Sheriff verengt seine Augen. \"Der Leuchtturm ist seit Jahren gesperrt. Haben Sie das Schild nicht gesehen?\"\n\n\"Nein, tut mir leid. Ich... ich interessiere mich für alte Gebäude und wollte nur ein paar Fotos machen für meinen Blog über historische Leuchttürme.\"\n\nDer Sheriff scheint unentschlossen. Er mustert dich von oben bis unten, seine Hand noch immer am Holster. \n\n\"Zeigen Sie mal Ihren Ausweis.\"\n\nLangsam reichst du ihm deinen Führerschein. Er studiert ihn sorgfältig.\n\n\"Alex Carver\", liest er laut vor. \"Aus Boston.\" Er gibt dir den Ausweis zurück, aber sein Blick bleibt misstrauisch. \"Sie sollten wissen, dass das hier Privateigentum der Blackwood-Familie ist. Unbefugtes Betreten ist strafbar.\"\n\nEr greift nach seinem Funkgerät. \"Ich werde Sie jetzt zum Ausgang begleiten, und dann verlassen Sie Greystone. Verstanden?\"",
+            choices: [{
+                text: "Einverstanden sein und mit dem Sheriff gehen",
+                nextId: "sheriff_escort"
+            }, {
+                text: "Schnell fliehen, sobald sich eine Gelegenheit bietet",
+                nextId: "escape_sheriff"
+            }, {
+                text: "Die Wahrheit gestehen - du suchst deinen Freund Tom",
+                nextId: "confront_truth"
+            }]
+        },
+
+        // Die Wahrheit sagen - Du suchst Tom
+        confront_truth: {
+            text: "\"Ich suche nach meinem Freund Tom Harrow\", sagst du direkt. \"Er ist verschwunden, und ich habe Grund zur Annahme, dass ihm etwas zugestoßen ist.\"\n\nDer Sheriff erstarrt kurz, dann lacht er leise. \"Tom Harrow, der Journalist?\" Er schüttelt den Kopf. \"Der hat die Stadt vor einer Woche verlassen. Etwas über einen neuen Job in der Großstadt. Nichts Ungewöhnliches.\"\n\nDu bemerkst, wie seine Augen dich genau beobachten, während er spricht. \"Aber da Sie ein Freund sind - warum hat er Ihnen das nicht gesagt?\"\n\nElena Blackwood, die bisher geschwiegen hat, mischt sich ein. \"Sheriff, vielleicht sollten wir Mr. Carver in mein Büro einladen. Er scheint wirklich besorgt zu sein.\" Ihr Lächeln erreicht ihre Augen nicht. \"Wir können ihm sicher helfen, seinen Freund zu finden.\"",
+            choices: [{
+                text: "Die Einladung annehmen und mit Elena Blackwood gehen",
+                nextId: "blackwood_office"
+            }, {
+                text: "Ablehnen und darauf bestehen, dass du selbst weitersuchen wirst",
+                nextId: "refuse_blackwood"
+            }, {
+                text: "Fragen, warum Tom einen geheimen Raum im Leuchtturm eingerichtet hat",
+                nextId: "question_secret_room"
+            }]
+        }
+    },
+
+    // Nach dem Grund der Einlieferung fragen
+    admission_reason: {
+        text: "Prof. Freystatt wirkt zunehmend unwohl. 'Patient 67 wurde nach einem... nennen wir es einen Nervenzusammenbruch eingeliefert. Er begann, Verschwörungstheorien über unsere Klinik zu entwickeln.' Er räuspert sich. 'Tragischerweise glaubte er, früher hier gearbeitet zu haben. Ein klassischer Fall falscher Erinnerungen. Wie dem auch sei...' Er steht abrupt auf. 'Er beschuldigte uns, Bewusstseinsmanipulation zu betreiben. Lächerlich natürlich, aber in seinem Zustand gefährlich.' Das unangenehme Gefühl verstärkt sich, dass Freystatt dir wichtige Informationen vorenthält.",
+        choices: [{
+            text: "Fragen, was genau Patient 67 über Bewusstseinsmanipulation behauptete",
+            nextId: "manipulation_claims"
+        }, {
+            text: "Nach Dr. Bleich suchen", nextId: "find_sheehan"
+        }, {
+            text: "Zum Quartier gehen und die Akte studieren", nextId: "examine_file", addClue: {
+                id: "manipulation_accusation",
+                text: "Patient 67 beschuldigte die Klinik, Bewusstseinsmanipulation zu betreiben, bevor er verschwand."
+            }
+        }]
+    },
+
+    // Welche Manipulationsbehauptungen stellte Patient 67 auf
+    manipulation_claims: {
+        text: "Freystatt seufzt schwer. 'Wenn Sie darauf bestehen... Patient 67 behauptete, wir würden hier ein Projekt namens JANUS durchführen - angeblich ein Experiment zur Identitätsmanipulation.' Seine Stimme wird leiser. 'Er behauptete, wir würden selektive Amnesie erzeugen und neue Erinnerungen implantieren. Sogar ganze Identitäten neu erschaffen.' Ein nervöses Lachen. 'Völlig absurd natürlich. Seine Wahnvorstellungen wurden mit der Zeit immer ausufernder. Er behauptete sogar, selbst daran mitgearbeitet zu haben, bevor er zum Patienten wurde.' Freystatt greift nach seiner Wasserflasche, seine Hand zittert leicht. 'Paranoia ist eine mächtige Kraft, Marshal.'",
+        choices: [{
+            text: "Nach Dr. Bleich fragen", nextId: "find_sheehan"
+        }, {
+            text: "Fragen, ob es einen Zusammenhang mit dem Ostflügel gibt",
+            nextId: "ask_east_wing_connection",
+            addClue: {
+                id: "project_janus_claim",
+                text: "Patient 67 behauptete, dass in der Klinik ein Projekt namens JANUS zur Identitätsmanipulation durchgeführt wird."
+            }
+        }, {
+            text: "Das Gespräch beenden und eigene Nachforschungen anstellen",
+            nextId: "examine_file"
+        }]
+    },
+
+    // Nach Verbindung zum Ostflügel fragen
+    ask_east_wing_connection: {
+        text: "Freystatts Gesicht verfinstert sich. 'Der Ostflügel?', wiederholt er langsam. 'Dort finden experimentelle Therapien statt, jawohl. Aber nichts... Irreguläres.' Er steht auf und geht zum Fenster. 'Patient 67 fixierte sich auf diesen Bereich. Behauptete, dort würden die... Behandlungen stattfinden.' Er dreht sich um. 'Hören Sie, Marshal, ich muss warnen: Diese Wahnvorstellungen können ansteckend wirken. Selbst rationale Menschen beginnen zu zweifeln, wenn sie oft genug mit Überzeugung vorgetragen werden.' Er schaut auf seine Uhr. 'Es wird spät. Wir sollten morgen weitersprechen. Sheriff Wilson wird Sie zu Ihrem Quartier bringen.'",
+        choices: [{
+            text: "Das Gespräch beenden, aber planen, den Ostflügel zu untersuchen",
+            nextId: "plan_east_wing_investigation",
+            addClue: {
+                id: "director_defensive",
+                text: "Prof. Freystatt reagiert auffällig defensiv auf Fragen zum Ostflügel und versucht, das Gespräch zu beenden."
+            }
+        }, {
+            text: "Auf weitere Informationen bestehen", nextId: "insist_information"
+        }, {
+            text: "Nach anderen Personen fragen, die mit Patient 67 Kontakt hatten",
+            nextId: "patient_contacts"
+        }]
+    },
+
+    // Ostflügel-Untersuchung planen
+    plan_east_wing_investigation: {
+        text: "Du gehst mit Sheriff Wilson zu deinem Quartier, doch deine Gedanken kreisen um den Ostflügel und Freystatts verdächtige Reaktion. In deinem Zimmer angekommen, wartest du, bis Wilson gegangen ist, und beginnst zu planen. Der Ostflügel scheint der Schlüssel zu sein. Du skizzierst einen groben Plan der Klinik anhand dessen, was du bisher gesehen hast, und markierst mögliche Zugangspunkte. Ein leises Klopfen an deiner Tür unterbricht dich. Vorsichtig öffnest du. Ein alter Reinigungsmitarbeiter steht dort, nervös den Gang beobachtend. 'Sie suchen nach der Wahrheit', flüstert er. 'Ostflügel, Wartungseingang, 23 Uhr. Sicherheit macht Pause.' Bevor du antworten kannst, huscht er davon.",
+        choices: [{
+            text: "Den Hinweis befolgen und zum Wartungseingang gehen",
+            nextId: "maintenance_entrance",
+            addClue: {
+                id: "maintenance_tip",
+                text: "Ein Mitarbeiter gab dir den geheimen Hinweis, dass der Wartungseingang zum Ostflügel um 23 Uhr unbewacht ist."
+            }
+        }, {
+            text: "Zunächst die Akte studieren", nextId: "examine_file"
+        }, {
+            text: "Dr. Bleich aufsuchen, bevor du den Ostflügel erkundest", nextId: "find_sheehan"
+        }]
+    },
+
+    // Wartungseingang zum Ostflügel
+    maintenance_entrance: {
+        text: "Um 23 Uhr schleichst du dich zum Wartungseingang des Ostflügels. Wie der alte Mitarbeiter sagte, ist der Bereich unbewacht. Eine verrostete Metalltür steht einen Spalt offen. Du gleitest hindurch und findest dich in einem schmalen Versorgungskorridor wieder. Rohre verlaufen an der Decke, und der Geruch von Desinfektionsmitteln liegt in der Luft. Du folgst dem Gang, bis du an eine Abzweigung kommst. Links führt eine Treppe nach unten mit einem Schild 'Labor - Nur autorisiertes Personal'. Rechts führt ein Gang zu einer Tür mit der Aufschrift 'Behandlungsräume'. Aus dieser Richtung sind gedämpfte Stimmen zu hören.",
+        choices: [{
+            text: "Die Treppe zum Labor hinuntergehen", nextId: "descend_lab", addClue: {
+                id: "east_wing_access",
+                text: "Du hast heimlich Zugang zum Ostflügel erlangt und einen Weg zum Labor und zu den Behandlungsräumen gefunden."
+            }
+        }, {
+            text: "Den Gang zu den Behandlungsräumen folgen", nextId: "treatment_rooms"
+        }, {
+            text: "Zurückgehen und Dr. Bleich aufsuchen", nextId: "find_sheehan"
+        }]
+    },
+
+    // Weg zum Labor
+    descend_lab: {
+        text: "Du entscheidest dich für die Treppe nach unten. Mit jedem Schritt wird das Licht kühler, klinischer. Im Keller angekommen, findest du einen langen, hell erleuchteten Korridor mit mehreren Labortüren. Durch ein Glasfenster siehst du moderne Ausrüstung, Computer, chemische Apparaturen. Ein Labor ist noch beleuchtet. Vorsichtig näherst du dich und spähst hinein. Dr. Jenkins – du erkennst ihn von einem Foto in der Eingangshalle – arbeitet an einem Computer. Auf einem Bildschirm siehst du eine molekulare Struktur mit der Bezeichnung 'RX-78 Modifikation'. Auf einem Tisch liegen Akten mit der Aufschrift 'JANUS - Fortschrittsbericht'. Plötzlich steht Jenkins auf und kommt zur Tür.",
+        choices: [{
+            text: "Schnell verstecken", nextId: "hide_from_jenkins", addClue: {
+                id: "janus_lab_seen",
+                text: "Du hast Dr. Jenkins bei der Arbeit an einer Substanz namens 'RX-78' für Projekt JANUS beobachtet."
+            }
+        }, {
+            text: "Vorgeben, offiziell hier zu sein", nextId: "pretend_official"
+        }, {
+            text: "Eine andere Tür öffnen und hineinschlüpfen", nextId: "enter_other_lab"
+        }]
+    },
+
+    // Verstecken vor Jenkins
+    hide_from_jenkins: {
+        text: "Gerade noch rechtzeitig duckst du dich hinter einen Rollwagen mit Laborgeräten. Jenkins verlässt den Raum und geht den Korridor hinunter, ohne dich zu bemerken. Als seine Schritte verhallt sind, schleichst du ins Labor. Der Computer ist noch eingeschaltet, aber passwortgeschützt. Die Akten auf dem Tisch enthalten komplexe chemische Formeln und Versuchsprotokolle. Ein Eintrag fällt dir ins Auge: 'Subjekt A.L. zeigt unerwartete Resistenz gegen RX-78. Möglicherweise aufgrund seiner Beteiligung an der Frühentwicklung. Korrigierte Dosierung vorbereitet.' Ein Foto ist beigefügt – es zeigt dich in Laborkittel neben Wilson und Jenkins. Dein Herz beginnt zu rasen. 'A.L.' – könnten das deine Initialen sein?",
+        choices: [{
+            text: "Das Foto und einige Dokumente mitnehmen", nextId: "take_lab_evidence", addClue: {
+                id: "subject_al_you",
+                text: "In Jenkins' Labor hast du Hinweise gefunden, dass 'Subjekt A.L.' du selbst sein könntest und dass du gegen die Gedächtnismanipulation resistent bist."
+            }
+        }, {
+            text: "Versuchen, den Computer zu entsperren", nextId: "hack_computer"
+        }, {
+            text: "Das Labor durchsuchen, bevor Jenkins zurückkommt", nextId: "search_lab_quickly"
+        }]
+    },
+
+    // Beweise aus dem Labor mitnehmen
+    take_lab_evidence: {
+        text: "Mit zitternden Händen steckst du das Foto und einige der kritischsten Dokumente ein. Ein Versuchsprotokoll beschreibt detailliert, wie RX-78 verwendet wird, um selektive Amnesie zu erzeugen und dann neue Erinnerungen zu implantieren. Die Liste der 'Erfolgreichen Konversionen' enthält mehrere Namen, darunter 'A.L. (teilweise) - laufendes Experiment'. Plötzlich hörst du Stimmen im Korridor. Jenkins kehrt zurück, und er ist nicht allein. Du hörst Freystatts Stimme: '...muss stärker dosiert werden. Der Marshal stellt zu viele Fragen. Die Konditionierung bricht zusammen.' Hastig suchst du nach einem Ausweg. Eine Tür an der Rückseite des Labors führt zu einem weiteren Korridor. Du schlüpfst hindurch, Sekunden bevor die Wissenschaftler den Raum betreten.",
+        choices: [{
+            text: "Den unbekannten Korridor erkunden", nextId: "explore_back_corridor", addClue: {
+                id: "conditioning_breakdown",
+                text: "Prof. Freystatt und Dr. Jenkins planen, deine 'Dosierung' zu erhöhen, da deine 'Konditionierung' zusammenbricht."
+            }
+        }, {
+            text: "Lauschen, was Jenkins und Freystatt besprechen", nextId: "eavesdrop_scientists"
+        }, {
+            text: "Schnell zum Ausgang und zu deinem Quartier zurückkehren",
+            nextId: "retreat_quarter"
+        }]
+    },
+
+    // Korridorerkundung
+    explore_back_corridor: {
+        text: "Der Korridor führt tiefer in einen Bereich, der noch moderner und klinischer wirkt. Du passierst mehrere Türen mit kleinen Sichtfenstern. Dahinter siehst du Patienten, die in Betten liegen, an Monitore angeschlossen. In einem Raum beobachtest du, wie ein Patient mit leerem Blick auf einen Bildschirm starrt, während eine Stimme wiederholt: 'Du bist John Miller. Du warst immer John Miller.' Ein kalter Schauer läuft dir über den Rücken. Am Ende des Ganges findest du eine Tür mit der Aufschrift 'Archiv - Strengster Geheimhaltung'. Sie ist mit einem Kartenlesegerät gesichert, aber jemand hat einen Keil in die Tür gesteckt, sodass sie nicht vollständig schließt.",
+        choices: [{
+            text: "Das Archiv betreten", nextId: "enter_archive", addClue: {
+                id: "reconditioning_observed",
+                text: "Du hast beobachtet, wie Patienten aktiv neue Identitäten implantiert bekommen durch audiovisuelle Programmierung."
+            }
+        }, {
+            text: "Einen der Behandlungsräume genauer untersuchen", nextId: "check_treatment_room"
+        }, {
+            text: "Den Weg zurückverfolgen und die Klinik verlassen", nextId: "retrace_steps"
+        }]
+    },
+
+    // Archiv betreten
+    enter_archive: {
+        text: "Du schlüpfst durch die angekeilte Tür ins Archiv. Der Raum ist groß, mit hohen Regalen voller Akten und einem zentralen Computerterminal. Du beginnst, die Aktenbezeichnungen zu scannen: 'JANUS - Phase 1', 'JANUS - Fehlgeschlagene Subjekte', 'JANUS - Militärverträge'. Dein Blick fällt auf einen Ordner mit der Aufschrift 'Laeddis, A. / Patient 67-B'. Mit klopfendem Herzen öffnest du ihn. Er enthält zwei Akten: Eine über 'Dr. Andrew Laeddis', mit deinem Foto, Lebenslauf eines brillanten Psychiaters und Neurowissenschaftlers. Die zweite über 'Edward Wilson, Patient 67', ebenfalls mit Foto – den Mann, den du als 'verschwundenen Patienten' suchen sollst. Ein handschriftlicher Vermerk verbindet beide: 'Ursprüngliche JANUS-Entwickler. Beide kompromittiert.'",
+        choices: [{
+            text: "Die Akten mitnehmen und das Archiv verlassen",
+            nextId: "take_files_leave",
+            addClue: {
+                id: "dual_identity",
+                text: "Archivunterlagen bestätigen, dass du Dr. Andrew Laeddis bist und dass Wilson (Patient 67) und du die ursprünglichen Entwickler von Projekt JANUS wart."
+            }
+        }, {
+            text: "Nach weiteren Informationen über dich selbst suchen", nextId: "search_self_info"
+        }, {
+            text: "Den Computer benutzen, um mehr Daten abzurufen", nextId: "use_archive_computer"
+        }]
+    },
+
+    // Die Akten mitnehmen und fliehen
+    take_files_leave: {
+        text: "Du steckst beide Akten ein und bereitest dich vor, das Archiv zu verlassen. In diesem Moment hörst du, wie sich die Archivtür vollständig öffnet – jemand hat den Keil entfernt. Schnell duckst du dich hinter ein Regal. Schwester Rachel und Dr. Jenkins betreten den Raum. 'Die Konditionierung versagt schneller als erwartet', sagt Jenkins angespannt. 'Er erinnert sich an Fragmente. Wir müssen den Notfallplan aktivieren.' Rachel nickt. 'Was ist mit Wilson? Er ist immer noch irgendwo auf der Insel.' Jenkins' Stimme wird hart. 'Finden Sie ihn. Er ist der Einzige, der das Gegenmittel herstellen kann. Laeddis' Zustand beweist, dass es funktioniert.' Sie gehen zum Computer, mit dem Rücken zu dir. Dies ist deine Chance zu entkommen.",
+        choices: [{
+            text: "Leise zur Tür schleichen und fliehen", nextId: "sneak_out_archive", addClue: {
+                id: "emergency_plan",
+                text: "Jenkins und Rachel planen, einen 'Notfallplan' zu aktivieren, da deine Konditionierung versagt. Wilson hat ein Gegenmittel entwickelt."
+            }
+        }, {
+            text: "Weiteres Gespräch belauschen", nextId: "listen_more"
+        }, {
+            text: "Dich zu erkennen geben und sie konfrontieren", nextId: "confront_archive"
+        }]
+    },
+
+    // Aus dem Archiv schleichen
+    sneak_out_archive: {
+        text: "Du nutzt den Moment und schleichst leise zur Tür, während Jenkins und Rachel mit dem Computer beschäftigt sind. Gerade als du den Korridor erreichst, hörst du Rachel rufen: 'Die Laeddis-Akte fehlt!' Adrenalin durchströmt dich, als du den Gang hinunterrennst. Alarmsirenen beginnen zu heulen. Über Lautsprecher ertönt eine Durchsage: 'Sicherheitsalarm. Alle Ausgänge sperren. Sicherheitspersonal zu Sektor C.' Du biegst in einen Seitengang, um den näherkommenden Schritten auszuweichen. Eine Hand greift plötzlich nach dir und zieht dich in einen dunklen Raum. Du willst schreien, aber eine Hand bedeckt deinen Mund. 'Ruhig, Andrew', flüstert eine Stimme. 'Ich bin hier, um dir zu helfen.' Als sich deine Augen an die Dunkelheit gewöhnen, erkennst du Dr. Bleich.",
+        choices: [{
+            text: "Dr. Bleich fragen, woher er wusste, dass du hier bist",
+            nextId: "question_bleich_knowledge",
+            addClue: {
+                id: "security_alert_archive",
+                text: "Ein Sicherheitsalarm wurde ausgelöst, als Rachel bemerkte, dass die Laeddis-Akte fehlt. Dr. Bleich hat dich gefunden."
+            }
+        }, {
+            text: "Ihm die gefundenen Akten zeigen", nextId: "show_files_bleich"
+        }, {
+            text: "Nach einem Fluchtweg fragen", nextId: "ask_escape_route"
+        }]
+    },
+
+    // Dr. Bleich fragen (Verbindung zum Haupthandlungsstrang)
+    question_bleich_knowledge: {
+        text: "Als der Alarm durch die Gänge hallt, starrst du Dr. Bleich ungläubig an. 'Woher wussten Sie, dass ich hier bin? Wer sind Sie wirklich?' Bleich zieht dich tiefer in den schattigen Raum. 'Ich beobachte dich seit deiner Ankunft, Andrew. Oder sollte ich sagen, seit sie dich als 'Marshal' zurückgebracht haben.' Er sieht sich nervös um. 'Ich arbeite schon lange mit Wilson zusammen, im Geheimen. Wir haben versucht, JANUS zu stoppen, nachdem klar wurde, wozu Jenkins es nutzen will.' Er greift in seine Tasche und zieht eine kleine Flasche hervor. 'Dies ist eine verdünnte Version des Gegenmittels, das Wilson entwickelt hat. Es wird nicht alle Blockaden lösen, aber genug, damit du verstehst.' Er drückt dir die Flasche in die Hand. 'Wir müssen dich zum Leuchtturm bringen. Wilson wartet dort.'",
+        choices: [{
+            text: "Das verdünnte Gegenmittel nehmen", nextId: "take_diluted_antidote"
+        }, {
+            text: "Mehr über deine wahre Identität erfahren wollen", nextId: "ask_true_identity"
+        }, {
+            text: "Nach einem sicheren Weg zum Leuchtturm fragen", nextId: "ask_lighthouse_route"
+        }]
+    },
+
+    // Nach einem Weg zum Leuchtturm fragen
+    ask_lighthouse_route: {
+        text: "Während der Alarm weiter ertönt, fragst du Dr. Bleich nach dem sichersten Weg zum Leuchtturm. Er nickt anerkennend. 'Der Hauptweg wird bewacht sein. Aber es gibt einen alten Pfad durch den Wald, den nur wenige kennen.' Er zeichnet hastig eine Karte. 'Folge dem Wartungsausgang hinter der Wäscherei. Der Pfad ist überwuchert, aber passierbar. Er führt zur Nordküste, etwa einen Kilometer vom Leuchtturm entfernt.' Er schaut auf seine Uhr. 'Ich werde eine Ablenkung schaffen. In fünf Minuten löse ich einen Feueralarm im Westflügel aus. Dann rennst du los.' Er drückt dir einen Schlüssel in die Hand. 'Hiermit kommst du durch die Hintertür der Wäscherei. Und Andrew...' Er sieht dich eindringlich an. 'Vertraue deinen zurückkehrenden Erinnerungen. Sie sind real.'",
+        choices: [{
+            text: "Dr. Bleich für seine Hilfe danken und dich bereit machen",
+            nextId: "thank_bleich_prepare",
+            addClue: {
+                id: "lighthouse_route",
+                text: "Dr. Bleich hat dir einen versteckten Pfad zum Leuchtturm beschrieben und wird einen Feueralarm auslösen, damit du fliehen kannst."
+            }
+        }, {
+            text: "Das verdünnte Gegenmittel vor der Flucht nehmen", nextId: "take_diluted_antidote"
+        }, {
+            text: "Fragen, warum Wilson im Leuchtturm ist", nextId: "ask_wilson_lighthouse"
+        }]
+    },
+
+    // Warum ist Wilson im Leuchtturm?
+    ask_wilson_lighthouse: {
+        text: "'Warum versteckt sich Wilson ausgerechnet im Leuchtturm?', fragst du. Bleich senkt die Stimme weiter. 'Er wusste, dass sie bald die volle Kontrolle über die Klinik haben würden. Der Leuchtturm gehört nicht zum Klinikgelände. Er wird vom Festland aus verwaltet.' Er schaut nervös zur Tür. 'Wilson hat dort ein provisorisches Labor eingerichtet. Er arbeitet an einer verbesserten Version des Gegenmittels.' Ein bitteres Lächeln. 'Außerdem hat der Leuchtturm symbolische Bedeutung für euch beide. Dort habt ihr zum ersten Mal über JANUS gesprochen, vor all dem.' Er greift nach einem Funkgerät an seinem Gürtel. 'Ich muss jetzt den Alarm auslösen. Bist du bereit?' Die Sirenen heulen noch immer, Schritte nähern sich eurem Versteck.",
+        choices: [{
+            text: "Bestätigen, dass du bereit bist, und dich auf die Flucht vorbereiten",
+            nextId: "ready_to_escape",
+            addClue: {
+                id: "wilson_lighthouse_lab",
+                text: "Wilson hat im Leuchtturm ein provisorisches Labor eingerichtet und arbeitet an einer verbesserten Version des Gegenmittels für RX-78."
+            }
+        }, {
+            text: "Das verdünnte Gegenmittel schnell nehmen", nextId: "take_diluted_antidote"
+        }, {
+            text: "Fragen, was passiert, wenn Bleich erwischt wird", nextId: "ask_if_caught"
+        }]
+    },
+
+    // Bereit zur Flucht
+    ready_to_escape: {
+        text: "Du nickst entschlossen. 'Ich bin bereit.' Dr. Bleich drückt den Alarmknopf an seinem Funkgerät. Sekunden später ertönt ein neuer, schrillerer Alarm. 'Feueralarm im Westflügel. Alle verfügbaren Sicherheitskräfte zum Westflügel', dröhnt es durch die Lautsprecher. 'Jetzt!', zischt Bleich und öffnet vorsichtig die Tür. Der Korridor ist momentan leer, während Sicherheitspersonal in die entgegengesetzte Richtung eilt. 'Folge dem Gang nach links, dann die Treppe hinunter zur Wäscherei. Und Andrew...' Er drückt deine Schulter. 'Was auch immer passiert, vergiss nicht, wer du wirklich bist.' Mit diesen Worten schiebt er dich hinaus und verschwindet selbst in die andere Richtung.",
+        choices: [{
+            text: "Den Anweisungen folgen und zur Wäscherei eilen",
+            nextId: "head_to_laundry",
+            addClue: {
+                id: "bleich_diversion",
+                text: "Dr. Bleich hat einen Feueralarm ausgelöst, um dir die Flucht zu ermöglichen, während er selbst eine andere Richtung einschlägt."
+            }
+        }, {
+            text: "Das verdünnte Gegenmittel schnell trinken, bevor du losrennst",
+            nextId: "take_diluted_antidote"
+        }, {
+            text: "Versuchen, Dr. Bleich zu folgen und ihm zu helfen", nextId: "follow_bleich"
+        }]
+    },
+
+    // Zur Wäscherei eilen
+    head_to_laundry: {
+        text: "Du rennst den leeren Korridor entlang, biegst links ab und findest die Treppe. Unten angekommen, orientierst du dich kurz und entdeckst die Tür zur Wäscherei. Der Schlüssel passt, und du schlüpfst hinein. Der Raum ist voller Waschmaschinen und gestapelter Wäschekörbe. Am hinteren Ende siehst du eine Metalltür mit der Aufschrift 'Ausgang'. Als du dich näherst, hörst du, wie die Haupttür zur Wäscherei aufgeht. Schnell duckst du dich hinter einen Wäschestapel. Zwei Sicherheitsleute betreten den Raum. 'Er muss hier durchgekommen sein', sagt einer. 'Durchsucht alles.' Sie beginnen systematisch, den Raum zu durchkämmen. Die Hintertür ist nur noch wenige Meter entfernt, aber du bist zwischen den Wäschekörben gefangen.",
+        choices: [{
+            text: "Warten, bis sie in eine andere Ecke gehen, dann zur Tür sprinten",
+            nextId: "sprint_to_door",
+            addClue: {
+                id: "guards_searching",
+                text: "Sicherheitspersonal durchsucht systematisch die Klinik nach dir, einschließlich deines Fluchtwegs durch die Wäscherei."
+            }
+        }, {
+            text: "Eine Ablenkung schaffen", nextId: "create_distraction"
+        }, {
+            text: "Dich in einem Wäschekorb verstecken", nextId: "hide_laundry"
+        }]
+    }, sprint_to_door_continued: {
+        text: "Du rennst den schlammigen Pfad entlang, der in den dichten Wald führt. Äste peitschen dir ins Gesicht, während du tiefer ins Unterholz eintauchst. Die Rufe werden schwächer, aber du hörst Hunde bellen. Sie setzen Suchhunde ein. Der von Bleich beschriebene Pfad ist kaum erkennbar, überwuchert von Jahren der Vernachlässigung. Das Heulen des Windes vermischt sich mit den fernen Rufen deiner Verfolger. Nach etwa zwanzig Minuten verzweifelten Laufens erreichst du eine Klippe. Unter dir siehst du das sturmgepeitschte Meer und in der Ferne den schwachen Lichtstrahl des Leuchtturms. Der Pfad führt steil abwärts zur Küste.",
+        choices: [{
+            text: "Den Pfad zur Küste hinabsteigen", nextId: "descend_to_coast", addClue: {
+                id: "hunting_dogs",
+                text: "Das Klinikpersonal setzt Suchhunde ein, um dich zu fangen, was darauf hindeutet, wie wichtig es ihnen ist, dich wieder unter ihre Kontrolle zu bringen."
+            }
+        }, {
+            text: "Nach einem Versteck suchen, um die Hunde abzuschütteln",
+            nextId: "find_hiding_spot"
+        }, {
+            text: "Einen Umweg durch das dichtere Unterholz nehmen", nextId: "take_detour"
+        }]
+    },
+
+    // Zur Küste hinabsteigen
+    descend_to_coast: {
+        text: "Du beginnst den gefährlichen Abstieg. Der Pfad ist rutschig vom Regen, und mehrmals verlierst du fast den Halt. Das Brausen der Wellen wird lauter, als du dich der Küste näherst. Die Hunde klingen entfernter - du hast etwas Vorsprung gewonnen. Nach einem schwierigen Abstieg erreichst du endlich den Strand. Der Leuchtturm steht etwa einen Kilometer entfernt auf einer felsigen Landzunge. Du setzt deinen Weg fort, halb laufend, halb stolpernd über die nassen Steine. Der Wind peitscht dir salziges Wasser ins Gesicht. Nach einer gefühlten Ewigkeit erreichst du die Basis des Leuchtturms. Die Tür ist verschlossen, aber neben dem Eingang findest du eine kleine Notiz, mit Steinen beschwert: 'Wenn du das liest, bin ich drinnen. Klopfe dreimal, dann zweimal.'",
+        choices: [{
+            text: "Das angegebene Klopfzeichen verwenden", nextId: "use_knock_signal", addClue: {
+                id: "lighthouse_note",
+                text: "Am Leuchtturm hast du eine Nachricht mit einem Klopfzeichen gefunden, die vermutlich von Wilson hinterlassen wurde."
+            }
+        }, {
+            text: "Nach einem anderen Eingang suchen", nextId: "search_other_entrance"
+        }, {
+            text: "Kurz innehalten und die Umgebung auf Verfolger überprüfen",
+            nextId: "check_for_pursuers"
+        }]
+    },
+
+    // Das Klopfzeichen verwenden
+    use_knock_signal: {
+        text: "Du klopfst wie angegeben - dreimal, dann zweimal. Einen Moment lang passiert nichts, dann hörst du, wie schwere Riegel zurückgeschoben werden. Die Tür öffnet sich einen Spalt, und ein Auge mustert dich misstrauisch. 'Andrew?', fragt eine raue Stimme. Die Tür öffnet sich weiter, und du siehst einen älteren Mann mit grauem Haar und einer Narbe über dem rechten Auge. 'Du hast es geschafft', sagt er erleichtert und zieht dich schnell hinein. Er verriegelt die Tür hinter dir. 'Ich bin Ed Wilson', sagt er, während er dich zu einer Wendeltreppe führt. 'Aber das weißt du wahrscheinlich noch nicht.' Oben angekommen siehst du ein improvisiertes Labor mit einfacher Ausrüstung. Der Leuchtturm bietet einen Panoramablick auf die Insel und das stürmische Meer.",
+        choices: [{
+            text: "Wilson nach deiner wahren Identität fragen", nextId: "ask_wilson_identity"
+        }, {
+            text: "Die Dokumente zeigen, die du gefunden hast",
+            nextId: "show_wilson_documents",
+            addClue: {
+                id: "wilson_meeting",
+                text: "Du hast Dr. Edward Wilson im Leuchtturm getroffen. Er hat dich als 'Andrew' erkannt und ein provisorisches Labor eingerichtet."
+            }
+        }, {
+            text: "Fragen, was mit euch beiden passiert ist", nextId: "ask_what_happened"
+        }]
+    },
+
+    // Wilson die Dokumente zeigen
+    show_wilson_documents: {
+        text: "Du ziehst die gestohlenen Dokumente hervor und breitest sie auf einem Tisch aus. Wilson studiert sie mit grimmiger Miene. 'Sie haben dich also als Marshal zurückgebracht', murmelt er. 'Elegante Lösung. So kannst du überall nachforschen, während sie dich beobachten.' Er deutet auf das Foto von euch beiden im Labor. 'Wir waren Kollegen, Andrew. Die besten der Besten. Wir entwickelten JANUS als Hilfe für Traumapatienten.' Seine Augen verdunkeln sich. 'Dann kam Jenkins mit seinen militärischen Verbindungen. Die Regierung sah das Potenzial für... andere Anwendungen.' Er greift nach einer der Akten. 'Nach dem Tod deiner Familie warst du am Boden zerstört. Sie nutzten deine Schwäche aus, überzeugten dich, dass JANUS dir helfen könnte, den Schmerz zu vergessen.' Er seufzt schwer. 'Du wurdest ihr erstes erfolgreiches Subjekt.'",
+        choices: [{
+            text: "Fragen, ob es einen Weg gibt, deine Erinnerungen vollständig zurückzubekommen",
+            nextId: "ask_memory_recovery",
+            addClue: {
+                id: "janus_history",
+                text: "JANUS wurde ursprünglich als Therapie für Traumapatienten entwickelt, bevor militärische Interessen es für Identitätsmanipulation umfunktionierten. Du wurdest nach einer Familientragödie zum ersten erfolgreichen Testsubjekt."
+            }
+        }, {
+            text: "Fragen, warum Wilson als Patient 67 in der Klinik war",
+            nextId: "ask_patient67_wilson"
+        }, {
+            text: "Nach einem Plan fragen, um Jenkins und Freystatt zu stoppen",
+            nextId: "ask_stopping_jenkins"
+        }]
+    },
+
+    // Fragen zur Erinnerungswiederherstellung
+    ask_memory_recovery: {
+        text: "Wilson nickt langsam auf deine Frage. 'Ja, es gibt einen Weg.' Er geht zu einem improvisierten Labortisch und hebt eine kleine Flasche mit blauer Flüssigkeit hoch. 'Ich habe an einem Gegenmittel für RX-78 gearbeitet, seit ich erkannte, wozu sie JANUS verwenden wollten.' Er dreht die Flasche im Licht. 'Diese Formel löst die chemischen Blockaden, die deine wahren Erinnerungen unterdrücken.' Er sieht dich ernst an. 'Aber Andrew, ich muss dich warnen. Die vollständige Erinnerung bedeutet auch vollständigen Schmerz. Du wirst dich an alles erinnern - deine Frau, deine Kinder... wie du sie verloren hast.' Er stellt die Flasche vor dich hin. 'Es ist deine Entscheidung. Willst du die Wahrheit zurück, mit all ihrem Schmerz? Oder als der Marshal weiterleben, als den sie dich erschaffen haben?'",
+        choices: [{
+            text: "Das Gegenmittel nehmen", nextId: "take_antidote"
+        }, {
+            text: "Fragen, ob es einen Mittelweg gibt", nextId: "ask_middle_ground", addClue: {
+                id: "full_antidote",
+                text: "Wilson hat ein vollständiges Gegenmittel entwickelt, das alle chemischen Blockaden in deinem Gehirn lösen und deine wahren Erinnerungen zurückbringen kann."
+            }
+        }, {
+            text: "Erst wissen wollen, was mit deiner Familie passiert ist",
+            nextId: "ask_family_fate"
+        }]
+    },
+
+    // Nach dem Schicksal der Familie fragen
+    ask_family_fate: {
+        text: "Wilson schaut dich mitfühlend an. 'Bist du sicher, dass du das jetzt wissen willst, ohne das Gegenmittel?' Du nickst entschlossen. Er setzt sich schwer auf einen Stuhl. 'Du warst besessen von unserer Arbeit, Andrew. Arbeitest spät. Dolores rief dich an, besorgt über die alte Elektrik im Haus...' Er hält inne. 'Du sagtest, du würdest es am Wochenende überprüfen. Aber du warst vertieft in Forschungsnotizen.' Seine Stimme wird leiser. 'Es gab einen Kurzschluss. Das Feuer breitete sich schnell aus. Als du ankamst...' Er schüttelt den Kopf. 'Du konntest sie nicht retten. Dolores. Die Kinder. Du gabst dir die Schuld. Hattest einen vollständigen Zusammenbruch.' Er sieht dich an. 'Und genau da setzte Jenkins an. Bot dir an, den Schmerz zu nehmen. Für immer.'",
+        choices: [{
+            text: "Das Gegenmittel sofort nehmen", nextId: "take_antidote", addClue: {
+                id: "family_fire",
+                text: "Deine Familie starb bei einem Hausbrand, den du möglicherweise hättest verhindern können, wenn du nicht so in deine Arbeit vertieft gewesen wärst. Diese Schuld führte zu deinem Zusammenbruch."
+            }
+        }, {
+            text: "Einen Moment brauchen, um das Gehörte zu verarbeiten",
+            nextId: "process_information"
+        }, {
+            text: "Fragen, ob die Klinik für den Brand verantwortlich sein könnte",
+            nextId: "ask_clinic_responsible"
+        }]
+    },
+
+    // Sich Wilson zuwenden
+    turn_to_wilson: {
+        text: "Als der erste Ansturm der Erinnerungen nachlässt, hebst du den Blick zu Wilson. Tränen laufen über dein Gesicht, aber deine Augen sind klar - klarer als seit Jahren. 'Ed', sagst du mit einer Stimme, die selbst für dich neu und doch vertraut klingt. 'Ich erinnere mich an alles.' Wilson kniet neben dir, eine Hand auf deiner Schulter. 'Willkommen zurück, alter Freund.' Du stehst langsam auf, fühlst dich wie neugeboren und doch uralt. 'Jenkins wird dafür bezahlen', sagst du leise. 'Nicht nur für das, was er mir angetan hat, sondern für alle Patienten, die er missbraucht hat.' Wilson nickt grimmig. 'Ich habe Beweise gesammelt. Protokolle, Daten, Zeugenaussagen.' Er deutet auf einen Ordner auf dem Tisch. 'Alles, was wir brauchen, um JANUS zu stoppen. Aber wir müssen schnell handeln. Sie werden wissen, dass du hier bist.'",
+        choices: [{
+            text: "Mit Wilson einen Fluchtplan von der Insel schmieden",
+            nextId: "escape_plan",
+            addClue: {
+                id: "full_memory",
+                text: "Mit deinen vollständig wiederhergestellten Erinnerungen bist du nun bereit, mit Wilson zusammenzuarbeiten, um Jenkins und Projekt JANUS zu stoppen."
+            }
+        }, {
+            text: "Vorschlagen, zur Klinik zurückzukehren und Beweise zu sichern",
+            nextId: "suggest_return_clinic"
+        }, {
+            text: "Nach Dr. Bleich fragen und ob er in Gefahr ist", nextId: "ask_about_sheehan"
+        }]
+    },
+
+    // Fluchtplan (Verbindung zum Hauptende)
+    escape_plan: {
+        text: "Du und Wilson beginnt sofort, einen Fluchtplan zu schmieden. 'Es gibt ein Boot', erklärt Wilson, 'versteckt in einer Bucht auf der anderen Seite der Insel. Ich habe es für den Notfall vorbereitet.' Er breitet eine Karte aus. 'Wir können es über diesen Tunnel erreichen.' Er deutet auf eine Falltür unter einem Teppich. 'Er wurde früher von Schmugglern benutzt. Führt direkt zur Bucht.' Du hörst plötzlich entfernte Stimmen und das Bellen von Hunden. Wilson erbleicht. 'Sie kommen früher als erwartet.' Er greift nach dem Ordner mit den Beweisen und drückt ihn dir in die Hand. 'Du musst gehen. Jetzt. Bring die Beweise zum Festland. Ich werde sie aufhalten.' Du willst protestieren, aber sein Blick duldet keinen Widerspruch. 'Einer von uns muss es schaffen, Andrew. Für all die Menschen, die noch gerettet werden können.'",
+        choices: [{
+            text: "Darauf bestehen, gemeinsam zu fliehen", nextId: "insist_together"
+        }, {
+            text: "Die Beweise nehmen und fliehen", nextId: "take_evidence_flee"
+        }, {
+            text: "Vorschlagen, sich zu stellen und die Beweise zu präsentieren",
+            nextId: "suggest_surrender",
+            addClue: {
+                id: "escape_tunnel_boat",
+                text: "Es gibt einen geheimen Schmugglertunnel unter dem Leuchtturm, der zu einer Bucht mit einem vorbereiteten Fluchtboot führt."
+            }
+        }]
+    },
+
+    // Mehr Verbindungs- und noch fehlende Handlungsszenen
+
+    // Nach Dr. Jenkins' Motivation fragen
+    jenkins_motivation: {
+        text: "Du fragst Dr. Bleich nach Jenkins' wahren Motiven hinter Projekt JANUS. Er seufzt tief. 'Am Anfang war es Idealismus. Die Chance, Menschen mit schwerem Trauma zu helfen.' Er schüttelt den Kopf. 'Aber dann kamen die ersten erfolgreichen Tests. Die Möglichkeit, selektiv Erinnerungen zu löschen und neue zu implantieren.' Seine Stimme wird bitter. 'Das Militär wurde aufmerksam. Sie sahen das Potenzial für... andere Anwendungen. Perfekte Spione. Schläfer-Agenten mit implantierten Identitäten. Gefangene, die zu loyalen Vermögenswerten umprogrammiert werden könnten.' Er blickt aus dem Fenster. 'Jenkins begann, sich zu verändern. Der Ruhm, das Geld, die Macht... Sie haben ihn korrumpiert. Was als medizinischer Durchbruch begann, wurde zu einem Werkzeug für Kontrolle und Manipulation.'",
+        choices: [{
+            text: "Fragen, ob auch die Klinikleitung involviert ist",
+            nextId: "ask_administration_approval",
+            addClue: {
+                id: "military_interest",
+                text: "Das Militär wurde auf JANUS aufmerksam und sah Potenzial für die Erschaffung von Spionen und die Umprogrammierung von Gefangenen, was Jenkins' Forschung in eine dunklere Richtung lenkte."
+            }
+        }, {
+            text: "Fragen, ob Dr. Bleich selbst an dem Projekt mitgewirkt hat",
+            nextId: "ask_bleich_involvement"
+        }, {
+            text: "Nach Dr. Wilson fragen, der offenbar Patient 67 ist",
+            nextId: "patient67_connection"
+        }]
+    },
+
+    // Nach dem verschwommenen Foto fragen
+    blurry_photo: {
+        text: "Du fragst Prof. Freystatt nach dem verschwommenen Foto in der Akte. Er betrachtet es mit gespieltem Interesse. 'Ah, ja. Bedauerlich. Die Kamera hatte offenbar eine Fehlfunktion während der Aufnahme.' Seine Erklärung klingt einstudiert. 'Wir haben mehrfach versucht, ein besseres Bild zu machen, aber Patient 67 wurde... unkooperativ.' Er legt das Foto weg. 'Ein Mann mittleren Alters, graues Haar, markante Narbe über dem rechten Auge. Sehr intelligent, trotz seines Zustands.' Etwas an dieser Beschreibung löst ein seltsames Gefühl der Vertrautheit in dir aus. 'Haben Sie jemals von Dr. Edward Wilson gehört?', fragt Freystatt plötzlich, dich scharf beobachtend. Die Frage fühlt sich wie ein Test an.",
+        choices: [{
+            text: "Zugeben, dass der Name eine vage Vertrautheit auslöst",
+            nextId: "admit_familiarity",
+            addClue: {
+                id: "patient_description",
+                text: "Patient 67 wird als Mann mittleren Alters mit grauem Haar und einer Narbe über dem rechten Auge beschrieben - eine Beschreibung, die seltsam vertraut wirkt."
+            }
+        }, {
+            text: "Behaupten, den Namen nie gehört zu haben", nextId: "deny_knowing_wilson"
+        }, {
+            text: "Gegenfragen, warum er diesen Namen erwähnt", nextId: "counter_question_wilson"
+        }]
+    },
+
+    // Zugeben, dass der Name vertraut klingt
+    admit_familiarity: {
+        text: "Du zögerst. 'Der Name... klingt irgendwie vertraut, obwohl ich nicht sagen kann, woher.' Freystatts Augen verengen sich. Er tauscht einen kurzen Blick mit dem Wachmann an der Tür. 'Interessant', murmelt er und macht eine Notiz. 'Dr. Wilson war ein ehemaliger Kollege. Vor seiner... Erkrankung.' Er schließt die Akte. 'Vielleicht haben Sie seinen Namen in Fachzeitschriften gelesen. Er war bekannt in bestimmten Kreisen.' Freystatt steht auf, signalisiert das Ende des Gesprächs. 'Sheriff Wilson wird Sie zu Ihrem Quartier bringen. Ruhen Sie sich aus. Der Sturm wird mindestens drei Tage anhalten.' Als du zur Tür gehst, hörst du ihn leise in ein Telefon sprechen: 'Erhöhen Sie die Dosis im Wasser. Sofort.'",
+        choices: [{
+            text: "So tun, als hättest du nichts gehört, aber später das Wasser meiden",
+            nextId: "avoid_water",
+            addClue: {
+                id: "water_dosing",
+                text: "Freystatt hat angeordnet, 'die Dosis im Wasser zu erhöhen', nachdem du eine Vertrautheit mit Wilsons Namen zugegeben hast."
+            }
+        }, {
+            text: "Nach dem Telefonat fragen", nextId: "question_phone_call"
+        }, {
+            text: "Zum Quartier gehen, aber eigene Nachforschungen planen", nextId: "examine_file"
+        }]
+    },
+
+    // Das Wasser meiden
+    avoid_water: {
+        text: "In deinem Quartier angekommen, betrachtest du misstrauisch das Wasserglas auf dem Nachttisch. Freystatts Worte hallen in deinem Kopf nach: 'Erhöhen Sie die Dosis im Wasser.' Vorsichtig riechst du daran - keine Auffälligkeiten, aber das bedeutet nichts. Du entscheidest, kein Risiko einzugehen. Das Fenster lässt sich einen Spalt öffnen. Du schüttest das Wasser hinaus und stellst das leere Glas zurück. Als später eine Schwester kommt und fragt, ob du etwas brauchst, bittest du um Kopfschmerztabletten, lehnst aber weiteres Wasser ab, indem du auf die noch halbvolle Flasche auf dem Tisch deutest - die du aber nicht anzurühren gedenkst. In der Nacht beginnst du, klarer zu denken. Fragmente von Erinnerungen tauchen auf - ein Labor, wissenschaftliche Diskussionen mit einem Mann, der der Beschreibung von Wilson ähnelt.",
+        choices: [{
+            text: "Die Akte von Patient 67 genauer studieren",
+            nextId: "study_patient_file",
+            addClue: {
+                id: "clearer_thinking",
+                text: "Nachdem du das Wasser gemieden hast, beginnen fragmentarische Erinnerungen an ein Labor und Gespräche mit jemandem, der Wilson ähnelt, aufzutauchen."
+            }
+        }, {
+            text: "Versuchen, die zurückkehrenden Erinnerungsfragmente zu ordnen",
+            nextId: "organize_memory_fragments"
+        }, {
+            text: "Das Zimmer heimlich verlassen und weitere Nachforschungen anstellen",
+            nextId: "sneak_out_investigation"
+        }]
+    },
+
+    // Der Raum 22 - Eintritt
+    enter_room_22: {
+        text: "Du beobachtest den Korridor. Als ein Pfleger mit Schlüsselbund vorbeigeht, sprichst du ihn autoritär an: 'Ich muss Raum 22, Freystatt hat mich geschickt.' Der überraschte Mann stottert: 'Aber, ich-' Du schneidest ihm das Wort ab: 'Es ist dringend. Öffnen Sie die Tür.' Widerwillig gehorcht er. Sobald die Tür offen ist, dankst du ihm knapp und betrittst den Raum. Der Pfleger eilt verwirrt davon. Im Inneren findest du einen klinischen Raum mit einem Stuhl in der Mitte, der mit Gurten versehen ist. Monitore und medizinische Geräte umgeben ihn. An der Wand hängt ein großer Bildschirm. Auf einem Tisch liegen Spritzen, Medikamentenfläschchen mit der Aufschrift 'RX-78' und ein Protokollbuch. Als du es öffnest, läuft dir ein kalter Schauer über den Rücken: 'Subjekt A.L. - Fortlaufende Identitätsrekonstruktion. Testphase: US-Marshal-Persona.'",
+        choices: [{
+            text: "Das Protokollbuch durchlesen", nextId: "read_protocol_book", addClue: {
+                id: "rx78_room",
+                text: "In Raum 22 werden offenbar Identitätsmanipulationen mit RX-78 durchgeführt. Ein Protokoll erwähnt 'Subjekt A.L.' und eine 'Marshal-Persona'."
+            }
+        }, {
+            text: "Schnell einige Beweise sammeln und den Raum verlassen",
+            nextId: "collect_room22_evidence"
+        }, {
+            text: "Die Geräte und Monitore genauer untersuchen", nextId: "examine_equipment"
+        }]
+    },
+
+    // Das Protokollbuch lesen
+    read_protocol_book: {
+        text: "Du blätterst durch das Protokollbuch, und dein Unbehagen wächst mit jeder Seite. Detaillierte Aufzeichnungen beschreiben die 'Restrukturierung' von Patient A.L. - die systematische Löschung seiner ursprünglichen Erinnerungen und die Implantation einer neuen Identität als US-Marshal. Behandlungsdaten, Dosierungen von RX-78, Reaktionen. Eine Notiz von Dr. Jenkins fällt besonders auf: 'Subjekt zeigt ungewöhnliche Resistenz. Möglicherweise aufgrund seiner Beteiligung an der Entwicklung von RX-78. Paradoxerweise macht ihn sein Wissen über den Prozess anfälliger für Durchbrüche der ursprünglichen Erinnerungen.' Ein weiterer Eintrag, datiert von vor drei Tagen: 'Subjekt W. (Patient 67) entkommen. Verdacht: Hat A.L. kontaktiert. Überwachung verstärken. Falls A.L. Anzeichen von Erinnerungsdurchbrüchen zeigt, sofort Protokoll Delta aktivieren.'",
+        choices: [{
+            text: "Nach Hinweisen auf deine wahre Identität suchen",
+            nextId: "search_true_identity",
+            addClue: {
+                id: "memory_resistance",
+                text: "Laut Dr. Jenkins' Notizen zeigst du ungewöhnliche Resistenz gegen die Behandlung, möglicherweise weil du selbst an der Entwicklung von RX-78 beteiligt warst."
+            }
+        }, {
+            text: "Herausfinden wollen, was 'Protokoll Delta' ist",
+            nextId: "investigate_protocol_delta"
+        }, {
+            text: "Das Buch mitnehmen und den Raum schnell verlassen", nextId: "take_book_leave"
+        }]
+    },
+
+    // Nach deiner wahren Identität suchen
+    search_true_identity: {
+        text: "Du blätterst weiter, suchst gezielt nach deiner wahren Identität. Schließlich findest du einen Eintrag von vor sechs Monaten: 'Erstbehandlung Dr. Andrew Laeddis. Hervorragende Qualifikation als Testsubjekt aufgrund seiner Kenntnisse der Neurochemie und persönlichen Tragödie (siehe Akte: Familie).' Beigefügt ist ein Foto von dir - mit Bart und längeren Haaren - in einem Laborkittel, neben Wilson und Jenkins stehend. Alle drei lächeln in die Kamera. Die Bildunterschrift lautet: 'JANUS-Entwicklungsteam, Tag der ersten erfolgreichen Anwendung.' Dein Blick wandert zu einem weiteren Dokument: ein Zeitungsausschnitt über einen Hausbrand, bei dem Dolores Laeddis und ihre zwei Kinder ums Leben kamen. Du spürst einen stechenden Schmerz im Kopf, als fragmentarische Erinnerungen durchbrechen.",
+        choices: [{
+            text: "Die Dokumente mitnehmen und den Raum verlassen",
+            nextId: "take_identity_documents",
+            addClue: {
+                id: "laeddis_confirmation",
+                text: "Du hast Beweise gefunden, dass du Dr. Andrew Laeddis bist, ein Mitentwickler von Projekt JANUS, der nach dem Tod seiner Familie in einem Hausbrand zum Testsubjekt wurde."
+            }
+        }, {
+            text: "Nach weiteren Informationen über das JANUS-Projekt suchen",
+            nextId: "search_more_janus"
+        }, {
+            text: "Dr. Bleich finden, der möglicherweise mehr weiß", nextId: "find_sheehan"
+        }]
+    },
+
+    // Abschluss der fehlenden Szenen für den interaktiven Krimi
+
+    // Fortsetzung von take_identity_documents
+    take_identity_documents_continued: {
+        text: "Mit pochendem Herzen steckst du das Foto und die kritischsten Dokumente ein. Als du dich umdrehst, um zu gehen, hörst du Stimmen auf dem Flur. Jemand kommt. Du schaust dich hastig nach einem Versteck um. Neben dem Schrank steht ein schmaler Wandschirm, hinter dem du dich gerade noch verbergen kannst, als die Tür aufgeht. Dr. Jenkins betritt den Raum, begleitet von Schwester Rachel. 'Die Dosis wurde erhöht, wie angeordnet', sagt sie. 'Aber wenn er tatsächlich resistenter wird, weiß ich nicht, ob es ausreicht.' Jenkins seufzt frustriert. 'Er darf sich nicht erinnern. Nicht jetzt, wo wir so nah am Durchbruch sind.' Er geht zum Schreibtisch. 'Das Protokollbuch - es wurde bewegt.' Rachel sieht sich alarmiert um. 'Glauben Sie, er war hier?' Jenkins' Gesicht verhärtet sich. 'Aktivieren Sie Protokoll Delta. Sofort.'",
+        choices: [{
+            text: "Weiter versteckt bleiben, bis sie gehen", nextId: "stay_hidden", addClue: {
+                id: "protocol_delta_activated",
+                text: "Dr. Jenkins hat 'Protokoll Delta' aktiviert, nachdem er festgestellt hat, dass jemand das Protokollbuch eingesehen hat - vermutlich eine Notfallmaßnahme gegen dich."
+            }
+        }, {
+            text: "Versuchen, unbemerkt hinauszuschleichen", nextId: "sneak_out_unnoticed"
+        }, {
+            text: "Dich zu erkennen geben und sie konfrontieren", nextId: "confront_jenkins_rachel"
+        }]
+    },
+
+    // Versteckt bleiben
+    stay_hidden: {
+        text: "Du bleibst regungslos hinter dem Wandschirm, kaum zu atmen wagend. Jenkins und Rachel durchsuchen hastig den Raum, aber der schmale Spalt, durch den du sie beobachten kannst, verrät, dass sie unter Zeitdruck stehen. 'Wir können jetzt nicht den ganzen Flügel durchsuchen', zischt Jenkins. 'Verschließen Sie alle Ausgänge. Setzen Sie das Sicherheitspersonal ein. Und erhöhen Sie die Dosis in seinem Abendessen auf das Dreifache.' Rachel nickt. 'Was ist mit Wilson?' Jenkins' Augen verdunkeln sich. 'Wenn er Kontakt aufgenommen hat, ist es bereits zu spät. Bereiten Sie die Behandlungseinheit vor. Wir beginnen von vorn.' Sie verlassen eilig den Raum. Sobald ihre Schritte verhallt sind, kommst du aus deinem Versteck hervor, mit kaltem Schweiß bedeckt und einem Gefühl wachsender Dringlichkeit.",
+        choices: [{
+            text: "Sofort fliehen und einen Weg aus der Klinik suchen",
+            nextId: "flee_immediately",
+            addClue: {
+                id: "reset_plan",
+                text: "Jenkins plant, falls nötig, deine Behandlung komplett neu zu beginnen - ein völliger Neustart deiner Identitätsprogrammierung."
+            }
+        }, {
+            text: "Nach Dr. Bleich suchen, um Hilfe zu bekommen", nextId: "seek_bleich_help"
+        }, {
+            text: "Versuchen, Wilson zu finden, basierend auf den Hinweisen",
+            nextId: "try_find_wilson"
+        }]
+    },
+
+    // Sofort fliehen
+    flee_immediately: {
+        text: "Du entscheidest, dass du sofort fliehen musst. Mit den gestohlenen Dokumenten schleichst du durch die Korridore des Ostflügels, sorgfältig darauf bedacht, dem Sicherheitspersonal auszuweichen. Ein Alarm ertönt - 'Protokoll Delta' ist offenbar in Kraft. Du hörst Durchsagen: 'Alle Patienten in ihre Zimmer. Sicherheitspersonal zu den Ausgängen.' An einer Kreuzung siehst du, wie Wachen den Hauptausgang blockieren. Du wendest dich nach rechts, in einen weniger frequentierten Teil der Klinik. Dort entdeckst du eine Tür mit der Aufschrift 'Personalausgang'. Als du näher kommst, öffnet sich die Tür, und Dr. Bleich steht vor dir. Er sieht nicht überrascht aus. 'Schnell', flüstert er. 'Sie suchen dich überall. Ich weiß einen Weg hinaus.'",
+        choices: [{
+            text: "Dr. Bleich vertrauen und ihm folgen", nextId: "trust_bleich", addClue: {
+                id: "bleich_appears",
+                text: "Dr. Bleich erschien im richtigen Moment, um dir bei der Flucht zu helfen, was darauf hindeutet, dass er möglicherweise auf deiner Seite ist."
+            }
+        }, {
+            text: "Misstrauisch sein - könnte es eine Falle sein?", nextId: "be_suspicious"
+        }, {
+            text: "Ihn nach Wilson fragen, bevor du ihm folgst", nextId: "ask_about_wilson_first"
+        }]
+    },
+
+    // Dr. Bleich vertrauen
+    trust_bleich: {
+        text: "Du entscheidest, Dr. Bleich zu vertrauen, und folgst ihm schnell durch den Personalausgang. Er führt dich durch einen verwinkelten Korridor zu einer unauffälligen Tür. 'Dies ist ein alter Versorgungstunnel', erklärt er leise, während er die Tür aufschließt. 'Er führt zum Nordstrand. Von dort kannst du den Leuchtturm erreichen.' Ihr steigt eine enge Treppe hinab in einen feuchten, schwach beleuchteten Tunnel. 'Wilson wartet dort auf dich', fährt Bleich fort. 'Er hat ein Gegenmittel entwickelt. Es wird deine wahren Erinnerungen zurückbringen.' Er bleibt stehen und sieht dich ernst an. 'Andrew, hör mir zu. Was du auch findest, wer du auch warst - vergiss nicht, worum es wirklich geht. Die Menschen, die in dieser Klinik immer noch leiden. Die Jenkins kontrolliert.'",
+        choices: [{
+            text: "Nach weiteren Details über deine Vergangenheit fragen",
+            nextId: "ask_more_past",
+            addClue: {
+                id: "bleich_escape_help",
+                text: "Dr. Bleich hat dir einen geheimen Tunnel zum Nordstrand gezeigt und bestätigt, dass Wilson im Leuchtturm ist und ein Gegenmittel hat."
+            }
+        }, {
+            text: "Fragen, ob Dr. Bleich mitkommen wird", nextId: "ask_bleich_accompany"
+        }, {
+            text: "Ohne weitere Verzögerung zum Leuchtturm aufbrechen", nextId: "go_lighthouse"
+        }]
+    },
+
+    // Fragen, ob Bleich dich begleitet
+    ask_bleich_accompany: {
+        text: "Du fragst Dr. Bleich, ob er dich zum Leuchtturm begleiten wird. Er schüttelt bedauernd den Kopf. 'Ich kann nicht, Andrew. Jemand muss hier bleiben und die Spuren verwischen. Jenkins wird wissen, dass ich involviert bin, aber nicht, wie sehr.' Er drückt dir einen Schlüssel in die Hand. 'Für die Tür des Leuchtturms. Ein altes Seefahrersymbol ist eingeritzt - drei Wellen.' Er wird ernst. 'Außerdem müssen noch andere Patienten geschützt werden. Jenkins hat das Projekt an mehr Personen getestet, als du denkst.' Ein entferntes Geräusch lässt ihn aufhorchen. 'Geh jetzt. Der Tunnel führt direkt zur Küste. Halte dich an die rechte Wand, wenn es Abzweigungen gibt. Und Andrew...' Er zögert. 'Es war nicht deine Schuld. Was mit deiner Familie passierte. Vergiss das nicht, wenn die Erinnerungen zurückkehren.'",
+        choices: [{
+            text: "Dich bedanken und schnell aufbrechen", nextId: "thank_and_depart", addClue: {
+                id: "bleich_stays",
+                text: "Dr. Bleich bleibt in der Klinik zurück, um Spuren zu verwischen und andere Patienten zu schützen. Er gab dir einen Schlüssel für den Leuchtturm."
+            }
+        }, {
+            text: "Fragen, was er mit 'es war nicht deine Schuld' meint", nextId: "ask_about_guilt"
+        }, {
+            text: "Bestehen, dass er mitkommen soll", nextId: "insist_accompany"
+        }]
+    },
+
+    // Nach der Schuld fragen
+    ask_about_guilt: {
+        text: "'Was meinst du damit - es war nicht meine Schuld?' fragst du, plötzlich von tiefer Unruhe erfasst. Bleich sieht dich mit Mitgefühl an. 'Du wirst dich bald erinnern. Nach dem Tod deiner Familie hast du dir unerbittliche Vorwürfe gemacht. Diese Schuld hat dich zerstört, dich für Jenkins' Manipulation anfällig gemacht.' Er senkt die Stimme. 'Was du nicht wusstest: Der Kurzschluss im Haus war kein Zufall. Die Elektrik wurde manipuliert.' Du starrst ihn ungläubig an. 'Jenkins brauchte ein Versuchskaninchen für JANUS - jemanden, der es mitentwickelt hatte, der die neuronalen Muster kannte. Und er brauchte einen Weg, diesen jemand zu brechen.' Das Entsetzen lähmt dich für einen Moment. 'Du meinst... Jenkins hat meine Familie getötet? Um mich als Versuchsperson zu bekommen?'",
+        choices: [{
+            text: "Von Rache getrieben zum Leuchtturm aufbrechen",
+            nextId: "vengeance_motivated",
+            addClue: {
+                id: "family_murder",
+                text: "Laut Dr. Bleich wurde der Hausbrand, der deine Familie tötete, von Jenkins inszeniert, um dich als Versuchsperson für JANUS zu bekommen."
+            }
+        }, {
+            text: "Nach Beweisen für diese ungeheuerliche Behauptung fragen",
+            nextId: "ask_evidence_accusation"
+        }, {
+            text: "Kurz zusammenbrechen angesichts dieser Offenbarung",
+            nextId: "momentary_breakdown"
+        }]
+    },
+
+    // Von Rache getrieben
+    vengeance_motivated: {
+        text: "Eine kalte Wut erfasst dich, klärt deinen Verstand wie nichts zuvor. 'Jenkins wird dafür bezahlen', sagst du mit einer Stimme, die selbst dir fremd erscheint. Bleich packt deinen Arm. 'Nicht blindlings, Andrew. Das ist es, was er von dir erwartet. Sammle zuerst die Beweise. Wilson hat alles. Die Dokumente, die Zeugenaussagen.' Er sieht dich eindringlich an. 'Rache wird dir deine Familie nicht zurückbringen. Aber du kannst verhindern, dass anderen das Gleiche passiert.' Im Tunnel ertönt ein fernes Geräusch. 'Geh jetzt! Sie kommen näher.' Du nickst knapp, die Wut jetzt kanalisiert in einen eisernen Entschluss. 'Danke, für alles', sagst du und wendest dich zum Gehen. 'Wir sehen uns auf der anderen Seite.' Du rennst los, während hinter dir Bleichs Schritte in die entgegengesetzte Richtung verhallen.",
+        choices: [{
+            text: "Dem Tunnel zum Nordstrand folgen", nextId: "follow_tunnel_north", addClue: {
+                id: "controlled_rage",
+                text: "Die Wahrheit über den Tod deiner Familie hat eine kontrollierte Wut in dir entfacht und deinen Entschluss gefestigt, Jenkins zur Rechenschaft zu ziehen."
+            }
+        }, {
+            text: "Kurz innehalten und deine Gedanken sammeln", nextId: "pause_collect_thoughts"
+        }, {
+            text: "Zurückkehren und Dr. Bleich helfen", nextId: "return_help_bleich"
+        }]
+    },
+
+    // Dem Tunnel folgen
+    follow_tunnel_north: {
+        text: "Du rennst durch den feuchten Tunnel, die rechte Hand an der Wand, wie Bleich es dir gesagt hat. Bei jeder Abzweigung hältst du dich rechts. Der Geruch von Salz wird stärker, und schließlich hörst du das Rauschen der Wellen. Eine rostige Eisenleiter führt nach oben. Du kletterst hinauf und schiebst eine schwere Falltür auf. Ein Windstoß erfasst dich, als du auf den Nordstrand hinaustrittst. Der Sturm hat etwas nachgelassen, aber der Himmel ist noch immer dunkel. In der Ferne siehst du den Leuchtturm, sein Licht schneidet rhythmisch durch den Nebel. Du machst dich auf den Weg, vorbei an Felsen und angeschwemmtem Treibholz. Je näher du kommst, desto stärker wird ein Gefühl der Vertrautheit. Du warst schon einmal hier, in einem anderen Leben.",
+        choices: [{
+            text: "Direkt zum Leuchtturm gehen", nextId: "go_lighthouse", addClue: {
+                id: "reached_north_shore",
+                text: "Du hast den Nordstrand erreicht und siehst den Leuchtturm in der Ferne. Der Ort erweckt Gefühle der Vertrautheit."
+            }
+        }, {
+            text: "Die Umgebung nach Verfolgern absuchen", nextId: "check_for_pursuers"
+        }, {
+            text: "Kurz innehalten und versuchen, weitere Erinnerungen aufsteigen zu lassen",
+            nextId: "pause_for_memories"
+        }]
+    },
+
+    // Zur Tür sprinten - Fortsetzung des Fluchtwegs
+    check_for_pursuers: {
+        text: "Du hältst inne und untersuchst sorgfältig die Umgebung. Der Wind trägt Geräusche weit, und in der Ferne hörst du Hundebellen und Rufe. Sie haben deine Flucht bemerkt und folgen dir. Am Horizont siehst du Lichter, die sich vom Hauptgebäude der Klinik in Richtung Nordstrand bewegen. Du schätzt, dass du etwa zwanzig Minuten Vorsprung hast, vielleicht weniger, wenn sie die Abkürzung durch den Wald nehmen. Der Leuchtturm ist jetzt deutlich zu sehen, vielleicht noch einen Kilometer entfernt. Du beschleunigst deinen Schritt, balancierst über glitschige Felsen und wattest durch flache Wasserstellen. Die Dokumente in deiner Tasche fühlen sich plötzlich schwer an - belastend und gleichzeitig ungeheuer wertvoll. Sie könnten der Schlüssel sein, um Jenkins zu stoppen und Gerechtigkeit für deine Familie zu erlangen.",
+        choices: [{
+            text: "So schnell wie möglich zum Leuchtturm eilen",
+            nextId: "rush_to_lighthouse",
+            addClue: {
+                id: "pursuers_confirmed",
+                text: "Du hast bestätigt, dass Verfolger mit Hunden auf dem Weg zum Nordstrand sind. Du hast etwa zwanzig Minuten Vorsprung."
+            }
+        }, {
+            text: "Einen weniger offensichtlichen Weg nehmen, um Verfolger abzuschütteln",
+            nextId: "take_less_obvious_path"
+        }, {
+            text: "Ein Versteck suchen und warten, bis die Suche nachlässt",
+            nextId: "find_hiding_place"
+        }]
+    },
+
+    // Zum Leuchtturm eilen
+    rush_to_lighthouse: {
+        text: "Du entscheidest, dass Zeit wichtiger ist als Vorsicht, und rennst so schnell es das unebene Terrain erlaubt zum Leuchtturm. Der Wind peitscht dir ins Gesicht, der Regen hat deinen Mantel durchweicht. Das Bellen der Hunde wird lauter. Als du die Basis des Leuchtturms erreichst, siehst du, dass die Eisentür fest verschlossen ist. Du erinnerst dich an Bleichs Schlüssel und ziehst ihn hervor. Tatsächlich ist ein Symbol mit drei Wellenlinien eingraviert. Deine Hände zittern vor Anstrengung und Kälte, als du den Schlüssel ins Schloss steckst. Er passt. Mit einem schweren Klicken springt die Tür auf. Du gleitest hinein und verschließt sie sofort hinter dir. Die plötzliche Stille ist überwältigend. Eine steile Wendeltreppe führt nach oben. 'Hallo?', rufst du. 'Wilson? Bist du hier?' Eine Stimme antwortet von oben: 'Andrew? Bist du das?'",
+        choices: [{
+            text: "Die Treppe hinaufsteigen, um Wilson zu treffen",
+            nextId: "ascend_to_meet_wilson",
+            addClue: {
+                id: "reached_lighthouse",
+                text: "Du hast den Leuchtturm erreicht und Kontakt mit einer Person hergestellt, die dich als 'Andrew' erkennt - vermutlich Wilson."
+            }
+        }, {
+            text: "Vorsichtig sein und nach Bestätigung fragen, dass es Wilson ist",
+            nextId: "verify_wilson_identity"
+        }, {
+            text: "Schnell berichten, dass Verfolger unterwegs sind", nextId: "report_pursuers"
+        }]
+    },
+
+    // Die Treppe hinaufsteigen
+    ascend_to_meet_wilson: {
+        text: "Du steigst die spiralförmige Treppe hinauf, jede Stufe ein Echo in dem runden Turm. Als du die oberste Plattform erreichst, siehst du einen Mann mittleren Alters mit grauem Haar und einer markanten Narbe über dem rechten Auge - genau wie in der Beschreibung von Patient 67. Er lächelt erleichtert. 'Andrew. Endlich.' Er tritt näher, mustert dich eingehend. 'Wie viel erinnerst du?' Du zeigst ihm die Dokumente, die du gefunden hast. 'Bruchstücke. Genug, um zu wissen, dass ich nicht der bin, für den ich mich gehalten habe.' Wilson nickt verstehend. 'Die Konditionierung bricht zusammen. Das ist gut.' Er geht zu einem improvisierten Labortisch, auf dem Reagenzgläser und einfache Ausrüstung stehen. 'Ich habe an einem Gegenmittel gearbeitet. Es wird die chemischen Blockaden in deinem Gehirn auflösen.' Er hält eine kleine Flasche mit blauer Flüssigkeit hoch. 'Aber ich muss dich warnen, Andrew. Die vollständige Erinnerung bedeutet auch vollständigen Schmerz.'",
+        choices: [{
+            text: "Das Gegenmittel nehmen wollen", nextId: "want_antidote", addClue: {
+                id: "wilson_antidote",
+                text: "Dr. Wilson hat ein Gegenmittel entwickelt, das die chemischen Blockaden in deinem Gehirn auflösen und deine wahren Erinnerungen zurückbringen kann, aber mit ihnen auch den vollen Schmerz."
+            }
+        }, {
+            text: "Erst mehr über deine Vergangenheit erfahren wollen", nextId: "learn_more_first"
+        }, {
+            text: "Wilson von Dr. Bleichs Behauptung über den Tod deiner Familie erzählen",
+            nextId: "tell_family_murder_claim"
+        }]
+    },
+
+    // Das Gegenmittel nehmen wollen
+    want_antidote: {
+        text: "Du streckst entschlossen die Hand aus. 'Ich will mich erinnern. An alles.' Wilson nickt anerkennend. 'Das ist der Andrew, den ich kenne.' Er gibt dir die Flasche. 'Es wirkt schnell, aber der Prozess ist intensiv. Du solltest dich setzen.' Er führt dich zu einem einfachen Stuhl neben dem Leuchtfeuer. Durch die Glasscheiben siehst du den weiten Blick über das stürmische Meer und die dunkle Silhouette der Insel. In der Ferne sind Lichter zu sehen - deine Verfolger, die näher kommen. Du entfernst den Stopfen von der Flasche. 'Was auch immer ich war, was auch immer ich getan habe - ich muss es wissen.' Mit einem letzten Blick auf Wilson trinkst du das Gegenmittel in einem Zug. Der Geschmack ist bitter, metallisch. Einen Moment lang spürst du nichts. Dann beginnt ein Pochen in deinen Schläfen, das schnell zu einem stechenden Schmerz wird.",
+        choices: [{
+            text: "Dich dem Fluss der zurückkehrenden Erinnerungen hingeben",
+            nextId: "take_antidote"
+        }, {
+            text: "Versuchen, gegen den Schmerz anzukämpfen",
+            nextId: "fight_against_pain",
+            addClue: {
+                id: "taking_antidote",
+                text: "Du hast Wilsons Gegenmittel genommen, und der Prozess der Erinnerungsrückkehr hat begonnen, begleitet von intensiven Kopfschmerzen."
+            }
+        }, {
+            text: "Nach Wilsons Hand greifen, um Halt zu finden", nextId: "grasp_wilson_hand"
+        }]
+    },
+
+    // Gegen den Schmerz ankämpfen
+    fight_against_pain: {
+        text: "Du versuchst instinktiv, gegen den überwältigenden Schmerz anzukämpfen. Dein Körper spannt sich an, du greifst nach den Armlehnen des Stuhls. 'Lass es zu, Andrew', hörst du Wilsons Stimme wie durch einen Nebel. 'Kämpfe nicht dagegen an. Die Erinnerungen müssen fließen.' Trotz des Schmerzes spürst du, wie die Wände in deinem Geist einstürzen. Bilder fluten herein: Du und Wilson im Labor, eure Begeisterung über die therapeutischen Möglichkeiten von RX-78. Jenkins, der militärische Partner vorstellt. Deine wachsende Besorgnis über die ethischen Implikationen. Dolores, die dich anruft wegen der defekten Elektrik. Du versprichst, sie am Wochenende zu überprüfen. Dann Sirenen, Lichter, Rauch. Dein Haus in Flammen. Die Gewissheit, dass niemand überlebt hat. Der Zusammenbruch. Freystatts Angebot: 'Wir können den Schmerz nehmen, für immer.'",
+        choices: [{
+            text: "Die Erinnerungen akzeptieren und dich vollständig öffnen",
+            nextId: "accept_memories",
+            addClue: {
+                id: "full_memory_return",
+                text: "Deine vollständigen Erinnerungen kehren zurück - deine Arbeit an JANUS, deine Familie, ihr Tod, dein Zusammenbruch und wie du zum Versuchsobjekt wurdest."
+            }
+        }, {
+            text: "Nach der Erinnerung an Jenkins' Beteiligung am Tod deiner Familie suchen",
+            nextId: "seek_jenkins_involvement"
+        }, {
+            text: "Wilson anschauen, während sich deine Identität festigt", nextId: "look_at_wilson"
+        }]
+    },
+
+    // Die Erinnerungen akzeptieren
+    accept_memories: {
+        text: "Du gibst den Kampf auf und lässt die Erinnerungen kommen. Der Schmerz ist überwältigend, aber auch befreiend. Du erinnerst dich an jedes Detail deines Lebens als Dr. Andrew Laeddis, an die Liebe zu deiner Frau und deinen Kindern, an deine Leidenschaft für die Neuropsychiatrie. Dann kommt die schreckliche Nacht des Feuers, gefolgt von Wochen der Verzweiflung und Selbstvorwürfe. Und dann eine neue Erinnerung, eine, die du unterdrückt haben musst: Ein Gespräch, das du zufällig mitgehört hast. Jenkins am Telefon: '...hat funktioniert. Laeddis ist gebrochen. Völlig. Er wird allem zustimmen.' Eine andere Stimme: 'Keine Zeugen? Das Feuer hat alles beseitigt?' Jenkins' kalte Antwort: 'Alles perfekt inszeniert. Ein elektrischer Defekt.' Du öffnest die Augen, Tränen strömen über dein Gesicht, aber dein Blick ist klar. 'Ich erinnere mich', flüsterst du zu Wilson. 'An alles.'",
+        choices: [{
+            text: "Wilson deine Erinnerung an Jenkins' Gespräch mitteilen",
+            nextId: "share_jenkins_call",
+            addClue: {
+                id: "murder_confirmation",
+                text: "Eine zurückgekehrte Erinnerung bestätigt, dass Jenkins den Tod deiner Familie arrangiert hat - du hast ein belastendes Telefongespräch mitgehört, das du später unterdrückt hast."
+            }
+        }, {
+            text: "Aufstehen, mit neu gefundener Entschlossenheit", nextId: "stand_with_resolve"
+        }, {
+            text: "Kurz zusammenbrechen angesichts der überwältigenden Emotionen",
+            nextId: "momentary_breakdown_memories"
+        }]
+    },
+
+    // Wilson das Telefongespräch mitteilen
+    share_jenkins_call: {
+        text: "Du erzählst Wilson von der neu aufgetauchten Erinnerung - Jenkins' Telefongespräch, das du mitgehört hast. Wilsons Gesicht verfinstert sich. 'Ich hatte es vermutet, aber keine Beweise. Jenkins brauchte dich verzweifelt für den nächsten Schritt von JANUS. Ein williges Versuchsobjekt, das die Neurochemie verstand.' Er schüttelt den Kopf. 'Nachdem du zusammengebrochen warst, ging alles sehr schnell. Freystatt arrangierte deine Einweisung. Die ersten Versuche mit RX-78 begannen.' Plötzlich wird sein Blick alarmiert. Er geht zum Fenster und späht hinaus. 'Sie kommen. Schneller als erwartet.' Tatsächlich siehst du mehrere Lichter, die sich dem Leuchtturm nähern. 'Wir haben nicht viel Zeit, Andrew. Nimm die Beweise.' Er reicht dir einen wasserdichten Beutel mit Dokumenten. 'Und jetzt müssen wir einen Entscheidung treffen.'",
+        choices: [{
+            text: "Nach einem Fluchtweg fragen", nextId: "ask_escape_route", addClue: {
+                id: "pursuers_close",
+                text: "Eure Verfolger nähern sich schnell dem Leuchtturm. Wilson hat dir einen Beutel mit weiteren belastenden Beweisen gegen Jenkins übergeben."
+            }
+        }, {
+            text: "Vorschlagen, zu kämpfen und sich zu stellen", nextId: "suggest_stand_fight"
+        }, {
+            text: "Fragen, ob es einen anderen Weg gibt, als zu fliehen oder zu kämpfen",
+            nextId: "ask_third_option"
+        }]
+    },
+
+    // Fortsetzung von ask_escape_route
+    suggest_surrender: {
+        text: "'Was, wenn wir uns stellen?', schlägst du vor. 'Mit all diesen Beweisen können sie uns nicht einfach zum Schweigen bringen.' Wilson schüttelt den Kopf. 'Du unterschätzt, wie weit Jenkins gehen wird. Er hat Verbindungen zu Geheimdiensten, zum Militär. Menschen sind für weniger verschwunden.' Er schaut zum Fenster, wo die Lichter näher kommen. 'Und denk an all die anderen Patienten in der Klinik. Wir sind vielleicht die Einzigen, die ihnen helfen können.' Er drückt dir den Beutel mit Beweisen fester in die Hand. 'Diese Dokumente sind unsere einzige Hoffnung. Sie müssen an die Öffentlichkeit. An jemanden mit genug Macht, um Jenkins zu stoppen.' Ein lautes Klopfen an der Tür unterbricht euch. 'Wilson! Wir wissen, dass du da drin bist!', ruft Jenkins' Stimme. 'Und Laeddis auch! Es ist vorbei!'",
+        choices: [{
+            text: "Wilson zustimmen und durch den Tunnel fliehen",
+            nextId: "agree_escape_tunnel",
+            addClue: {
+                id: "jenkins_arrival",
+                text: "Jenkins und seine Leute haben den Leuchtturm erreicht und fordern eure Aufgabe. Die Situation wird kritisch."
+            }
+        }, {
+            text: "Nach einer Möglichkeit suchen, beide zu entkommen", nextId: "look_both_escape"
+        }, {
+            text: "Einen Plan vorschlagen, Jenkins in eine Falle zu locken",
+            nextId: "suggest_trap_jenkins"
+        }]
+    },
+
+    // Beiden die Flucht ermöglichen
+    look_both_escape: {
+        text: "Du schaust dich hektisch um. 'Muss es wirklich einer von uns sein? Können wir nicht beide entkommen?' Wilson überlegt. 'Das Boot ist klein, aber es würde für zwei reichen...' Die Tür des Leuchtturms bebt unter schweren Schlägen. 'Das Schloss wird nicht lange halten', murmelt Wilson. Er eilt zu einem Schrank, zieht eine kleine Metallbox hervor. 'Ein letzter Trick.' Aus der Box nimmt er zwei kleine Sprengsätze. 'Nichts Tödliches, nur Blendgranaten mit Rauch. Genug, um Verwirrung zu stiften.' Er reicht dir einen. 'Ich werfe meinen durch das Fenster, du deinen durch die Tür, sobald sie aufbricht. Dann rennen wir beide zur Falltür.' Das Schloss beginnt nachzugeben. 'Bereit?', fragt Wilson mit einem grimmigen Lächeln.",
+        choices: [{
+            text: "Dem Plan zustimmen und dich bereit machen",
+            nextId: "agree_distraction_plan",
+            addClue: {
+                id: "distraction_devices",
+                text: "Wilson hat improvisierte Blendgranaten mit Rauch vorbereitet, die Verwirrung stiften sollen, damit ihr beide durch den Tunnel entkommen könnt."
+            }
+        }, {
+            text: "Vorschlagen, dass einer von euch zurückbleibt, um den anderen zu decken",
+            nextId: "suggest_cover_escape"
+        }, {
+            text: "Nach dem Sprengstoff greifen und Wilson zur Falltür drängen",
+            nextId: "grab_explosives_urge_wilson"
+        }]
+    },
+
+    // Dem Ablenkungsplan zustimmen
+    agree_distraction_plan: {
+        text: "Du nickst entschlossen. 'Lass es uns tun.' Wilson öffnet das Fenster auf der dem Eingang abgewandten Seite. Die Tür splittert unter einem weiteren heftigen Schlag. 'Bei drei', sagt Wilson. 'Eins... zwei... drei!' Er wirft seine Granate durch das Fenster. Im selben Moment bricht die Tür auf, und du wirfst deinen Sprengsatz direkt auf die eindringenden Männer. Zwei laute Knalle ertönen, gefolgt von blendendem Licht und dichtem Rauch. Schreie und Verwirrung erfüllen die Luft. Wilson packt deinen Arm. 'Jetzt!' Ihr stürzt zur Falltür. Wilson steigt zuerst hinab, du folgst dicht dahinter und ziehst die Luke über euch zu. Der Tunnel ist eng und dunkel, nur Wilsons kleine Taschenlampe spendet Licht. 'Schnell', drängt er, 'bevor sie bemerken, wohin wir verschwunden sind.'",
+        choices: [{
+            text: "Wilson durch den Tunnel folgen", nextId: "follow_wilson_tunnel", addClue: {
+                id: "successful_distraction",
+                text: "Die Ablenkung mit den Blendgranaten war erfolgreich. Du und Wilson seid in den Geheimtunnel entkommen, während Jenkins' Leute verwirrt zurückblieben."
+            }
+        }, {
+            text: "Versuchen, die Luke zu blockieren, um Verfolger zu verlangsamen",
+            nextId: "try_block_trapdoor"
+        }, {
+            text: "Nach den Beweisen tasten, um sicherzugehen, dass sie noch da sind",
+            nextId: "check_evidence_safe"
+        }]
+    },
+
+    // Wilson durch den Tunnel folgen
+    follow_wilson_tunnel: {
+        text: "Du folgst Wilson durch den engen, feuchten Tunnel. Der Weg führt stetig abwärts, manchmal so eng, dass ihr fast kriechen müsst. 'Dieser Tunnel wurde im 19. Jahrhundert von Schmugglern genutzt', erklärt Wilson flüsternd. 'Ein perfektes Geheimnis.' Hinter euch hörst du entfernte Rufe - sie haben die Falltür entdeckt. 'Schneller', drängt Wilson. Nach etwa zwanzig Minuten ändert sich die Luft, wird salziger. Der Tunnel erweitert sich zu einer kleinen Höhle, durch die du das Rauschen der Wellen hören kannst. 'Wir sind fast da.' Wilson schiebt einen schweren Felsen beiseite, der den Ausgang verdeckt, und kühle Nachtluft strömt herein. Ihr tretet hinaus auf einen winzigen, verborgenen Strand, umgeben von hohen Klippen. Dort, an einem versteckten Steg, liegt ein kleines Motorboot.",
+        choices: [{
+            text: "Zum Boot eilen", nextId: "hurry_to_boat", addClue: {
+                id: "reached_hidden_cove",
+                text: "Ihr habt die versteckte Bucht mit dem Fluchtboot erreicht. Verfolger sind im Tunnel, aber noch nicht durchgebrochen."
+            }
+        }, {
+            text: "Zurückschauen und lauschen, wie nah die Verfolger sind",
+            nextId: "check_pursuers_distance"
+        }, {
+            text: "Wilson nach dem nächsten Schritt des Plans fragen", nextId: "ask_next_step"
+        }]
+    },
+
+    // Zum Boot eilen
+    hurry_to_boat: {
+        text: "Ihr rennt zum Boot. Wilson löst schnell die Taue, während du an Bord springst. Der kleine Motor startet mit einem Röhren, als Wilson den Schlüssel dreht. 'Halt dich fest', ruft er über dem Lärm. Das Boot schießt vorwärts, gerade als ihr Stimmen am Tunnelausgang hört. Ein Schuss knallt, das Wasser neben euch spritzt auf. Weitere Schüsse folgen, aber ihr seid bereits außer Reichweite, das Boot schneidet durch die Wellen in die Dunkelheit. Wilson lenkt euch um die Klippen herum, weg von der Insel, Richtung offenes Meer. Erst als die Küste nur noch eine dunkle Linie am Horizont ist, verlangsamt er den Motor. 'Wir haben es geschafft', sagt er, kaum glaubend. 'Wohin jetzt?', fragst du. Wilson deutet Richtung Osten. 'Das Festland ist etwa drei Stunden entfernt. Ich kenne jemanden dort, der uns helfen kann. Einen Journalisten, dem ich vertraue.'",
+        choices: [{
+            text: "Zustimmen und Kurs auf das Festland nehmen",
+            nextId: "agree_head_mainland",
+            addClue: {
+                id: "boat_escape_successful",
+                text: "Ihr seid erfolgreich mit dem Boot geflohen und nehmt Kurs auf das Festland, wo Wilson einen vertrauenswürdigen Journalisten kennt."
+            }
+        }, {
+            text: "Vorschlagen, die Beweise zu überprüfen, während ihr fahrt",
+            nextId: "suggest_check_evidence"
+        }, {
+            text: "Fragen, was mit Dr. Bleich und den anderen Patienten geschehen wird",
+            nextId: "ask_about_others"
+        }]
+    },
+
+    // Kurs aufs Festland setzen
+    agree_head_mainland: {
+        text: "Du nickst zustimmend, und Wilson nimmt Kurs auf das Festland. Das kleine Boot tanzt über die Wellen, der Motor surrt gleichmäßig. Der Regen hat aufgehört, und der Nachthimmel klart auf, Sterne werden sichtbar. Wilson reicht dir eine Thermoskanne mit Kaffee. 'Du solltest etwas trinken. Es wird eine lange Nacht.' Ihr setzt euch und atmet zum ersten Mal seit Stunden durch. 'Was passiert, wenn wir ankommen?', fragst du. Wilson blickt ernst. 'Wir gehen direkt zu meinem Kontakt. Er arbeitet für eine große Zeitung, hat Verbindungen zu Bundesbehörden. Mit den Beweisen, die wir haben, muss die Regierung handeln.' Er schaut zurück zur Insel, jetzt nur noch ein dunkler Fleck am Horizont. 'All die Patienten dort... sie verdienen Gerechtigkeit.' Du öffnest den wasserdichten Beutel und beginnst, die Dokumente zu sichten - Laborprotokolle, Fotos, Zeugenaussagen. Alles, was ihr braucht, um Jenkins und seine Komplizen zur Rechenschaft zu ziehen.",
+        choices: [{
+            text: "Die Reise zum Festland fortsetzen (Zum Ende)",
+            nextId: "ending_escape",
+            addClue: {
+                id: "justice_plan",
+                text: "Der Plan ist, die Beweise einem Journalisten mit Verbindungen zu Bundesbehörden zu übergeben, um Gerechtigkeit für alle Opfer von Projekt JANUS zu erreichen."
+            }
+        }, {
+            text: "Eine letzte Frage zu deiner Familie stellen", nextId: "final_family_question"
+        }, {
+            text: "Über die Zukunft nachdenken, wenn alles vorbei ist", nextId: "contemplate_future"
+        }]
+    },
+
+    // Weiterführung von Handlungssträngen, für die noch Szenen fehlen:
+
+    // Dr. Bleich nach seiner Beteiligung am Projekt fragen
+    ask_bleich_involvement: {
+        text: "'Waren Sie selbst an dem Projekt beteiligt, Dr. Bleich?', fragst du direkt. Er senkt den Blick kurz, Schuld zeichnet sich auf seinem Gesicht ab. 'Am Anfang, ja. Ich glaubte an das therapeutische Potenzial.' Er seufzt schwer. 'Als ich erkannte, wohin es führte, war es schon zu spät. Jenkins hatte die Kontrolle übernommen, mit Freystatts Unterstützung.' Er sieht dich an. 'Ich versuchte, im System zu bleiben, um zu helfen, wo ich konnte. Manche Patienten vor dem Schlimmsten zu bewahren.' Seine Stimme wird leiser. 'Ich hätte früher handeln sollen. Als Wilson und du zuerst Bedenken äußertet.' Du bemerkst die Verwendung deines Vornamens - ein weiterer Hinweis, dass er dich als jemand anderen kennt. 'Jetzt versuche ich, es wiedergutzumachen. Wilson und ich arbeiten heimlich zusammen, um Beweise zu sammeln.'",
+        choices: [{
+            text: "Fragen, wo Wilson jetzt ist", nextId: "ask_wilson_whereabouts", addClue: {
+                id: "bleich_guilt",
+                text: "Dr. Bleich war anfangs an Projekt JANUS beteiligt, zog sich zurück, als er die dunkle Wendung erkannte, und arbeitet nun heimlich mit Wilson zusammen, um Beweise zu sammeln."
+            }
+        }, {
+            text: "Nach konkreten Beweisen fragen, die er gesammelt hat",
+            nextId: "ask_evidence_collected"
+        }, {
+            text: "Fragen, wieviele Patienten von der Identitätsmanipulation betroffen sind",
+            nextId: "ask_affected_patients"
+        }]
+    },
+
+    // Nach Wilsons Aufenthaltsort fragen
+    ask_wilson_whereabouts: {
+        text: "'Wo ist Wilson jetzt?', fragst du. Dr. Bleich wirft einen vorsichtigen Blick zur Tür. 'Im Leuchtturm an der Nordküste. Er floh vor drei Tagen, als er entdeckte, dass Jenkins plante, ihn zu... eliminieren.' Er senkt die Stimme weiter. 'Wilson hatte zu viel herausgefunden, wurde zu gefährlich für sie. Er nahm wichtige Beweise mit und entwickelte ein Gegenmittel für RX-78.' Bleich nimmt ein Stück Papier und zeichnet eine grobe Karte. 'Hier ist der Weg. Aber sei vorsichtig - sie suchen überall nach ihm. Und nach dir, seit du anfängst, Fragen zu stellen.' Er blickt dich ernst an. 'Er wartet auf dich, Andrew. Er hat all die Antworten, die du suchst, und das Mittel, um deine wahren Erinnerungen zurückzubringen. Aber du musst dich beeilen. Der Sturm lässt nach, und Jenkins wird bald Verstärkung vom Festland anfordern.'",
+        choices: [{
+            text: "Sofort zum Leuchtturm aufbrechen", nextId: "go_lighthouse", addClue: {
+                id: "wilson_lighthouse",
+                text: "Wilson versteckt sich im Leuchtturm an der Nordküste, hat wichtige Beweise und ein Gegenmittel für RX-78. Er floh, als Jenkins plante, ihn zu beseitigen."
+            }
+        }, {
+            text: "Nach einer sicheren Route zum Leuchtturm fragen", nextId: "ask_safe_route"
+        }, {
+            text: "Fragen, ob Dr. Bleich dich begleiten wird", nextId: "ask_bleich_accompany"
+        }]
+    },
+
+    // Fragen, ob es einen Mittelweg gibt
+    ask_middle_ground: {
+        text: "'Gibt es keinen Mittelweg?', fragst du Wilson. 'Muss ich alles auf einmal erinnern?' Wilson überlegt kurz. 'Ich könnte die Dosierung reduzieren. Dir einen Teil deiner Erinnerungen zurückgeben, genug, um zu verstehen, wer du bist, ohne die volle emotionale Wucht.' Er nimmt ein leeres Fläschchen und gießt etwa die Hälfte der blauen Flüssigkeit um. 'Dies würde ausreichen, um die oberflächlichen Blockaden zu lösen. Die tieferen Erinnerungen - besonders die traumatischen - würden gedämpft bleiben.' Er reicht dir das halbvolle Fläschchen. 'Deine Entscheidung, Andrew. Teilweise Wahrheit jetzt, oder volle Wahrheit, wenn du bereit bist.' Draußen hörst du das Rauschen der Wellen und das ferne Bellen von Hunden - eure Verfolger kommen näher.",
+        choices: [{
+            text: "Die reduzierte Dosis nehmen", nextId: "take_reduced_dose", addClue: {
+                id: "partial_antidote",
+                text: "Wilson hat eine reduzierte Dosis des Gegenmittels angeboten, die dir einen Teil deiner Erinnerungen zurückgeben würde, ohne die volle emotionale Traumabelastung."
+            }
+        }, {
+            text: "Doch die volle Dosis nehmen - du willst die ganze Wahrheit",
+            nextId: "take_antidote"
+        }, {
+            text: "Vorschlagen, dass ihr zuerst einen Fluchtplan macht, bevor du eine Entscheidung triffst",
+            nextId: "suggest_escape_plan_first"
+        }]
+    },
+
+    // Die reduzierte Dosis nehmen
+    take_reduced_dose: {
+        text: "Du entscheidest dich für den behutsamen Ansatz und nimmst die reduzierte Dosis. Der Geschmack ist bitter, aber weniger intensiv als erwartet. Die Wirkung setzt langsamer ein - ein warmes Pulsieren in deinem Kopf, das sich allmählich ausbreitet. Erinnerungen kehren zurück, aber wie durch einen Schleier: Du im Labor, arbeitend an einer chemischen Formel. Wilson und du, diskutierend über Anwendungsmöglichkeiten. Jenkins, der militärische Verbindungsleute vorstellt. Deine wachsende Skepsis. Bilder deiner Frau und Kinder, aber ohne die überwältigende Trauer, nur ein dumpfes Gefühl des Verlusts. Die Verschwommenheit der Marshal-Identität lichtet sich, und du erkennst sie als das Konstrukt, das sie ist. 'Ich bin Andrew Laeddis', sagst du mit fester Stimme. 'Ein Psychiater. Ich habe an Projekt JANUS gearbeitet. Und dann... wurde ich zu seinem Opfer.'",
+        choices: [{
+            text: "Wilson nach den Details fragen, die noch fehlen",
+            nextId: "ask_missing_details",
+            addClue: {
+                id: "partial_memory_return",
+                text: "Die reduzierte Dosis hat dir grundlegende Erinnerungen an deine Identität als Dr. Andrew Laeddis zurückgegeben, ohne die volle traumatische Belastung."
+            }
+        }, {
+            text: "Nach einem Fluchtplan fragen, bevor die Verfolger eintreffen",
+            nextId: "ask_escape_plan"
+        }, {
+            text: "Fragen, ob du später die volle Dosis nehmen kannst",
+            nextId: "ask_full_dose_later"
+        }]
+    },
+
+    // Wilson nach fehlenden Details fragen
+    ask_missing_details: {
+        text: "'Es gibt Lücken', sagst du zu Wilson. 'Ich erinnere mich an die Grundlagen, aber Details fehlen. Besonders über... meinen Zusammenbruch.' Wilson nickt verständnisvoll. 'Das war beabsichtigt. Die reduzierte Dosis schützt dich vor den traumatischsten Erinnerungen.' Er setzt sich dir gegenüber. 'Nach dem Tod deiner Familie warst du am Boden zerstört, gabst dir selbst die Schuld. Jenkins nutzte deinen Zustand aus, überzeugte dich, dass JANUS dir helfen könnte, den Schmerz zu vergessen.' Ein bitteres Lächeln. 'In gewisser Weise hat er sein Versprechen gehalten. Er nahm den Schmerz - zusammen mit deiner Identität.' Er greift nach dem Beutel mit Beweisen. 'Was er dir nicht sagte: Wir hatten Hinweise, dass der Brand kein Unfall war. Jemand hatte die Elektrik manipuliert. Und als du das herauszufinden begannst...' Wilson lässt den Satz unvollendet hängen, aber die Implikation ist klar.",
+        choices: [{
+            text: "Fragen, ob Jenkins für den Tod deiner Familie verantwortlich ist",
+            nextId: "ask_jenkins_responsible",
+            addClue: {
+                id: "murder_suspicion",
+                text: "Wilson deutet an, dass der Brand, der deine Familie tötete, kein Unfall war, sondern möglicherweise von Jenkins arrangiert wurde, als du zu viele Fragen stelltest."
+            }
+        }, {
+            text: "Nach einem Fluchtplan fragen, angesichts der näherkommenden Verfolger",
+            nextId: "ask_escape_route"
+        }, {
+            text: "Wilson fragen, wie er selbst zu Patient 67 wurde",
+            nextId: "ask_wilson_transformation"
+        }]
+    },
+
+    // Jenkins' Verantwortung hinterfragen
+    ask_jenkins_responsible: {
+        text: "Die Frage brennt in dir. 'Glaubst du, dass Jenkins...?' Du kannst es nicht aussprechen, aber Wilson versteht. 'Die Beweise sind nicht schlüssig', sagt er vorsichtig. 'Aber die Zeitlinie ist verdächtig. Kurz nachdem wir uns entschieden hatten, die militärische Anwendung von JANUS zu blockieren, geschah der Brand.' Er holt tief Luft. 'Jenkins brauchte dich verzweifelt für die nächste Phase - ein Versuchssubjekt, das die neurologischen Mechanismen verstand. Und plötzlich warst du emotional gebrochen, bereit, alles zu akzeptieren, was den Schmerz lindern würde.' Wilson steht auf und geht zum Fenster. 'Ich habe versucht, dir zu helfen, aber sie isolierten dich. Als ich zu laut wurde, machten sie mich zu Patient 67. Ein eleganter Weg, uns beide zum Schweigen zu bringen.' Er wendet sich zu dir. 'Eine letzte Sache solltest du wissen: Ich glaube, Dr. Bleich war derjenige, der heimlich Hinweise für dich hinterließ - Dinge, die deine Marshal-Identität ins Wanken bringen sollten.'",
+        choices: [{
+            text: "Deinen wachsenden Zorn gegen Jenkins kanalisieren und einen Fluchtplan vorschlagen",
+            nextId: "channel_anger_escape",
+            addClue: {
+                id: "calculated_tragedy",
+                text: "Der Tod deiner Familie und euer beider 'Patienten-Status' waren möglicherweise Teil von Jenkins' kalkuliertem Plan, euch zum Schweigen zu bringen und gleichzeitig perfekte Versuchspersonen für JANUS zu erhalten."
+            }
+        }, {
+            text: "Die vollständige Dosis des Gegenmittels verlangen - du willst die ganze Wahrheit",
+            nextId: "demand_full_dose"
+        }, {
+            text: "Nach Dr. Bleichs Motiven fragen", nextId: "ask_bleich_motives"
+        }]
+    },
+
+    // Zorn kanalisieren und Fluchtplan vorschlagen
+    channel_anger_escape: {
+        text: "Eine kalte, kontrollierte Wut steigt in dir auf, schärft deinen Verstand. 'Wir müssen von dieser Insel runter', sagst du mit einer Klarheit, die dich selbst überrascht. 'Mit den Beweisen. Jenkins zur Rechenschaft ziehen.' Wilson nickt anerkennend. 'Der Andrew, den ich kenne, ist zurück.' Er geht zu einem abgenutzten Teppich und zieht ihn beiseite, enthüllt eine Falltür. 'Schmugglertunnel, führt zu einer versteckten Bucht auf der anderen Seite der Insel. Dort liegt ein Boot bereit.' Er nimmt eine Tasche mit Unterlagen. 'Hier sind alle Beweise, die ich gesammelt habe. Genug, um Jenkins, Freystatt und ihre militärischen Verbindungsleute zu überführen.' Das Bellen der Hunde wird lauter. Wilson blickt besorgt zum Fenster. 'Sie sind fast hier. Wir müssen uns beeilen. Einer von uns muss mit den Beweisen entkommen. Der andere muss sie aufhalten, Zeit gewinnen.'",
+        choices: [{
+            text: "Vorschlagen, dass ihr beide flieht", nextId: "suggest_both_flee"
+        }, {
+            text: "Anbieten, zurückzubleiben, um Wilson mit den Beweisen fliehen zu lassen",
+            nextId: "offer_stay_behind",
+            addClue: {
+                id: "smuggler_tunnel",
+                text: "Unter dem Leuchtturm befindet sich ein alter Schmugglertunnel, der zu einer versteckten Bucht mit einem Fluchtboot führt. Die Zeit drängt, da eure Verfolger fast den Leuchtturm erreicht haben."
+            }
+        }, {
+            text: "Darauf bestehen, dass du mit den Beweisen fliehst und Wilson die Verfolger aufhält",
+            nextId: "insist_you_flee"
+        }]
+    },
+
+    // Gemeinsame Flucht vorschlagen
+    suggest_both_flee: {
+        text: "'Wir gehen beide', sagst du entschieden. 'Keiner bleibt zurück.' Wilson schüttelt den Kopf. 'Das Boot ist klein, könnte uns beide tragen, aber...' Ein lautes Klopfen an der Tür unterbricht ihn. 'Wilson! Wir wissen, dass du da drin bist!', ruft Jenkins' Stimme. 'Und Laeddis auch!' Wilson eilt zu einem Schrank, zieht eine kleine Metallbox hervor. 'Ein letzter Trick.' Er nimmt zwei kleine Sprengsätze heraus. 'Blendgranaten mit Rauch. Genug, um Verwirrung zu stiften.' Er gibt dir eine. 'Du wirfst deine durch die Tür, sobald sie aufbricht. Ich meine durch das Fenster. Die Verwirrung sollte uns genug Zeit geben, beide zur Falltür zu gelangen.' Er zieht seinen Mantel an. 'Bereit für ein letztes Abenteuer, alter Freund?'",
+        choices: [{
+            text: "Nicken und dich für die Ablenkung bereitmachen",
+            nextId: "agree_distraction_plan",
+            addClue: {
+                id: "last_stand",
+                text: "Wilson hat Blendgranaten vorbereitet, um einen letzten verzweifelten Fluchtversuch für euch beide zu ermöglichen, während Jenkins und seine Leute bereits an der Tür sind."
+            }
+        }, {
+            text: "Nach einem Plan B fragen, falls die Ablenkung misslingt", nextId: "ask_plan_b"
+        }, {
+            text: "Wilson für seine Freundschaft und Hilfe danken, bevor ihr handelt",
+            nextId: "thank_wilson"
+        }]
+    },
+
+    // Zurückbleiben anbieten
+    offer_stay_behind: {
+        text: "'Ich bleibe', sagst du ruhig. 'Du kennst dich mit den Beweisen aus, weißt, wer die richtigen Kontakte hat.' Wilson schaut dich überrascht an. 'Bist du sicher? Sie werden...' Du unterbrichst ihn. 'Ich weiß. Aber jemand muss es tun. Und ich habe eine Rechnung mit Jenkins offen.' Eine seltsame Ruhe erfüllt dich. 'Außerdem - mit dem, was ich jetzt weiß, können sie meine Erinnerungen nicht mehr so leicht manipulieren.' Wilson zögert, dann nickt er ernst. Er übergibt dir seine Blendgranate. 'Die wird dir etwas Zeit verschaffen.' Dann umarmt er dich kurz. 'Danke, Andrew. Ich verspreche dir, sie werden dafür bezahlen.' Er öffnet die Falltür und beginnt hinabzusteigen. 'Eine Sache noch', sagt er. 'Falls du es schaffst - die vollständige Dosis des Gegenmittels steht dort drüben. Für den Fall, dass du dich entscheidest, alles zu erinnern.'",
+        choices: [{
+            text: "Wilson verabschieden und dich auf die Konfrontation vorbereiten",
+            nextId: "farewell_wilson_prepare",
+            addClue: {
+                id: "sacrifice_choice",
+                text: "Du hast dich entschieden, zurückzubleiben und Wilson mit den Beweisen fliehen zu lassen, im Wissen, dass du wahrscheinlich gefangen genommen wirst."
+            }
+        }, {
+            text: "Im letzten Moment die Meinung ändern und Wilson folgen",
+            nextId: "change_mind_follow"
+        }, {
+            text: "Die vollständige Dosis des Gegenmittels nehmen, bevor du dich Jenkins stellst",
+            nextId: "take_antidote_before_confrontation"
+        }]
+    }, // Fortsetzung von farewell_wilson_prepare
+    farewell_wilson_prepare_continued: {
+        text: "Du verabschiedest dich von Wilson mit einem letzten Nicken. 'Viel Glück, Ed. Bring diese Bastarde zur Strecke.' Wilson verschwindet in der Falltür, und du schiebst den Teppich zurück. Die Klopfgeräusche an der Tür werden stärker. Du greifst nach der Blendgranate und positionierst dich strategisch. Dann fällt dein Blick auf die Flasche mit dem vollständigen Gegenmittel. Mit einer schnellen Entscheidung greifst du danach und trinkst sie in einem Zug. Wenn du Jenkins gegenübertreten sollst, dann mit all deinen Erinnerungen, der vollen Wahrheit. Der Schmerz ist überwältigend, als die letzten Blockaden brechen. Bilder deiner Familie, ihres Todes, Jenkins' Verrat - alles mit kristallklarer Schärfe. Tränen laufen über dein Gesicht, aber dein Blick ist fest, als die Tür splittert. 'Willkommen zurück, Dr. Laeddis', sagt Jenkins, als er mit gezogener Waffe eintritt. 'Oder sollte ich sagen, Marshal?'",
+        choices: [{
+            text: "Jenkins mit neu gefundener Stärke konfrontieren",
+            nextId: "confront_jenkins_strength",
+            addClue: {
+                id: "full_memories_return",
+                text: "Du hast in letzter Minute das vollständige Gegenmittel genommen und erinnerst dich nun an alles - die volle Wahrheit über deine Familie, ihre Ermordung und Jenkins' Verrat."
+            }
+        }, {
+            text: "Die Blendgranate werfen und versuchen zu entkommen",
+            nextId: "throw_flashbang_escape"
+        }, {
+            text: "Vorgeben, noch der verwirrte Marshal zu sein", nextId: "pretend_marshal"
+        }]
+    },
+
+    // Jenkins mit Stärke konfrontieren
+    confront_jenkins_strength: {
+        text: "Du richtest dich zu voller Größe auf, die Wucht deiner zurückgekehrten Erinnerungen verleiht dir eine unerwartete Stärke. 'Ich weiß alles, Jenkins. Über JANUS, über deine militärischen Verbindungen...' Du machst einen Schritt vor, während er und zwei Sicherheitsleute in den Raum treten. 'Und über meine Familie.' Jenkins' Lächeln wird kälter. 'Tragische Sache, dieser Unfall.' Du lachst bitter. 'Wir beide wissen, dass es kein Unfall war. Ich erinnere mich an das Telefongespräch, das ich mitgehört habe. 'Alles perfekt inszeniert. Ein elektrischer Defekt.' Deine eigenen Worte.' Zum ersten Mal siehst du echte Überraschung in Jenkins' Gesicht. 'Wilson ist weg', fährst du fort. 'Mit allen Beweisen. In diesem Moment auf dem Weg zum Festland.' Jenkins gibt seinen Männern ein Zeichen. 'Findet Wilson! Sofort!'",
+        choices: [{
+            text: "Die Ablenkung nutzen und die Blendgranate werfen",
+            nextId: "use_distraction_flashbang",
+            addClue: {
+                id: "jenkins_rattled",
+                text: "Du hast Jenkins erschüttert, indem du das belastende Telefongespräch erwähnt hast, das du mitgehört hattest. Er scheint die Bedrohung durch Wilsons Flucht mit den Beweisen ernst zu nehmen."
+            }
+        }, {
+            text: "Weiter mit Jenkins sprechen, um mehr Zeit für Wilson zu gewinnen",
+            nextId: "stall_for_wilson"
+        }, {
+            text: "Dich ergeben, in dem Wissen, dass Wilson entkommen ist",
+            nextId: "surrender_wilson_escaped"
+        }]
+    },
+
+    // Die Ablenkung nutzen
+    use_distraction_flashbang: {
+        text: "Als Jenkins seine Aufmerksamkeit kurz seinen Männern zuwendet, nutzt du den Moment. Mit einer flüssigen Bewegung wirfst du die Blendgranate. Der Knall ist ohrenbetäubend, gefolgt von gleißendem Licht und dichtem Rauch. Schreiend greifen sich Jenkins und seine Männer an die Augen. Du springst zur Falltür, ziehst den Teppich beiseite und öffnest die Luke. Ein kurzer Blick zurück zeigt Jenkins, der blind durch den Rauch taumelt. 'Das war für meine Familie', sagst du leise und steigst in den Tunnel. Der Weg ist dunkel, aber ein schwaches Licht in der Ferne zeigt dir die Richtung - Wilson muss eine Taschenlampe haben. Du rennst durch den feuchten Gang, getrieben von der Gewissheit, dass Jenkins' Männer dir bald folgen werden. Nach einer gefühlten Ewigkeit erreichst du das Ende des Tunnels. Wilson wartet am Boot, bereit abzulegen. 'Andrew!', ruft er überrascht. 'Ich dachte, du wolltest--' 'Pläne ändern sich', unterbrichst du ihn. 'Lass uns verschwinden.'",
+        choices: [{
+            text: "Mit Wilson im Boot fliehen", nextId: "escape_with_wilson", addClue: {
+                id: "successful_escape",
+                text: "Du hast die Blendgranate effektiv eingesetzt und bist durch den Tunnel geflohen. Wilson wartet mit dem Boot, und ihr könnt gemeinsam entkommen."
+            }
+        }, {
+            text: "Vorschlagen, dass ihr euch trennt, um die Chancen zu erhöhen",
+            nextId: "suggest_separate"
+        }, {
+            text: "Zurückblicken, ob Verfolger im Tunnel zu sehen sind",
+            nextId: "look_back_pursuers"
+        }]
+    },
+
+    // Mit Wilson fliehen
+    escape_with_wilson: {
+        text: "Ohne weitere Worte springst du ins Boot. Wilson startet den Motor, und ihr schießt vom Ufer weg, gerade als Rufe am Tunnelausgang zu hören sind. Die Lichter der Taschenlampen tanzen über die Felswände, aber ihr seid bereits außer Reichweite. Wilson lenkt das Boot geschickt um die Felsen der Bucht herum ins offene Meer. Erst als die Küste nur noch eine dunkle Linie am Horizont ist, verlangsamt er den Motor. 'Das war knapp', sagt er und reicht dir eine Thermoskanne mit Kaffee. Der warme Dampf steigt in die kühle Nachtluft. 'Also, du erinnerst dich an alles?', fragt er vorsichtig. Du nickst, der Schmerz ist präsent, aber erträglich. 'An alles. Dolores, die Kinder... was Jenkins getan hat.' Wilson legt eine Hand auf deine Schulter. 'Wir werden ihn zur Rechenschaft ziehen, Andrew. Das verspreche ich dir.'",
+        choices: [{
+            text: "Über eure Pläne nach Erreichen des Festlands sprechen",
+            nextId: "discuss_mainland_plans",
+            addClue: {
+                id: "open_sea",
+                text: "Ihr seid auf offener See, außerhalb der Reichweite eurer Verfolger. Der Plan, Jenkins zur Rechenschaft zu ziehen, nimmt Gestalt an."
+            }
+        }, {
+            text: "Nach Dr. Bleich fragen und ob er in Gefahr ist",
+            nextId: "ask_about_bleich_danger"
+        }, {
+            text: "Die Beweise sichten, die Wilson gesammelt hat", nextId: "examine_wilson_evidence"
+        }]
+    },
+
+    // Pläne für das Festland besprechen
+    discuss_mainland_plans: {
+        text: "'Was passiert, wenn wir das Festland erreichen?', fragst du, während das Boot stetig durch die Wellen pflügt. Wilson blickt zum Horizont, wo bereits ein schwacher Lichtschein den kommenden Morgen ankündigt. 'Ich kenne einen Journalisten - Mark Sullivan. Unbestechlich und mit Verbindungen zu Bundesbehörden.' Er deutet auf den wasserdichten Beutel mit Beweisen. 'Hiermit muss die Regierung handeln, selbst gegen jemanden mit Jenkins' Verbindungen.' Er sieht dich ernst an. 'Es wird nicht einfach. Sie werden versuchen, uns zu diskreditieren, uns als geisteskranke ehemalige Patienten darzustellen.' Du nickst verstehend. 'Aber wir haben die wissenschaftlichen Beweise. Die Formel von RX-78, die Protokolle, die Zeugenaussagen.' Du denkst an all die anderen Patienten in der Klinik. 'Und wir haben die Wahrheit.' Wilson lächelt leicht. 'Ja, endlich haben wir die Wahrheit.'",
+        choices: [{
+            text: "Die Reise zum Festland fortsetzen (Zum Ende)",
+            nextId: "ending_escape",
+            addClue: {
+                id: "justice_plan",
+                text: "Der Plan ist, die Beweise einem vertrauenswürdigen Journalisten mit Verbindungen zu Bundesbehörden zu übergeben, um Jenkins und seine Komplizen zur Rechenschaft zu ziehen."
+            }
+        }, {
+            text: "Über deine eigene Zukunft nachdenken, wenn alles vorbei ist",
+            nextId: "contemplate_own_future"
+        }, {
+            text: "Eine letzte Frage über deine Familie stellen", nextId: "final_family_question"
+        }]
+    },
+
+    // Über die eigene Zukunft nachdenken
+    contemplate_own_future: {
+        text: "Während das Boot durch die Nacht gleitet, schweift dein Blick über den sternenklaren Himmel. 'Was wird aus mir, wenn das alles vorbei ist?', fragst du leise, mehr zu dir selbst als zu Wilson. Er betrachtet dich nachdenklich. 'Das ist die Frage, nicht wahr? Wer ist Andrew Laeddis jetzt?' Er lehnt sich zurück. 'Du bist nicht mehr der Mann, der du warst, bevor JANUS dich veränderte. Aber du bist auch nicht der Marshal, der du zu sein glaubtest.' Du lässt diese Worte sinken. Tatsächlich - wer bist du jetzt? Ein Psychiater, dessen Familie ermordet wurde? Ein Opfer von Gedächtnismanipulation? Ein Rächer? 'Vielleicht', sagt Wilson sanft, 'ist das deine Chance für einen echten Neuanfang. Nicht eine aufgezwungene neue Identität, sondern eine selbstgewählte.' Du nickst langsam. Die Gedanken an Dolores und die Kinder sind schmerzhaft, aber nicht mehr lähmend. Vielleicht liegt darin eine Art Freiheit.",
+        choices: [{
+            text: "Die Reise zum Festland fortsetzen (Zum Ende)",
+            nextId: "ending_escape",
+            addClue: {
+                id: "new_beginning",
+                text: "Du beginnst zu erkennen, dass nach dem Abschluss dieser Sache die Möglichkeit eines echten Neuanfangs besteht - eine selbstgewählte Identität statt einer aufgezwungenen."
+            }
+        }, {
+            text: "Vorschlagen, wieder als Psychiater zu arbeiten, um anderen zu helfen",
+            nextId: "suggest_return_psychiatry"
+        }, {
+            text: "Fragen, ob Wilson bei dir bleiben wird", nextId: "ask_wilson_stay"
+        }]
+    },
+
+    // Alternativ/Ergänzende Szenen für die Haupthandlungsstränge
+
+    // Raum gezielt durchsuchen
+    search_room: {
+        text: "Du beginnst, das Zimmer systematisch zu durchsuchen. Unter dem Bett findest du nichts außer Staub. Der kleine Schreibtisch enthält leere Blätter und einen stumpfen Bleistift - offenbar wurde dem Patienten nicht viel Schreibmaterial zugestanden. Als du den schmalen Schrank öffnest, entdeckst du nur wenige einfache Kleidungsstücke. Dann fällt dein Blick auf eine lose Bodenfliese neben dem Bett. Du kniest nieder und hebst sie vorsichtig an. Darunter liegt ein in Plastik eingewickeltes Notizbuch. Die Seiten sind mit hastig gekritzelten Notizen gefüllt, viele davon wirken paranoid, andere bemerkenswert klar. Eine Passage sticht heraus: 'Sie werden jemanden schicken. Jemanden, der nicht weiß, wer er wirklich ist. Wenn du das liest und glaubst, ein Marshal zu sein - du bist es nicht. Suche nach dem Leuchtturm. Die Wahrheit wartet dort.' Die letzte Seite zeigt eine Karte der Insel mit einem markierten Weg zum Leuchtturm an der Nordküste.",
+        choices: [{
+            text: "Das Notizbuch mitnehmen", nextId: "take_notebook", addClue: {
+                id: "hidden_notebook",
+                text: "Du hast ein verstecktes Notizbuch gefunden, das andeutet, dass ein falscher 'Marshal' geschickt werden würde und dass die Wahrheit im Leuchtturm wartet."
+            }
+        }, {
+            text: "Rachel nach dem Notizbuch fragen", nextId: "ask_rachel_notebook"
+        }, {
+            text: "Die Karte zum Leuchtturm kopieren und das Notizbuch zurücklegen",
+            nextId: "copy_lighthouse_map"
+        }]
+    },
+
+    // Das Notizbuch mitnehmen
+    take_notebook: {
+        text: "Du steckst das Notizbuch unter deine Jacke, während Rachel noch im Türrahmen steht. 'Haben Sie etwas gefunden, Marshal?', fragt sie mit einem Anflug von Misstrauen. 'Nichts Besonderes', entgegnest du beiläufig. 'Nur ein weiterer leerer Raum.' Ihr Blick bleibt auf dir ruhen, länger als angenehm. 'Seltsam', murmelt sie. 'Patient 67 hinterließ normalerweise... Spuren.' Du gehst zur Tür, an ihr vorbei. 'Ich würde gerne mehr über diesen Patienten erfahren. Wer war mit ihm in Kontakt?' Rachel folgt dir den Korridor entlang. 'Dr. Bleich war sein Haupttherapeut. Aber ich würde Ihre Zeit nicht mit ihm verschwenden. Er ist... weich. Zu mitfühlend für seinen eigenen Vorteil.' Ihre Worte klingen wie eine Warnung. 'Wo finde ich Dr. Bleich?', fragst du. 'Wahrscheinlich in seinem Büro im B-Flügel', antwortet sie widerwillig.",
+        choices: [{
+            text: "Dr. Bleich aufsuchen", nextId: "find_sheehan", addClue: {
+                id: "rachel_warning",
+                text: "Rachel warnte unterschwellig vor Dr. Bleich, beschrieb ihn als 'zu mitfühlend für seinen eigenen Vorteil', was darauf hindeutet, dass er möglicherweise nicht mit der Klinikleitung auf einer Linie steht."
+            }
+        }, {
+            text: "Fragen, ob Patient 67 jemals vom Leuchtturm sprach",
+            nextId: "ask_about_lighthouse"
+        }, {
+            text: "Dein Quartier aufsuchen, um das Notizbuch ungestört zu studieren",
+            nextId: "study_notebook_alone"
+        }]
     }
+
 };

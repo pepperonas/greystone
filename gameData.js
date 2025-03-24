@@ -966,8 +966,7 @@ const gameData = {
     question_identity: {
         text: "In deinem Quartier untersuchst du jeden Aspekt deiner angeblichen Marshal-Identität. Deine Dienstmarke – bei genauerem Hinsehen erkennst du feine Unstimmigkeiten im Prägedruck. Deine Erinnerungen an die Ausbildung, an frühere Fälle – alles bleibt seltsam verschwommen, ohne konkrete Details. Selbst deine Ankunft auf der Insel – wie genau kamst du hierher? Die Einzelheiten entgleiten dir. Du öffnest dein Notizbuch und durchblätterst deine eigenen Aufzeichnungen seit der Ankunft. Die Handschrift in den ersten Einträgen unterscheidet sich subtil von deinen späteren Notizen – als hätte jemand anderes sie geschrieben. Oder als hättest du selbst dich verändert. Als würdest du zu jemand anderem werden – oder zurückkehren.",
         choices: [{
-            text: "Mit Dr. Bleich über deine Entdeckungen sprechen",
-            nextId: "talk_sheehan_identity"
+            text: "Mit Dr. Bleich über deine Entdeckungen sprechen", nextId: "talk_sheehan_identity"
         }, {
             text: "Einen Fluchtplan von der Insel schmieden", nextId: "plan_escape_island"
         }, {
@@ -1136,6 +1135,552 @@ const gameData = {
         text: "Der Regen peitscht dir ins Gesicht, als das kleine Boot an der verwitterten Anlegestelle der Ashcliff-Klinik anlegt. Die düstere Silhouette des viktorianischen Gebäudes zeichnet sich gegen den grauen Himmel ab. Prof. Freystatt und Sheriff Wilson erwarten dich bereits. 'Willkommen zurück, Marshal', sagt Freystatt mit einem wissenden Blick. 'Bereit für eine neue Runde?' Du runzelst verwirrt die Stirn. 'Zurück? Ich war noch nie hier.' Wilson und Freystatt tauschen Blicke aus. 'Natürlich nicht', sagt Freystatt sanft. 'Sie sind hier, um das mysteriöse Verschwinden von Patient 67 zu untersuchen.' Ein Déjà-vu überkommt dich, aber du schiebst es beiseite. 'Genau', sagst du und greifst nach deiner Dienstmarke. 'Bringen wir es hinter uns.'",
         choices: [{
             text: "Spiel neu starten", nextId: "start"
+        }]
+    }, // Zugang zum Hochsicherheitstrakt C verlangen
+    access_ward_c: {
+        text: "Du forderst direkten Zugang zum Hochsicherheitstrakt C. Prof. Freystatt runzelt die Stirn. 'Das ist... ungewöhnlich. Dieser Bereich ist streng gesichert.' Er zögert. 'Ich könnte eine Genehmigung erteilen, aber nicht sofort. Sicherheitsprotokolle müssen eingehalten werden.' Er greift zum Telefon und spricht leise mit jemandem. 'Morgen früh um 10 Uhr', sagt er schließlich. 'Treffen Sie sich mit Sicherheitschef Brigham im Hauptfoyer. Er wird Sie eskortieren.' Sein Tonfall lässt vermuten, dass er Zeit gewinnen will. 'Bis dahin schlage ich vor, Sie ruhen sich aus. Der Sturm hat begonnen.'",
+        choices: [{
+            text: "Einverstanden sein, aber eigene Nachforschungen planen",
+            nextId: "examine_file",
+            addClue: {
+                id: "delayed_access",
+                text: "Prof. Freystatt verzögert deinen Zugang zum Hochsicherheitstrakt C bis morgen."
+            }
+        }, {
+            text: "Darauf bestehen, den Trakt sofort zu sehen", nextId: "insist_immediate_access"
+        }, {
+            text: "Nach anderen Möglichkeiten fragen, Informationen über Patient 67 zu erhalten",
+            nextId: "patient_contacts"
+        }]
+    },
+
+// Auf sofortigen Zugang bestehen
+    insist_immediate_access: {
+        text: "Du lehnst dich vor. 'Professor, ich muss darauf bestehen. Ein potenziell gefährlicher Patient ist entkommen. Jede Stunde zählt.' Freystatts Gesicht verhärtet sich. 'Marshal, ich verstehe Ihre Dringlichkeit, aber ich führe hier eine Einrichtung mit strengen Protokollen.' Er steht auf. 'Ich kann Ihnen heute Zugang zum Patientenzimmer gewähren. Das ist alles.' Du bemerkst, wie er einen unauffälligen Knopf unter seinem Schreibtisch drückt. Kurz darauf klopft es, und ein großer Mann in Sicherheitsuniform tritt ein. 'Sheriff Wilson wird Sie zu Ihrer Unterkunft bringen. Morgen früh können wir weitersprechen.'",
+        choices: [{
+            text: "Nachgeben und mit Wilson gehen", nextId: "examine_file", addClue: {
+                id: "security_button",
+                text: "Prof. Freystatt hat heimlich Sicherheitspersonal gerufen, als du auf Zugang bestanden hast."
+            }
+        }, {
+            text: "Nach dem Patientenzimmer fragen", nextId: "last_seen_location"
+        }, {
+            text: "Eine andere Taktik versuchen und nach Dr. Bleich fragen", nextId: "find_sheehan"
+        }]
+    },
+
+// Nach Fotos oder Aufnahmen des Patienten fragen
+    patient_photos: {
+        text: "Du fragst nach Fotos oder Aufnahmen von Patient 67. Prof. Freystatt blättert durch die Akte. 'Seltsam', murmelt er. 'Die Aufnahmen von der Aufnahmeuntersuchung fehlen.' Er schließt nachdenklich die Akte. 'In der Personalabteilung sollte es Kopien geben. Aber zu dieser späten Stunde...' Er lächelt entschuldigend. 'Morgen können wir die Unterlagen anfordern.' Er steht auf, deutet an, dass das Gespräch beendet ist. 'Sheriff Wilson wird Sie zu Ihrer Unterkunft bringen. Der Sturm wird lange anhalten, Sie sollten sich ausruhen.'",
+        choices: [{
+            text: "Zum Quartier gehen, aber eigene Nachforschungen planen",
+            nextId: "examine_file",
+            addClue: {
+                id: "missing_photos",
+                text: "Die Fotos von Patient 67 wurden offenbar absichtlich aus der Akte entfernt."
+            }
+        }, {
+            text: "Nach dem Grund für die fehlenden Fotos fragen", nextId: "question_missing_photos"
+        }, {
+            text: "Darauf bestehen, die Personalabteilung sofort aufzusuchen",
+            nextId: "insist_personnel_dept"
+        }]
+    },
+
+// Nach dem Grund für die fehlenden Fotos fragen
+    question_missing_photos: {
+        text: "'Professor, fehlende Fotos in einer Patientenakte sind höchst ungewöhnlich. Hat das einen bestimmten Grund?' Freystatts Gesicht zeigt kurz Besorgnis, bevor er seine professionelle Fassade wiederherstellt. 'In dieser Einrichtung behandeln wir... besondere Fälle. Manche Patienten haben Verbindungen, die Diskretion erfordern.' Er senkt die Stimme. 'Ich sollte das nicht sagen, aber Patient 67 war in gewissen Regierungskreisen bekannt. Seine Identität wird... geschützt.' Er schaut zur Tür. 'Ich habe bereits zu viel gesagt. Morgen können wir weiter sprechen. Sheriff Wilson erwartet Sie.'",
+        choices: [{
+            text: "Zum Quartier gehen und über diese Information nachdenken",
+            nextId: "examine_file",
+            addClue: {
+                id: "government_connection",
+                text: "Patient 67 hat anscheinend Verbindungen zu Regierungskreisen, die seine Identität schützen wollen."
+            }
+        }, {
+            text: "Nach weiteren Einzelheiten über die Regierungsverbindungen fragen",
+            nextId: "government_inquiry"
+        }, {
+            text: "Den Raum verlassen, aber planen, später zurückzukehren und sein Büro zu durchsuchen",
+            nextId: "plan_office_search"
+        }]
+    },
+
+// Mit Schwester Rachel sprechen
+    talk_rachel: {
+        text: "Du findest Schwester Rachel am Schwesterndienstplatz, wo sie Medikamente sortiert. Als du dich näherst, blickt sie auf. 'Kann ich Ihnen helfen, Marshal?' Du erwähnst Patient 67 und bemerkst, wie sich ihre Haltung leicht versteift. 'Ich war nur eine seiner Betreuerinnen', sagt sie distanziert. 'Ein schwieriger Fall. Paranoide Episoden, Wahnvorstellungen.' Sie schließt den Medikamentenschrank ab. 'Er glaubte, hier gegen seinen Willen festgehalten zu werden. Typisch für seine Diagnose.' Etwas in ihrer Stimme klingt einstudiert. 'Er wurde jeden zweiten Mittwoch zur Spezialbehandlung in den Ostflügel gebracht. Darüber sollten Sie mit Dr. Jenkins sprechen. Wenn Sie ihn finden können.'",
+        choices: [{
+            text: "Nach den 'Spezialbehandlungen' fragen", nextId: "special_treatments", addClue: {
+                id: "rachel_evasive",
+                text: "Schwester Rachel wirkt merkwürdig distanziert und evasiv, wenn sie über Patient 67 spricht."
+            }
+        }, {
+            text: "Fragen, was sie mit 'wenn Sie ihn finden können' meint",
+            nextId: "ask_about_jenkins"
+        }, {
+            text: "Das Zimmer des Patienten sehen wollen", nextId: "last_seen_location"
+        }]
+    },
+
+// Nach den speziellen Behandlungen fragen
+    special_treatments: {
+        text: "'Was genau waren diese 'Spezialbehandlungen' im Ostflügel?' fragst du. Rachel zögert. 'Ich bin nicht befugt, über Dr. Jenkins' Arbeit zu sprechen. Experimentelle Therapien für schwere Fälle.' Sie senkt ihre Stimme. 'Patient 67 kehrte immer... anders zurück. Ruhiger. Desorientiert.' Sie schaut sich um, als wolle sie sichergehen, dass niemand zuhört. 'Nach der letzten Behandlung hat er sich verändert. Begann, Namen zu nennen. Orte. Als hätte er sich an etwas erinnert.' Sie richtet sich abrupt auf und greift nach ihrem Klemmbrett. 'Ich muss jetzt meine Runde machen. Wenn Sie mehr wissen wollen, sprechen Sie mit Dr. Bleich. Er war sein Therapeut.'",
+        choices: [{
+            text: "Nach Dr. Bleich suchen", nextId: "find_sheehan", addClue: {
+                id: "treatment_effects",
+                text: "Die 'Spezialbehandlungen' im Ostflügel schienen Patient 67 zu desorientieren, aber zuletzt 'erinnerte' er sich an etwas."
+            }
+        }, {
+            text: "Fragen, welche Namen und Orte er erwähnte", nextId: "ask_names_places"
+        }, {
+            text: "Nach dem Ostflügel fragen und wie man dorthin gelangt",
+            nextId: "inquire_east_wing"
+        }]
+    },
+
+// Dr. Bleich mit der Akte konfrontieren
+    confront_sheehan_file: {
+        text: "Du legst die Personalakte mit dem Foto auf Dr. Bleichs Schreibtisch. 'Erklären Sie mir das.' Er starrt lange auf das Dokument, dann schließt er langsam die Tür seines Büros. 'Wo haben Sie das gefunden?' Seine Stimme ist ruhig, aber angespannt. Du erklärst es ihm. Er seufzt tief. 'Sie hätten das nicht sehen sollen. Noch nicht.' Er setzt sich und betrachtet dich eindringlich. 'Was Sie hier sehen, Marshal – oder sollte ich sagen, Dr. Laeddis? – ist die Wahrheit, die wir versucht haben, Ihnen behutsam nahezubringen.' Er lehnt sich vor. 'Sie sind nicht hier, um einen Patienten zu finden. Sie SIND der Patient.'",
+        choices: [{
+            text: "Die Behauptung abstreiten und wütend werden", nextId: "deny_identity"
+        }, {
+            text: "Nach Beweisen fragen", nextId: "ask_for_proof", addClue: {
+                id: "identity_confrontation",
+                text: "Dr. Bleich behauptet direkt, dass du Dr. Andrew Laeddis bist und nicht wirklich ein Marshal."
+            }
+        }, {
+            text: "Fragen, warum er dir die Wahrheit sagt, wenn andere sie verbergen",
+            nextId: "why_telling_truth"
+        }]
+    },
+
+// Nach Beweisen für die Identitätsbehauptung fragen
+    ask_for_proof: {
+        text: "Du verlangst Beweise für seine ungeheuerliche Behauptung. Dr. Bleich öffnet eine Schublade und zieht mehrere Dokumente hervor. Ein Buch – 'Neurochemische Grundlagen der Gedächtnismanipulation' von Dr. A. Laeddis. Fotos von dir mit anderen Ärzten, darunter Wilson und Jenkins. Medizinische Berichte über deinen Zusammenbruch nach dem 'tragischen Vorfall'. 'Andrew, du warst einer der brillantesten Psychiater, die ich je gekannt habe', sagt er sanft. 'Nach dem Tod deiner Familie hast du zusammen mit Wilson eine Methode entwickelt, traumatische Erinnerungen zu löschen. Aber als das Militär sich für eure Arbeit zu interessieren begann, wolltet ihr aussteigen. Dann...' Er zögert. 'Dann arrangierte Jenkins deinen 'Nervenzusammenbruch'.'",
+        choices: [{
+            text: "Nach Einzelheiten über deine Familie fragen",
+            nextId: "family_details",
+            addClue: {
+                id: "identity_evidence",
+                text: "Dr. Bleich hat handfeste Beweise vorgelegt, dass du Dr. Andrew Laeddis bist, ein Psychiater, der nach einer Familientragödie zusammenbrach."
+            }
+        }, {
+            text: "Fragen, was mit Wilson geschehen ist", nextId: "wilson_fate"
+        }, {
+            text: "Vorschlagen, gemeinsam Jenkins zu konfrontieren",
+            nextId: "suggest_confront_jenkins"
+        }]
+    },
+
+// Rachel konfrontieren
+    confront_rachel: {
+        text: "'Sie wussten es die ganze Zeit, nicht wahr?' konfrontierst du Rachel. 'Dass ich nicht wirklich ein Marshal bin.' Ihr Gesicht versteift sich, sie greift subtil nach dem Alarmknopf an ihrem Gürtel. 'Ich weiß nicht, wovon Sie sprechen, Marshal. Sie scheinen verwirrt zu sein.' Ihre Augen scannen den Korridor. 'Vielleicht sollten wir Dr. Jenkins aufsuchen. Er kann Ihnen etwas gegen diese... Verwirrung geben.' Du erkennst die Bedrohung in ihrem falschen Lächeln. 'Oder wir könnten Prof. Freystatt informieren. Er wird wissen, was zu tun ist.' Du bemerkst, wie zwei Sicherheitsleute am Ende des Flurs erscheinen und langsam näherkommen.",
+        choices: [{
+            text: "Vorgeben, einen Rückzieher zu machen und Verwirrung vortäuschen",
+            nextId: "feign_confusion",
+            addClue: {
+                id: "rachel_hostile",
+                text: "Schwester Rachel reagierte feindlich und alarmierte Sicherheitspersonal, als du deine wahre Identität ansprachst."
+            }
+        }, {
+            text: "Einen Fluchtweg suchen", nextId: "look_escape_route"
+        }, {
+            text: "Dr. Bleich aufsuchen, der dir möglicherweise helfen kann",
+            nextId: "tell_sheehan_memories"
+        }]
+    },
+
+// HANDLUNGSSTRANG 2: FEHLENDE SZENEN
+
+// C. Malberg nach den 'Vorfällen' fragen
+    ask_about_incidents: {
+        text: "Du fragst C. Malberg nach den 'Vorfällen', die er erwähnt hat. Er blickt sich nervös um und senkt die Stimme noch weiter. 'Vor etwa einem Jahr. Ein Patient – Thompson – wurde für eine Woche in den Ostflügel verlegt. Als er zurückkam...' Er schüttelt den Kopf. 'Er war nicht mehr derselbe. Behauptete, er heiße Miller. Hatte eine völlig andere Persönlichkeit, andere Erinnerungen.' Er schluckt. 'Die offizielle Erklärung war dissoziative Identitätsstörung. Aber ich habe ihn jahrelang bewacht. Er hatte so etwas nie.' Er wirft einen angstvollen Blick zum Ostflügel. 'Und er war nicht der Einzige. Jenkins nennt es 'Restrukturierung'. Die meisten Wärter wollen nichts damit zu tun haben.'",
+        choices: [{
+            text: "Nach weiteren betroffenen Patienten fragen", nextId: "ask_other_patients"
+        }, {
+            text: "Fragen, ob Patient 67 auch 'restrukturiert' wurde",
+            nextId: "ask_patient67_restructured",
+            addClue: {
+                id: "personality_change",
+                text: "C. Malberg berichtet von Patienten, deren Persönlichkeit und Erinnerungen nach Behandlungen im Ostflügel vollständig verändert waren."
+            }
+        }, {
+            text: "Den beobachtenden Patienten George Noyce ansprechen",
+            nextId: "approach_watching_patient"
+        }]
+    },
+
+// Nach anderen Behandlungsräumen suchen
+    check_other_rooms: {
+        text: "Du schleichst dich vorsichtig den Korridor entlang, um weitere Behandlungsräume zu inspizieren. Die meisten sind dunkel und leer. In einem Raum findest du Aktenschränke mit Patientenakten, alle mit dem Stempel 'Projekt JANUS'. Du öffnest einen und scannst die Dokumente: 'Subjekt erfolgreich restrukturiert. Ursprüngliche Identität vollständig unterdrückt. Neue Identitätsparameter stabil.' In einem anderen Raum entdeckst du ein Labor mit chemischen Analysen. Eine Tafel zeigt die molekulare Struktur von 'RX-78' neben handschriftlichen Notizen: 'Selektive Amnesie erreicht. Verabreichung über Trinkwasser effektiv. Stabilisator notwendig für dauerhafte Implantation.' Plötzlich hörst du Stimmen vom Ende des Korridors.",
+        choices: [{
+            text: "Schnell zurückziehen und verstecken", nextId: "hide_from_voices", addClue: {
+                id: "rx78_water",
+                text: "RX-78 wird offenbar dem Trinkwasser beigemischt, um selektive Amnesie zu erzeugen und neue Identitäten zu implantieren."
+            }
+        }, {
+            text: "Einige Dokumente mitnehmen", nextId: "take_janus_documents"
+        }, {
+            text: "Den Raum verlassen und Dr. Bleich aufsuchen", nextId: "consult_sheehan"
+        }]
+    },
+
+// Nach Dr. Jenkins und seiner Motivation fragen
+    jenkins_motivation: {
+        text: "Du fragst nach Dr. Jenkins und seinen Motiven. Dr. Bleich wirkt beunruhigt. 'Er war einst ein idealistischer Arzt. Brillant. Sein Ziel war, PTSD bei Kriegsveteranen zu heilen, indem er traumatische Erinnerungen selektiv entfernte.' Seine Stimme wird bitter. 'Dann kamen die Militärverträge. Das Geld. Die Macht.' Er senkt die Stimme. 'Sie fragen nach seiner Motivation? Kontrolle. Die Fähigkeit, Menschen neu zu programmieren. Loyalitäten zu ändern. Identitäten zu erschaffen.' Er schüttelt den Kopf. 'Er glaubt, dass Bewusstsein nur ein chemischer Prozess ist, den man manipulieren kann. Und er hat bewiesen, dass er recht hat. Das macht ihn so gefährlich.'",
+        choices: [{
+            text: "Fragen, warum die Klinikleitung diese Arbeit zulässt",
+            nextId: "ask_administration_approval"
+        }, {
+            text: "Fragen, ob Dr. Bleich selbst an dem Projekt mitgewirkt hat",
+            nextId: "ask_Bleich_involvement",
+            addClue: {
+                id: "jenkins_control",
+                text: "Dr. Jenkins' Hauptmotivation ist Kontrolle und die Macht, menschliches Bewusstsein zu manipulieren und neu zu programmieren."
+            }
+        }, {
+            text: "Nach dem verschwundenen Dr. Wilson fragen", nextId: "patient67_connection"
+        }]
+    },
+
+// HANDLUNGSSTRANG 3: FEHLENDE SZENEN
+
+// Die Karte heimlich abzeichnen
+    copy_map: {
+        text: "Du nimmst dir einen Moment, um die Kratzer an der Wand unauffällig auf ein Notizbuchblatt zu übertragen, während Rachel abgelenkt ist. Die Karte ist einfach, aber präzise – sie zeigt einen Weg vom Hauptgebäude zu einem markierten Punkt im Keller. Als du fertig bist, steckst du das Notizbuch weg. 'Ich denke, ich habe genug gesehen', sagst du zu Rachel. Sie nickt knapp. 'Wie Sie meinen, Marshal.' Beim Verlassen des Raumes überkommt dich ein starkes Déjà-vu. Der Korridor, die Zimmer – alles erscheint seltsam vertraut, als wärest du schon oft hier gewesen. Nicht als Besucher, sondern... anders.",
+        choices: [{
+            text: "Rachel nach diesem seltsamen Gefühl fragen", nextId: "ask_rachel_familiarity"
+        }, {
+            text: "Die Umgebung genauer untersuchen", nextId: "examine_ward_area"
+        }, {
+            text: "Dem Weg auf der Karte folgen und den Keller aufsuchen",
+            nextId: "sneak_basement",
+            addClue: {
+                id: "map_copied",
+                text: "Du hast die in die Wand geritzte Karte kopiert, die einen Weg zu einem bestimmten Ort im Keller zeigt."
+            }
+        }]
+    },
+
+// Fragen, ob Sheehan dich für den eingeschleusten Agenten hält
+    ask_if_agent: {
+        text: "Du siehst Dr. Bleich direkt an. 'Glauben Sie, dass ICH dieser eingeschleuste Agent bin?' Bleich hält deinem Blick stand. 'Was glauben Sie, Marshal?' Er betont den Titel auf eine Weise, die dich innerlich zusammenzucken lässt. 'Finden Sie es nicht seltsam, dass Sie sich kaum an Details Ihrer Anreise erinnern können? Oder an Ihren letzten Fall? Oder daran, wer genau Sie hierher geschickt hat?' Er lehnt sich vor. 'Ich sage nicht, dass Sie es sind. Ich sage nur, dass Sie vorsichtig sein sollten. Überprüfen Sie alles. Trauen Sie niemandem – nicht einmal sich selbst.' Er reicht dir den Schlüssel. 'Besonders, wenn Sie anfangen, sich an Dinge zu erinnern, die zu Ihrer jetzigen Identität nicht passen.'",
+        choices: [{
+            text: "Zugeben, dass du seltsame Visionen und Déjà-vu-Erlebnisse hattest",
+            nextId: "admit_visions",
+            addClue: {
+                id: "bleich_suspicion",
+                text: "Dr. Bleich deutet an, dass deine Identität als Marshal möglicherweise implantiert sein könnte und fordert dich auf, deine Erinnerungen zu hinterfragen."
+            }
+        }, {
+            text: "Den Schlüssel nehmen und zum Aktenschrank gehen", nextId: "basement_files"
+        }, {
+            text: "Seine Motive hinterfragen – warum hilft er dir?",
+            nextId: "question_bleich_motives"
+        }]
+    },
+
+// Auf die Kindheitserinnerungen konzentrieren
+    focus_childhood: {
+        text: "Du schließt die Augen und konzentrierst dich auf die aufblitzenden Erinnerungen an die Kinder. Ein Junge und ein Mädchen – Daniel und Rachel. Ihre Gesichter werden klarer. Du erinnerst dich an einen Geburtstag am See, Daniels siebten. Der Schokoladenkuchen, den Dolores gebacken hatte. Rachels Lachen, als sie ihren kleinen Bruder mit Wasser bespritzte. Das Gefühl der Sonne auf deiner Haut, der Stolz in deiner Brust. Dann ein späterer Moment: Du liest ihnen aus einem Buch vor, während ein Gewitter draußen tobt. Die Wärme des Feuers, der Geruch von Kakao. Diese Erinnerungen fühlen sich echt an – tiefer, lebendiger als alles, was du als 'Marshal' erlebt hast.",
+        choices: [{
+            text: "Versuchen, dich an den Tag des Unfalls zu erinnern",
+            nextId: "remember_loss",
+            addClue: {
+                id: "family_memories",
+                text: "Du hast klare Erinnerungen an deine Kinder Daniel und Rachel und deine Frau Dolores – Erinnerungen, die lebendiger wirken als dein Leben als Marshal."
+            }
+        }, {
+            text: "Nach Dolores und den Kindern in den Klinikakten suchen",
+            nextId: "search_family_records"
+        }, {
+            text: "Dr. Bleich aufsuchen und von diesen Erinnerungen berichten",
+            nextId: "talk_sheehan_identity"
+        }]
+    },
+
+// Fragen, warum Sheehan dir hilft
+    why_sheehan_helps: {
+        text: "'Warum helfen Sie mir, Dr. Bleich? Wenn ich wirklich dieser Laeddis bin – warum erinnern Sie mich an meine wahre Identität?' Bleich lächelt traurig. 'Weil wir Freunde waren, Andrew. Gute Freunde.' Er greift nach einem gerahmten Foto auf seinem Schreibtisch und dreht es zu dir. Es zeigt dich, Wilson und Bleich, lachend auf einer Konferenz. 'Wir drei haben zusammen studiert. Als Jenkins anfing, eure Arbeit zu missbrauchen, hast du mir davon erzählt. Ich hätte dir damals helfen sollen.' Seine Stimme bricht. 'Stattdessen dachte ich, du übertreibst. Dann war es zu spät – für dich, für deine Familie.' Er sieht dich fest an. 'Was jetzt geschieht, ist mein Versuch, diesen Fehler wiedergutzumachen. Dir zu helfen, dich selbst zurückzugewinnen. Und Wilson zu retten.'",
+        choices: [{
+            text: "Nach weiteren Details über eure gemeinsame Vergangenheit fragen",
+            nextId: "ask_shared_past"
+        }, {
+            text: "Fragen, was mit deiner Familie geschehen ist",
+            nextId: "inquire_family_fate",
+            addClue: {
+                id: "bleich_guilt",
+                text: "Dr. Bleich fühlt sich schuldig, weil er dir und Wilson nicht geholfen hat, als ihr Jenkins' Missbrauch eurer Forschung entdeckt habt."
+            }
+        }, {
+            text: "Fragen, ob es einen Weg gibt, dein wahres Selbst zurückzugewinnen",
+            nextId: "ask_recovery_possibility"
+        }]
+    },
+
+// WICHTIGE TWIST-SZENEN UND VERBINDUNGSSZENEN
+
+// Sheehan überreden, mit dir zu fliehen
+    convince_sheehan_escape: {
+        text: "'Kommen Sie mit mir', drängst du Dr. Bleich. 'Sie sind hier nicht sicher. Jenkins wird wissen, dass Sie mir geholfen haben.' Bleich schüttelt den Kopf. 'Ich kann nicht, Andrew. Jemand muss hier bleiben, um sie abzulenken. Um anderen Patienten zu helfen.' Er greift nach einem Ordner in seinem Schreibtisch. 'Hier sind Kopien von Beweisen, die ich gesammelt habe. Nicht so umfassend wie Wilsons, aber hilfreich.' Er überreicht dir den Ordner. 'Nimm den Hinterausgang. Ich werde ihnen sagen, du bist zum Haupteingang gerannt.' Ihr hört Schritte im Korridor. 'Geh jetzt! Finde Wilson. Und Andrew...' Er drückt deine Schulter. 'Vergiss nicht wieder, wer du bist.'",
+        choices: [{
+            text: "Danken und durch den Hinterausgang fliehen",
+            nextId: "escape_back_exit",
+            addClue: {
+                id: "bleich_sacrifice",
+                text: "Dr. Bleich ist zurückgeblieben, um deine Flucht zu decken, und hat dir zusätzliche Beweise übergeben."
+            }
+        }, {
+            text: "Darauf bestehen, dass er mitkommt", nextId: "insist_sheehan_comes"
+        }, {
+            text: "Zum Leuchtturm aufbrechen", nextId: "go_lighthouse"
+        }]
+    },
+
+// Mit Sheehan einen Plan schmieden
+    plan_confront_jenkins: {
+        text: "Du setzt dich, jetzt etwas gefasster, und besprichst mit Dr. Bleich die nächsten Schritte. 'Wir müssen Jenkins konfrontieren', sagst du. 'Beweise sichern.' Bleich runzelt die Stirn. 'Das wäre zu gefährlich. Er hat Sicherheitspersonal auf seiner Seite. Und was noch wichtiger ist – er kontrolliert, was die Leute hier glauben.' Er überlegt. 'Wilson hat die umfassendsten Beweise. Und ein vollständiges Gegenmittel für RX-78.' Er steht auf. 'Der Sturm lässt nach. Heute Nacht ist unsere beste Chance. Die Wachen am Nordtor sind reduziert.' Er zeichnet dir eine Karte. 'Folge diesem Pfad zum Leuchtturm. Wilson wartet dort. Ich werde hier Ablenkung schaffen und mich um Dr. Bleich kümmern. Er ist auf unserer Seite, aber er wurde bedroht.'",
+        choices: [{
+            text: "Dem Plan zustimmen und zum Leuchtturm aufbrechen",
+            nextId: "go_lighthouse",
+            addClue: {
+                id: "escape_plan",
+                text: "Dr. Bleich hat einen Plan entwickelt, damit du zum Leuchtturm gelangen kannst, während er für Ablenkung sorgt."
+            }
+        }, {
+            text: "Vorschlagen, zuerst weitere Beweise in Jenkins' Labor zu suchen",
+            nextId: "suggest_evidence_gathering"
+        }, {
+            text: "Fragen, ob es einen Plan B gibt, falls etwas schiefgeht",
+            nextId: "ask_about_plan_b"
+        }]
+    },
+
+// Nach einem Plan B fragen
+    ask_about_plan_b: {
+        text: "'Was, wenn etwas schiefgeht? Gibt es einen Plan B?' Dr. Bleich nickt anerkennend. 'Gute Frage. Immer der strategische Denker.' Er zieht eine kleine Karte hervor. 'Wenn du den Leuchtturm nicht erreichen kannst, gibt es ein Versteck am südlichen Strand. Eine kleine Hütte, die früher als Lagerraum für Fischereigeräte diente.' Er markiert den Ort. 'Dort habe ich Vorräte, Medikamente und eine Kopie von Wilsons Forschung deponiert. Und dies...' Er überreicht dir einen kleinen Schlüssel. 'Für ein Boot, das dort vertäut ist. Es hat genug Treibstoff, um das Festland zu erreichen.' Er sieht dich ernst an. 'Wenn alles andere fehlschlägt – nimm die Beweise mit und bring sie zur Öffentlichkeit.'",
+        choices: [{
+            text: "Zum Leuchtturm aufbrechen", nextId: "go_lighthouse", addClue: {
+                id: "backup_plan",
+                text: "Es gibt ein Versteck am südlichen Strand mit Vorräten und einem Boot als Notfallplan."
+            }
+        }, {
+            text: "Fragen, wem du auf dem Festland vertrauen kannst",
+            nextId: "ask_mainland_contacts"
+        }, {
+            text: "Dr. Bleich für seine Hilfe danken und dich verabschieden",
+            nextId: "thank_bleich_leave"
+        }]
+    },
+
+// Vorschlagen, weitere Beweise zu sammeln
+    suggest_evidence_gathering: {
+        text: "'Bevor wir uns trennen, sollten wir vielleicht noch weitere Beweise aus Jenkins' Labor sichern', schlägst du vor. Dr. Bleich überlegt kurz. 'Riskant, aber vielleicht notwendig. Jenkins führt ein detailliertes Protokoll aller Behandlungen.' Er öffnet eine Schublade und entnimmt einen Magnetausweis. 'Dies bringt dich in sein privates Labor im untersten Kellergeschoss des Ostflügels. Raum K-7.' Er zeichnet den Weg auf die Karte. 'Sei vorsichtig. Zu dieser Zeit sollte Jenkins bei der Abendbesprechung sein, aber Schwester Rachel oder andere könnten dort sein.' Er kritzelt einen Code auf einen Zettel. 'Das Passwort für seinen Computer. Suche nach Dateien mit der Bezeichnung 'JANUS-A.L.' oder 'Restrukturierungsprotokoll'.'",
+        choices: [{
+            text: "Den Plan akzeptieren und zum Kellerlabor gehen",
+            nextId: "infiltrate_jenkins_lab",
+            addClue: {
+                id: "lab_access",
+                text: "Dr. Bleich hat dir einen Magnetausweis und ein Passwort für Jenkins' privates Labor gegeben."
+            }
+        }, {
+            text: "Es als zu riskant ablehnen und direkt zum Leuchtturm gehen",
+            nextId: "go_lighthouse"
+        }, {
+            text: "Vorschlagen, dass ihr beide geht, um schneller zu sein",
+            nextId: "suggest_joint_mission"
+        }]
+    },
+
+// WEITERE FEHLENDE SZENEN
+
+// Die Behauptung abstreiten und wütend werden
+    deny_identity: {
+        text: "'Das ist absurd!', explodierst du. 'Ich bin ein US-Marshal! Ich wurde hierher geschickt, um einen verschwundenen Patienten zu finden!' Du greifst nach deiner Dienstmarke, hältst sie Bleich entgegen. 'Sehen Sie das? Das ist echt!' Dr. Bleich bleibt ruhig. 'Natürlich erscheint sie dir echt, Andrew. Die Erinnerung an ihre Aushändigung wurde sorgfältig in dein Gedächtnis implantiert.' Er nimmt die Marke, dreht sie um. 'Aber schau genauer hin. Die Seriennummer? Sie entspricht keinem bekannten Format. Der Prägestempel? Leicht abweichend vom Original.' Er reicht dir die Marke zurück. 'Dein Gehirn füllt die Unstimmigkeiten aus, weil es die falschen Erinnerungen schützen will. Aber ein Teil von dir weiß es bereits.'",
+        choices: [{
+            text: "Die Marke genauer untersuchen", nextId: "examine_badge", addClue: {
+                id: "badge_anomalies",
+                text: "Bei genauer Betrachtung zeigt deine Marke subtile Unstimmigkeiten, die auf eine Fälschung hindeuten könnten."
+            }
+        }, {
+            text: "Fragen, warum man dir eine falsche Identität geben würde",
+            nextId: "ask_false_identity_reason"
+        }, {
+            text: "Das Büro verlassen und einen klaren Kopf bekommen", nextId: "leave_clear_head"
+        }]
+    },
+
+// Die Marke genauer untersuchen
+    examine_badge: {
+        text: "Mit zitternden Händen betrachtest du deine Marke im Licht. Tatsächlich – die Prägung ist leicht unregelmäßig, die Ränder nicht so präzise, wie sie sein sollten. Die Seriennummer beginnt mit 'AW' statt dem üblichen 'USM'-Präfix. War das schon immer so? Du versuchst, dich an den Tag zu erinnern, als du die Marke erhalten hast, aber die Erinnerung ist verschwommen, wie ein Traum. Du wendest die Marke und bemerkst auf der Rückseite eine winzige Gravur: 'J-Corp'. Dr. Bleich beobachtet dich aufmerksam. 'J-Corp ist Jenkins' private Forschungsfirma', erklärt er leise. 'Sie stellt auch medizinische Ausrüstung her.' Du starrst auf die Marke, als würde sie dir plötzlich fremd erscheinen. War dein ganzes Leben als Marshal eine konstruierte Lüge?",
+        choices: [{
+            text: "Nach weiteren Beweisen für deine wahre Identität fragen",
+            nextId: "ask_for_proof",
+            addClue: {
+                id: "j_corp_marking",
+                text: "Deine Marke trägt eine winzige 'J-Corp'-Gravur – Jenkins' private Forschungsfirma, die offenbar die Fälschung hergestellt hat."
+            }
+        }, {
+            text: "Dr. Bleich fragen, wie die Gedächtnismanipulation funktioniert",
+            nextId: "ask_memory_manipulation"
+        }, {
+            text: "Wütend werden und Bleich beschuldigen, Teil der Verschwörung zu sein",
+            nextId: "accuse_bleich_conspiracy"
+        }]
+    },
+
+// Fragen, warum man dir eine falsche Identität geben würde
+    ask_false_identity_reason: {
+        text: "'Selbst wenn das stimmen würde – warum?', fragst du. 'Warum mir eine falsche Identität als Marshal geben?' Dr. Bleich lehnt sich zurück. 'Zwei Gründe. Erstens: Nach deinem Zusammenbruch hast du selbst darum gebeten. Der Schmerz über den Verlust deiner Familie war unerträglich.' Seine Augen werden mitfühlend. 'Aber der zweite Grund ist, warum Jenkins zustimmte: Es war der perfekte Test für Projekt JANUS. Ein Subjekt, das nicht nur vergisst, sondern eine völlig neue Identität annimmt und diese aufrechterhält.' Er senkt die Stimme. 'Du bist ihr Meisterstück, Andrew. Der Beweis, dass ihr Verfahren funktioniert. Ursprünglich entwickelt, um traumatisierten Soldaten zu helfen – jetzt ein Werkzeug zur vollständigen Identitätsmanipulation. Die Implikationen für Spionage, verdeckte Operationen...'",
+        choices: [{
+            text: "Fragen, ob Dr. Bleich an dem Projekt beteiligt war",
+            nextId: "ask_bleich_involvement"
+        }, {
+            text: "Nach Beweisen für deine frühere Identität als Andrew Laeddis fragen",
+            nextId: "ask_for_proof",
+            addClue: {
+                id: "project_purpose",
+                text: "Deine falsche Identität dient als Beweis für die Wirksamkeit von Projekt JANUS, das von seiner ursprünglichen therapeutischen Absicht zu einem Werkzeug für Identitätsmanipulation wurde."
+            }
+        }, {
+            text: "Fragen, wie du deine wahren Erinnerungen zurückbekommen kannst",
+            nextId: "ask_recovery_possibility"
+        }]
+    },
+
+// Freystatt über Visionen befragen
+    ask_Freystatt_visions: {
+        text: "Du entscheidest dich für den direkten Weg. 'Professor, ich hatte eine Vision – ich sah mich selbst in diesem Raum, wie ich diese Karte an die Wand ritzte.' Freystatts Gesicht zeigt kurz Überraschung, bevor er seine professionelle Maske wieder aufsetzt. 'Interessant. Halluzinationen können durch verschiedene Faktoren ausgelöst werden – Stress, Schlafmangel, die ungewohnte Umgebung.' Er tauscht einen Blick mit Rachel aus. 'Oder eine Vorgeschichte mit psychischen Erkrankungen.' Er tritt näher. 'Hatten Sie solche Visionen schon einmal, Marshal?' Seine Frage klingt beiläufig, aber du spürst das intensive Interesse dahinter. 'Vielleicht sollten wir Sie untersuchen lassen. Ein einfacher Gesundheitscheck.'",
+        choices: [{
+            text: "Die Untersuchung ablehnen und auf deiner Aufgabe bestehen",
+            nextId: "refuse_examination",
+            addClue: {
+                id: "freystatt_concern",
+                text: "Prof. Freystatt zeigte auffälliges Interesse an deinen Visionen und schlug sofort eine 'Untersuchung' vor."
+            }
+        }, {
+            text: "Scheinbar zustimmen, aber planen, dich später davonzustehlen",
+            nextId: "fake_agreement"
+        }, {
+            text: "Fragen, ob solche Visionen mit den experimentellen Behandlungen zusammenhängen könnten",
+            nextId: "question_treatments_connection"
+        }]
+    },
+
+// Die Untersuchung ablehnen
+    refuse_examination: {
+        text: "'Mit allem Respekt, Professor, ich bin hier, um einen Fall zu lösen, nicht um mich untersuchen zu lassen', sagst du bestimmt. Freystatts Lächeln wird kälter. 'Natürlich, Marshal. Ich wollte nur hilfreich sein.' Er macht eine Geste zu Rachel. 'Bitte stellen Sie sicher, dass unser Gast alles hat, was er braucht.' Zu dir gewandt: 'Vielleicht sollten Sie sich ausruhen. Der Sturm kann... desorientierend wirken.' Als er sich zum Gehen wendet, hörst du, wie er leise zu Rachel sagt: 'Informieren Sie Dr. Jenkins. Plan B vorbereiten.' Du tust, als hättest du nichts gehört, aber dein Alarmgefühl ist geweckt. Was ist 'Plan B'? Und warum fühlt sich dieser Ort zunehmend wie eine Falle an?",
+        choices: [{
+            text: "Rachel nach Dr. Jenkins fragen", nextId: "ask_about_jenkins", addClue: {
+                id: "plan_b",
+                text: "Prof. Freystatt erwähnte heimlich einen 'Plan B' gegenüber Rachel und wies sie an, Dr. Jenkins zu informieren."
+            }
+        }, {
+            text: "Vorgeben zu gehen, aber heimlich zurückkehren und lauschen",
+            nextId: "pretend_leave_eavesdrop"
+        }, {
+            text: "Den Keller erkunden, wie auf der Karte angezeigt", nextId: "sneak_basement"
+        }]
+    },
+
+// Rachel nach Jenkins fragen
+    ask_about_jenkins: {
+        text: "Als ihr allein seid, fragst du Rachel beiläufig: 'Dieser Dr. Jenkins – ich würde ihn gerne treffen. Wo finde ich ihn?' Rachel's Haltung versteift sich leicht. 'Dr. Jenkins ist schwer zu erreichen. Er verbringt die meiste Zeit im Ostflügel bei seinen Forschungen.' Sie schiebt einen Medikamentenwagen vor sich her. 'Normalerweise nimmt er keine Besucher an.' Du bemerkst ein leichtes Zittern in ihren Händen. 'Aber ich kann eine Nachricht hinterlassen, wenn Sie möchten.' Sie wirkt nervös, fast ängstlich. 'Haben Sie spezielle Fragen an ihn? Vielleicht kann ich helfen.' Ihre Augen scannen deinen Gesichtsausdruck, als suche sie nach Anzeichen von... etwas.",
+        choices: [{
+            text: "Nach seinen Forschungen im Ostflügel fragen",
+            nextId: "inquire_east_wing",
+            addClue: {
+                id: "rachel_nervous",
+                text: "Schwester Rachel wird nervös, wenn du nach Dr. Jenkins fragst, und versucht, dich von einem direkten Treffen mit ihm abzuhalten."
+            }
+        }, {
+            text: "Fragen, ob Jenkins Patient 67 behandelt hat", nextId: "ask_jenkins_patient67"
+        }, {
+            text: "Das Thema wechseln und nach dem Keller fragen", nextId: "inquire_basement"
+        }]
+    },
+
+// Jeden Aspekt der Marshal-Identität in Frage stellen
+    look_marshal_proof: {
+        text: "In deinem Quartier durchsuchst du fieberhaft deine persönlichen Gegenstände nach Beweisen für deine wahre Identität als Marshal. Deine Brieftasche enthält eine Dienstmarke und einen Ausweis – sie sehen echt aus, aber bei näherer Betrachtung fallen dir Unstimmigkeiten auf. Der Ausweis trägt ein Ausstellungsdatum von vor sechs Monaten, genau die Zeit, die Patient 67 laut Akte hier ist. Deine angebliche Dienstnummer findet sich in keinem deiner anderen Dokumente. Du versuchst, dich an Kollegen zu erinnern, an frühere Fälle – alles bleibt nebulös, ohne konkrete Details. In deinem Notizbuch findest du Einträge, die du nicht erinnerst geschrieben zu haben. Die Handschrift ändert sich subtil auf den letzten Seiten – wird fester, kontrollierter. Als würdest du zu jemandem anderem werden.",
+        choices: [{
+            text: "Die Brieftasche weiter untersuchen", nextId: "examine_wallet_deeper", addClue: {
+                id: "identity_inconsistencies",
+                text: "Deine Ausweispapiere als Marshal weisen subtile Unstimmigkeiten auf, und deine Erinnerungen an dieses Leben sind auffallend vage."
+            }
+        }, {
+            text: "Deine eigene Handschrift analysieren", nextId: "analyze_handwriting"
+        }, {
+            text: "Nach weiteren Hinweisen in deinem Zimmer suchen", nextId: "search_room_clues"
+        }]
+    },
+
+// Die Brieftasche gründlicher untersuchen
+    examine_wallet_deeper: {
+        text: "Du leerst den gesamten Inhalt deiner Brieftasche auf dem Bett aus. Hinter deinem Ausweis entdeckst du ein verborgenes Fach. Darin liegt ein kleines, abgegriffenes Foto – ein Schnappschuss einer Frau mit zwei kleinen Kindern vor einem Seehaus. Du drehst es um. Auf der Rückseite steht in verblasster Tinte: 'Andrew, wir lieben dich. Komm bald nach Hause. D.' Dein Herz rast. Das Gesicht der Frau weckt ein tiefes Gefühl von Verlust und Sehnsucht. Dolores. Dann ein weiteres verstecktes Detail – ein winziger Zettel, gefaltet zwischen Kreditkarten. Eine handschriftliche Notiz: 'Wenn du das liest: Du bist A.L. Nicht C.D. Erinnerungen manipuliert. Traue Freystatt nicht. Finde Wilson im Leuchtturm.' Die Handschrift ist deine eigene.",
+        choices: [{
+            text: "Versuchen, dich an Dolores und die Kinder zu erinnern",
+            nextId: "remember_family",
+            addClue: {
+                id: "hidden_photo",
+                text: "In deiner Brieftasche war ein verborgenes Foto deiner Familie und eine Notiz, die dich als A.L. (Andrew Laeddis) identifiziert und dich warnt, Freystatt nicht zu trauen."
+            }
+        }, {
+            text: "Zum Leuchtturm aufbrechen, um Wilson zu finden", nextId: "go_lighthouse"
+        }, {
+            text: "Dr. Bleich aufsuchen und ihm das Foto und die Notiz zeigen",
+            nextId: "show_bleich_evidence"
+        }]
+    },
+
+// Versuchen, sich an die Familie zu erinnern
+    remember_family: {
+        text: "Du starrst intensiv auf das Foto und konzentrierst dich auf die Gesichter. Langsam tauchen Erinnerungsfragmente auf: Dolores' Lachen, ihr Lieblingskleid – blau mit weißen Blumen. Der Junge – Daniel – wie er mit sechs Jahren sein erstes Fahrrad bekam. Das Mädchen – Rachel – ihre Leidenschaft fürs Klavierspielen. Der Geruch von Dolores' Apfelkuchen. Euer Hochzeitstag am See. Die gemeinsamen Abende am Kamin. Dann plötzlich: Flammen. Sirenen. Du, spät in der Nacht im Labor. Ein verzweifelter Anruf. Das Haus in Flammen. Deine Familie eingeschlossen. Die Schuldgefühle überwältigen dich. Du hättst da sein sollen. Hättest die fehlerhafte Elektrik reparieren sollen, wie versprochen. Die Erinnerungen fühlen sich so real an – tiefer und intensiver als alles, was du als 'Marshal' erlebt hast.",
+        choices: [{
+            text: "Zum Leuchtturm aufbrechen, um Wilson zu finden",
+            nextId: "go_lighthouse",
+            addClue: {
+                id: "family_tragedy_remembered",
+                text: "Du erinnerst dich an deine Familie und ihre tragischen Tod bei einem Hausbrand, während du im Labor arbeitest. Die Schuldgefühle darüber führten zu deinem Zusammenbruch."
+            }
+        }, {
+            text: "Prof. Freystatt konfrontieren", nextId: "confront_Freystatt_memories"
+        }, {
+            text: "Nach Beweisen suchen, ob diese Erinnerungen echt oder implantiert sind",
+            nextId: "search_memory_validation"
+        }]
+    },
+
+// Prof. Freystatt konfrontieren
+    confront_Freystatt_memories: {
+        text: "Du stürmst in Freystatts Büro, das Foto und die Notiz in der Hand. 'Was haben Sie mit mir gemacht?', forderst du. Freystatt bleibt ruhig, als hätte er dich erwartet. 'Ah, Dr. Laeddis. Sie kommen zurück.' Er seufzt. 'Früher als geplant.' Er bittet dich, Platz zu nehmen. 'Wir haben Ihnen geholfen, Andrew. Nach dem Tod Ihrer Familie waren Sie... gebrochen. Sie baten selbst um die Behandlung.' Er faltet die Hände. 'Was wir nicht wussten, war, dass Dr. Wilson Ihnen ein Gegenmittel verabreicht hatte. Er verriet das Projekt, entwendete Forschungsdaten.' Freystatts Augen werden kalt. 'Sie müssen verstehen – was wir hier tun, ist wichtiger als einzelne Personen. Die Fähigkeit, traumatische Erinnerungen zu löschen, neue Identitäten zu erschaffen... Stellen Sie sich die Anwendungen vor.'",
+        choices: [{
+            text: "Nach Wilson und seinem Verbleib fragen",
+            nextId: "ask_wilson_whereabouts",
+            addClue: {
+                id: "freystatt_admission",
+                text: "Prof. Freystatt hat zugegeben, dass du Andrew Laeddis bist und dass deine Identität als US-Marshal implantiert wurde, um deine traumatischen Erinnerungen zu unterdrücken."
+            }
+        }, {
+            text: "Fragen, ob Freystatt deine Familie gekannt hat", nextId: "ask_about_family"
+        }, {
+            text: "Freystatt konfrontieren und ihm vorwerfen, Gedankenmanipulation zu rechtfertigen",
+            nextId: "challenge_memory_manipulation"
+        }]
+    },
+
+// Darauf bestehen, gemeinsam zu fliehen
+    insist_together: {
+        text: "'Wir gehen gemeinsam oder gar nicht', bestehst du. 'Ich lasse dich nicht zurück, Ed.' Wilson schüttelt den Kopf. 'Andrew, sei vernünftig. Mit den Beweisen musst du entkommen. Ich kenne diesen Tunnel seit Jahren. Ich werde ihnen entwischen und dich später treffen.' Die Tür zum Leuchtturm splittert unter schweren Schlägen. 'Keine Zeit mehr zum Diskutieren!' Er drückt dich zur Falltür. Du kannst bereits Stimmen hören: Dr. Jenkins, Sicherheitspersonal, Freystatts kühle Befehle. 'Nimm das auch', sagt Wilson und überreicht dir eine zweite Flasche. 'Das vollständige Gegenmittel. Für den Notfall.' Mit einem letzten Nicken schiebt er dich in den Tunnel und schließt die Falltür. Über dir hörst du, wie die Eingangstür aufbricht.",
+        choices: [{
+            text: "Durch den Tunnel zum Boot eilen", nextId: "escape_tunnel", addClue: {
+                id: "complete_antidote",
+                text: "Wilson hat dir das vollständige Gegenmittel für RX-78 gegeben, bevor er zurückblieb, um deine Flucht zu decken."
+            }
+        }, {
+            text: "Die Falltür wieder öffnen und Wilson helfen", nextId: "help_wilson_fight"
+        }, {
+            text: "Leise im Tunnel verharren und lauschen", nextId: "listen_tunnel"
         }]
     }
 };

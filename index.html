@@ -24,6 +24,14 @@
             --text-max-height: 50vh;
         }
 
+        /* Touch-optimierte Variablen für Mobilgeräte */
+        @media (pointer: coarse) {
+            :root {
+                --button-padding: 16px 20px;
+                --button-font-size: 1.2em;
+            }
+        }
+
         /* Container für das gesamte Spiel */
         .game-container {
             max-width: 800px;
@@ -67,24 +75,46 @@
             margin-top: 20px;
         }
 
-        .choice-btn {
+        /* Progress Button Styles */
+        .button-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            width: 100%;
             background-color: #2a3b40;
             color: #d0d0d0;
             border: none;
-            padding: var(--button-padding);
-            cursor: pointer;
             border-radius: 5px;
-            transition: all 0.3s ease;
-            font-family: 'Georgia', serif;
+            padding: var(--button-padding);
             font-size: var(--button-font-size);
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
             text-align: left;
+            font-family: 'Georgia', serif;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
-        .choice-btn:hover {
-            background-color: #3d5159;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        .button-text {
+            position: relative;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .button-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: rgba(80, 120, 140, 0.7);
+            transition: width 0.05s linear;
+            border-radius: 5px;
+            pointer-events: none;
+            z-index: 1;
         }
 
         /* Notizbuch-Bereich */
@@ -172,81 +202,6 @@
             animation: fadeIn 2s ease;
         }
 
-        /* Sound Toggle Button */
-        .sound-toggle {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            background-color: #2a3b40;
-            color: #d0d0d0;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .sound-toggle:hover {
-            background-color: #3d5159;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
-
-        .sound-toggle .icon {
-            width: 20px;
-            height: 20px;
-            position: relative;
-        }
-
-        .sound-toggle .icon::before,
-        .sound-toggle .icon::after {
-            content: '';
-            position: absolute;
-        }
-
-        .sound-toggle .icon.sound-on::before {
-            width: 8px;
-            height: 8px;
-            background: #d0d0d0;
-            border-radius: 0 3px 3px 0;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .sound-toggle .icon.sound-on::after {
-            border: 6px solid transparent;
-            border-left: 11px solid #d0d0d0;
-            left: 9px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .sound-toggle .icon.sound-off::before {
-            width: 8px;
-            height: 8px;
-            background: #d0d0d0;
-            border-radius: 0 3px 3px 0;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .sound-toggle .icon.sound-off::after {
-            width: 2px;
-            height: 20px;
-            background: #d0d0d0;
-            transform: rotate(45deg);
-            left: 15px;
-            top: 0;
-        }
-
         /* Responsive Design */
         @media (max-width: 768px) {
             .game-container {
@@ -262,7 +217,7 @@
                 max-height: 40vh;
             }
 
-            .choice-btn {
+            .button {
                 font-size: 1em;
                 padding: 10px;
             }

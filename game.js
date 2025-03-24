@@ -1,182 +1,17 @@
-// Sound-Zustand und Sound-Toggle-Button
-let soundEnabled = true;
-let audioInitialized = false;
-let ambientSound = null;
-
 // Spielsteuerung
 let currentSceneId = 'start';
 let playerClues = {};
 let notebookExpanded = true;
 let typingInterval = null;
 
+// Prüfen, ob es sich um ein mobiles Gerät handelt
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 // DOM-Elemente
 const storyTextElement = document.getElementById('storyText');
 const choicesElement = document.getElementById('choices');
 const notebookContent = document.getElementById('notebookContent');
 const notebookToggle = document.getElementById('notebookToggle');
-
-// Funktion zum Erstellen eines einfacheren Ambient-Sounds
-const createAmbientSound = () => {
-    try {
-        console.log("Initialisiere Audio...");
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-
-        // Reduzierte Anzahl von Oszillatoren - besser für Performance
-        const oscillator1 = ctx.createOscillator();
-        const oscillator2 = ctx.createOscillator();
-
-        // Noise-Generator für Wind-Effekt
-        const noiseNode = createNoiseGenerator(ctx);
-
-        // Gain Nodes
-        const mainGain = ctx.createGain();
-        const osc1Gain = ctx.createGain();
-        const osc2Gain = ctx.createGain();
-        const noiseGain = ctx.createGain();
-
-        // Filter für das Rauschen
-        const filter = ctx.createBiquadFilter();
-        filter.type = 'bandpass';
-        filter.frequency.value = 400;
-        filter.Q.value = 0.5;
-
-        // Einfachere Oszillator-Einstellungen
-        oscillator1.type = 'sine';
-        oscillator1.frequency.value = 70;
-        osc1Gain.gain.value = 0.051
-
-        oscillator2.type = 'triangle';
-        oscillator2.frequency.value = 120;
-        osc2Gain.gain.value = 0.02;
-
-        noiseGain.gain.value = 0.05;
-
-        // Ein einzelner LFO für grundlegende Modulation
-        const lfo = ctx.createOscillator();
-        const lfoGain = ctx.createGain();
-
-        lfo.type = 'sine';
-        lfo.frequency.value = 0.1; // Sehr langsame Modulation
-        lfoGain.gain.value = 20; // Modulationstiefe
-
-        // Verbindungen für den LFO
-        lfo.connect(lfoGain);
-        lfoGain.connect(filter.frequency);
-
-        // Audio-Verbindungen
-        oscillator1.connect(osc1Gain);
-        oscillator2.connect(osc2Gain);
-        noiseNode.connect(filter);
-        filter.connect(noiseGain);
-
-        osc1Gain.connect(mainGain);
-        osc2Gain.connect(mainGain);
-        noiseGain.connect(mainGain);
-
-        mainGain.connect(ctx.destination);
-
-        // Starten der Oszillatoren
-        oscillator1.start();
-        oscillator2.start();
-        lfo.start();
-
-        // Anfangs stummschalten
-        mainGain.gain.value = 0;
-
-        // Einfachere Wind-Variation mit weniger Ressourcenverbrauch
-        let windInterval = null;
-
-        console.log("Audio initialisiert!");
-
-        return {
-            play: () => {
-                console.log("Sound abspielen...");
-                if (soundEnabled) {
-                    mainGain.gain.setValueAtTime(0, ctx.currentTime);
-                    mainGain.gain.linearRampToValueAtTime(0.25, ctx.currentTime + 1);
-
-                    // Wind-Variationen nur starten, wenn Sound aktiviert ist
-                    if (!windInterval) {
-                        windInterval = setInterval(() => {
-                            if (soundEnabled) {
-                                // Gelegentliche Filter-Änderungen
-                                filter.frequency.linearRampToValueAtTime(
-                                    300 + Math.random() * 200,
-                                    ctx.currentTime + 2
-                                );
-                            }
-                        }, 4000);
-                    }
-                }
-            },
-            stop: () => {
-                mainGain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.5);
-                if (windInterval) {
-                    clearInterval(windInterval);
-                    windInterval = null;
-                }
-            },
-            toggle: (enable) => {
-                console.log("Toggle Sound:", enable);
-                if (enable) {
-                    mainGain.gain.linearRampToValueAtTime(0.25, ctx.currentTime + 0.5);
-
-                    // Wind-Variationen nur starten, wenn Sound aktiviert ist
-                    if (!windInterval) {
-                        windInterval = setInterval(() => {
-                            if (soundEnabled) {
-                                // Gelegentliche Filter-Änderungen
-                                filter.frequency.linearRampToValueAtTime(
-                                    300 + Math.random() * 200,
-                                    ctx.currentTime + 2
-                                );
-                            }
-                        }, 4000);
-                    }
-                } else {
-                    mainGain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.5);
-                    if (windInterval) {
-                        clearInterval(windInterval);
-                        windInterval = null;
-                    }
-                }
-            }
-        };
-    } catch (e) {
-        console.error("Fehler bei Audio-Initialisierung:", e);
-        // Dummy-Objekt zurückgeben, wenn Audio nicht initialisiert werden kann
-        return {
-            play: () => {
-                console.log("Audio play (dummy)");
-            },
-            stop: () => {
-                console.log("Audio stop (dummy)");
-            },
-            toggle: () => {
-                console.log("Audio toggle (dummy)");
-            }
-        };
-    }
-};
-
-// Einfachere Hilfsfunktion zur Erzeugung eines Rauschens
-function createNoiseGenerator(audioContext) {
-    // Kleineres Buffer für bessere Performance
-    const bufferSize = audioContext.sampleRate;
-    const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
-    const output = noiseBuffer.getChannelData(0);
-
-    for (let i = 0; i < bufferSize; i++) {
-        output[i] = Math.random() * 2 - 1;
-    }
-
-    const noise = audioContext.createBufferSource();
-    noise.buffer = noiseBuffer;
-    noise.loop = true;
-    noise.start();
-
-    return noise;
-}
 
 // Notizbuch ein-/ausklappen
 function toggleNotebook() {
@@ -217,7 +52,7 @@ function updateNotebook() {
 }
 
 // Überarbeitete Typewriter-Funktion mit Callback für 'fertig'
-function typeWriter(text, element, speed = 30, onComplete) {
+function typeWriter(text, element, speed = 5, onComplete) {
     let i = 0;
     element.innerHTML = '';
 
@@ -260,44 +95,79 @@ function typeWriter(text, element, speed = 30, onComplete) {
     }, speed);
 }
 
-// Funktion zum Erstellen eines Choice-Buttons mit visueller Fortschrittsanimation
+// Funktion zum Erstellen eines Choice-Buttons mit Progress-Button-Funktionalität
 function createChoiceButton(choice) {
-    // Wrapper für den Button erstellen (für relative Positionierung)
-    const buttonWrapper = document.createElement('div');
-    buttonWrapper.className = 'button-wrapper';
-    buttonWrapper.style.position = 'relative';
-    buttonWrapper.style.overflow = 'hidden';
-    buttonWrapper.style.borderRadius = '5px';
-    buttonWrapper.style.marginBottom = '10px';
+    // Button-Container erstellen
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'button-container';
+    buttonContainer.style.position = 'relative';
+    buttonContainer.style.width = '100%';
+    buttonContainer.style.height = 'auto';
+    buttonContainer.style.marginBottom = '10px';
 
     // Button erstellen
     const button = document.createElement('button');
-    button.className = 'choice-btn';
-    button.textContent = choice.text;
-    button.style.position = 'relative';
+    button.className = 'button choice-btn';
     button.style.width = '100%';
-    button.style.zIndex = '2'; // Höherer z-index, damit Text über dem Overlay liegt
-    button.style.background = 'transparent'; // Transparenter Hintergrund
+    button.style.position = 'relative';
+    button.style.overflow = 'hidden';
+    button.style.borderRadius = '5px';
+    button.style.cursor = 'pointer';
+    button.style.backgroundColor = '#2a3b40';
+    button.style.color = '#d0d0d0';
+    button.style.border = 'none';
+    button.style.padding = '12px 15px';
+    button.style.fontSize = '1.1em';
+    button.style.textAlign = 'left';
+    button.style.fontFamily = 'Georgia, serif';
+    button.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.3)';
+    button.style.WebkitTapHighlightColor = 'transparent';
 
-    // Hintergrund-Element erstellen, das hinter dem Button liegt
+    // Button-Hintergrund (Fortschrittsbalken)
     const buttonBackground = document.createElement('div');
     buttonBackground.className = 'button-background';
     buttonBackground.style.position = 'absolute';
     buttonBackground.style.top = '0';
     buttonBackground.style.left = '0';
-    buttonBackground.style.width = '100%';
+    buttonBackground.style.width = '0%';
     buttonBackground.style.height = '100%';
-    buttonBackground.style.backgroundColor = '#2a3b40'; // Ursprüngliche Button-Farbe
+    buttonBackground.style.backgroundColor = 'rgba(80, 120, 140, 0.7)';
+    buttonBackground.style.transition = 'width 0.05s linear';
     buttonBackground.style.borderRadius = '5px';
-    buttonBackground.style.zIndex = '0'; // Niedrigster z-index
+    buttonBackground.style.pointerEvents = 'none';
+    buttonBackground.style.zIndex = '1';
 
-    // Long-Press-Variablen
-    const requiredPressTime = 2000; // 2 Sekunden Haltezeit
+    // Text-Wrapper für den Button
+    const buttonText = document.createElement('span');
+    buttonText.className = 'button-text';
+    buttonText.textContent = choice.text;
+    buttonText.style.position = 'relative';
+    buttonText.style.zIndex = '10';
+    buttonText.style.pointerEvents = 'none';
+
+    // Variablen für den Long-Press
+    const requiredPressTime = 1000; // 1 Sekunde für den Long-Press
     let pressTimer = null;
-    let animationTimer = null;
-    let startX, startY;
+    let startTime = 0;
+    let rafId = null;
+    let isPressed = false;
 
-    // Hilfsfunktion zur Ausführung der Aktion
+    // Funktion zum Aktualisieren des Fortschritts
+    function updateProgress() {
+        if (!isPressed) return;
+
+        const elapsedTime = Date.now() - startTime;
+        const progressPercent = Math.min(elapsedTime / requiredPressTime * 100, 100);
+
+        // Setze die Breite des Hintergrunds als Fortschrittsanzeige
+        buttonBackground.style.width = progressPercent + '%';
+
+        if (progressPercent < 100 && isPressed) {
+            rafId = requestAnimationFrame(updateProgress);
+        }
+    }
+
+    // Funktion zum Ausführen der Aktion
     function executeAction() {
         // Hinweis zum Notizbuch hinzufügen, falls vorhanden
         if (choice.addClue) {
@@ -309,52 +179,24 @@ function createChoiceButton(choice) {
         loadScene(choice.nextId);
     }
 
-    // Fortschritts-Element erstellen und einfügen
-    function createProgressElement() {
-        // Entferne vorhandene Progress-Elemente, falls vorhanden
-        const existingProgress = buttonWrapper.querySelector('.progress-overlay');
-        if (existingProgress) {
-            buttonWrapper.removeChild(existingProgress);
-        }
+    // Beim Drücken starten
+    function startPress(e) {
+        e.preventDefault(); // Verhindert Standardverhalten
 
-        // Erstelle neues Progress-Element
-        const progressOverlay = document.createElement('div');
-        progressOverlay.className = 'progress-overlay';
-        progressOverlay.style.position = 'absolute';
-        progressOverlay.style.left = '0';
-        progressOverlay.style.top = '0';
-        progressOverlay.style.height = '100%';
-        progressOverlay.style.width = '0%';
-        progressOverlay.style.backgroundColor = 'rgba(80, 120, 140, 0.7)'; // Etwas stärker für bessere Sichtbarkeit
-        progressOverlay.style.borderRadius = '5px';
-        progressOverlay.style.pointerEvents = 'none'; // Damit Klick-Events durchgehen
-        progressOverlay.style.transition = 'width 0.1s linear';
-        progressOverlay.style.zIndex = '1'; // Zwischen Hintergrund und Button
+        if (isPressed) return;
+        isPressed = true;
+        startTime = Date.now();
 
-        buttonWrapper.appendChild(progressOverlay);
-        return progressOverlay;
-    }
+        // Setze eine Mindestzeit, bevor der Timer für die Aktion starten kann
+        // Dies verhindert kurze Klicks auf Mobilgeräten
+        const minPressTime = 100; // 100ms Mindestdruck, um unbeabsichtigte Klicks zu verhindern
 
-    // Touch/Maus-Start: Timer starten
-    function startTimer(e) {
-        // Position speichern, falls es ein Touch-Event ist
-        if (e.type === 'touchstart') {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-        }
-
-        // Progress-Element erstellen
-        const progressElement = createProgressElement();
-
-        // Timer für die Fortschrittsanzeige
-        let elapsedTime = 0;
-        const updateInterval = 20; // Aktualisiere alle 20ms für flüssigere Animation
-
-        // Timer starten, der nach 2 Sekunden die Aktion ausführt
-        pressTimer = setTimeout(() => {
-            // Volle Zeit erreicht - Aktion ausführen
-            progressElement.style.backgroundColor = '#A3C2C3'; // Grünliche Erfolgsfarbe
-            progressElement.style.width = '100%';
+        // Timer für die geforderte Zeit
+        pressTimer = setTimeout(function () {
+            isPressed = false;
+            // Ändern Sie die Farbe für das erfolgreiche Drücken
+            buttonBackground.style.backgroundColor = '#A3C2C3';
+            buttonBackground.style.width = '100%';
 
             // Verzögerung, damit der Nutzer die erfolgreiche Aktivierung sieht
             setTimeout(() => {
@@ -362,90 +204,58 @@ function createChoiceButton(choice) {
             }, 200);
         }, requiredPressTime);
 
-        // Animation-Timer für die schrittweise Fortschrittsanzeige
-        let progress = 0;
-        animationTimer = setInterval(() => {
-            elapsedTime += updateInterval;
-            progress = (elapsedTime / requiredPressTime) * 100;
-
-            if (progress <= 100) {
-                progressElement.style.width = progress + '%';
-            } else {
-                clearInterval(animationTimer);
-            }
-        }, updateInterval);
+        // Starte die Fortschrittsanzeige
+        rafId = requestAnimationFrame(updateProgress);
     }
 
-    // Touch/Maus-Ende: Timer abbrechen, wenn vorzeitig losgelassen
-    function cancelTimer(e) {
-        // Bei Touch-Events: Prüfen, ob eine signifikante Bewegung stattgefunden hat
-        if (e.type === 'touchend' || e.type === 'touchcancel') {
-            const endX = e.changedTouches[0].clientX;
-            const endY = e.changedTouches[0].clientY;
-
-            // Wenn zu viel Bewegung stattgefunden hat, würden wir hier abbrechen
-            const moveThreshold = 20;
-            if (Math.abs(endX - startX) > moveThreshold || Math.abs(endY - startY) > moveThreshold) {
-                // Signifikante Bewegung - Timer auf jeden Fall abbrechen
-            }
+    // Beim Loslassen beenden
+    function endPress(e) {
+        if (e && e.preventDefault) {
+            e.preventDefault();
         }
 
-        if (pressTimer) {
-            clearTimeout(pressTimer);
-            pressTimer = null;
+        if (!isPressed) return;
+
+        clearTimeout(pressTimer);
+        cancelAnimationFrame(rafId);
+
+        // Auf Mobilgeräten und Desktop: Nur ausführen, wenn der Button lange genug gedrückt wurde
+        // Wir entfernen die Alternative für kurze Klicks
+        {
+            // Fortschrittsanzeige zurücksetzen
+            buttonBackground.style.transition = 'width 0.3s ease-out';
+            buttonBackground.style.width = '0%';
         }
 
-        if (animationTimer) {
-            clearInterval(animationTimer);
-            animationTimer = null;
-        }
-
-        // Fortschrittsanzeige zurücksetzen
-        const progressElement = buttonWrapper.querySelector('.progress-overlay');
-        if (progressElement) {
-            // Sanfte Animation zurück zu 0
-            progressElement.style.transition = 'width 0.3s ease-out';
-            progressElement.style.width = '0%';
-
-            // Nach der Animation entfernen
-            setTimeout(() => {
-                if (progressElement && progressElement.parentNode === buttonWrapper) {
-                    buttonWrapper.removeChild(progressElement);
-                }
-            }, 300);
-        }
+        isPressed = false;
     }
 
-    // Event-Listener für Maus
-    button.addEventListener('mousedown', startTimer);
-    button.addEventListener('mouseup', cancelTimer);
-    button.addEventListener('mouseleave', cancelTimer);
+    // Event-Listener für Desktop
+    button.addEventListener('mousedown', startPress);
+    button.addEventListener('mouseup', endPress);
+    button.addEventListener('mouseleave', endPress);
 
-    // Event-Listener für Touch
-    button.addEventListener('touchstart', startTimer);
-    button.addEventListener('touchend', cancelTimer);
-    button.addEventListener('touchcancel', cancelTimer);
+    // Event-Listener für Mobile
+    button.addEventListener('touchstart', startPress, {passive: false});
+    button.addEventListener('touchend', endPress, {passive: false});
+    button.addEventListener('touchcancel', endPress, {passive: false});
 
-    // Standard-Verhalten verhindern
-    button.addEventListener('click', (e) => {
-        e.preventDefault(); // Verhindert Standard-Klick-Verhalten
-    });
+    // Verhindert Kontextmenü bei Rechtsklick
+    button.addEventListener('contextmenu', e => e.preventDefault());
 
-    // Elemente zusammenfügen
-    buttonWrapper.appendChild(buttonBackground);
-    buttonWrapper.appendChild(button);
+    // Verhindert Scrollen während der Touch-Interaktion
+    button.addEventListener('touchmove', e => e.preventDefault(), {passive: false});
 
-    return buttonWrapper;
+    // Alles zusammenbauen
+    button.appendChild(buttonBackground);
+    button.appendChild(buttonText);
+    buttonContainer.appendChild(button);
+
+    return buttonContainer;
 }
 
-// Funktion zum Laden einer Szene
 function loadScene(sceneId) {
     console.log("Lade Szene:", sceneId);
-
-    // Wenn Audio initialisiert ist, abspielen
-    if (audioInitialized && ambientSound) {
-        ambientSound.play();
-    }
 
     currentSceneId = sceneId;
     const scene = gameData[sceneId];
@@ -470,7 +280,7 @@ function loadScene(sceneId) {
                     return; // Diese Entscheidung nicht anzeigen
                 }
 
-                // Erstelle Button mit visueller Fortschrittsanimation
+                // Erstelle Button mit Progress-Button-Funktionalität
                 const button = createChoiceButton(choice);
                 choicesElement.appendChild(button);
             });
@@ -478,128 +288,106 @@ function loadScene(sceneId) {
     }, 500);
 }
 
-// Funktion zum Initialisieren des Sounds nach einer Benutzerinteraktion
-function initializeAudio() {
-    if (!audioInitialized) {
-        console.log("Starte Audio-Initialisierung...");
-        ambientSound = createAmbientSound();
-        audioInitialized = true;
-
-        // Sound-Toggle-Button erstellen
-        const soundToggle = document.createElement('button');
-        soundToggle.className = 'sound-toggle';
-        soundToggle.title = 'Sound ein/aus';
-
-        const iconElement = document.createElement('div');
-        iconElement.className = 'icon sound-on';
-        soundToggle.appendChild(iconElement);
-
-        soundToggle.addEventListener('click', () => {
-            soundEnabled = !soundEnabled;
-            ambientSound.toggle(soundEnabled);
-            iconElement.className = soundEnabled ? 'icon sound-on' : 'icon sound-off';
-        });
-
-        document.body.appendChild(soundToggle);
-    }
-}
-
-// Funktion zum Erstellen des Start-Buttons mit visueller Fortschrittsanimation
+// Funktion zum Erstellen des Start-Buttons mit Progress-Button-Funktionalität
 function createStartButton() {
     const startButtonContainer = document.createElement('div');
     startButtonContainer.style.textAlign = 'center';
     startButtonContainer.style.marginTop = '40px';
 
-    // Wrapper für den Button erstellen
-    const buttonWrapper = document.createElement('div');
-    buttonWrapper.className = 'button-wrapper';
-    buttonWrapper.style.position = 'relative';
-    buttonWrapper.style.overflow = 'hidden';
-    buttonWrapper.style.borderRadius = '5px';
-    buttonWrapper.style.display = 'inline-block';
-    buttonWrapper.style.minWidth = '200px';
+    // Button-Container erstellen
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'button-container';
+    buttonContainer.style.position = 'relative';
+    buttonContainer.style.width = '200px';
+    buttonContainer.style.height = 'auto';
+    buttonContainer.style.margin = '0 auto';
 
     // Button erstellen
     const startButton = document.createElement('button');
-    startButton.textContent = 'Spiel starten';
-    startButton.className = 'choice-btn';
-    startButton.style.position = 'relative';
+    startButton.className = 'button';
     startButton.style.width = '100%';
-    startButton.style.zIndex = '2'; // Höherer z-index, damit Text über dem Overlay liegt
-    startButton.style.background = 'transparent';
+    startButton.style.position = 'relative';
+    startButton.style.overflow = 'hidden';
+    startButton.style.borderRadius = '5px';
+    startButton.style.cursor = 'pointer';
+    startButton.style.backgroundColor = '#2a3b40';
+    startButton.style.color = '#d0d0d0';
+    startButton.style.border = 'none';
+    startButton.style.padding = '15px 20px';
+    startButton.style.fontSize = '1.2em';
+    startButton.style.fontFamily = 'Georgia, serif';
+    startButton.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.3)';
+    startButton.style.WebkitTapHighlightColor = 'transparent';
 
-    // Hintergrund-Element erstellen
+    // Button-Hintergrund (Fortschrittsbalken)
     const buttonBackground = document.createElement('div');
     buttonBackground.className = 'button-background';
     buttonBackground.style.position = 'absolute';
     buttonBackground.style.top = '0';
     buttonBackground.style.left = '0';
-    buttonBackground.style.width = '100%';
+    buttonBackground.style.width = '0%';
     buttonBackground.style.height = '100%';
-    buttonBackground.style.backgroundColor = '#2a3b40'; // Ursprüngliche Button-Farbe
+    buttonBackground.style.backgroundColor = 'rgba(80, 120, 140, 0.7)';
+    buttonBackground.style.transition = 'width 0.05s linear';
     buttonBackground.style.borderRadius = '5px';
-    buttonBackground.style.zIndex = '0';
+    buttonBackground.style.pointerEvents = 'none';
+    buttonBackground.style.zIndex = '1';
 
-    // Long-Press-Variablen
-    const requiredPressTime = 2000; // 2 Sekunden Haltezeit
+    // Text-Wrapper für den Button
+    const buttonText = document.createElement('span');
+    buttonText.className = 'button-text';
+    buttonText.textContent = 'Spiel starten';
+    buttonText.style.position = 'relative';
+    buttonText.style.zIndex = '10';
+    buttonText.style.pointerEvents = 'none';
+
+    // Variablen für den Long-Press
+    const requiredPressTime = 1000; // 1 Sekunde für den Long-Press
     let pressTimer = null;
-    let animationTimer = null;
-    let startX, startY;
+    let startTime = 0;
+    let rafId = null;
+    let isPressed = false;
 
-    // Hilfsfunktion zur Ausführung der Start-Aktion
+    // Funktion zum Aktualisieren des Fortschritts
+    function updateProgress() {
+        if (!isPressed) return;
+
+        const elapsedTime = Date.now() - startTime;
+        const progressPercent = Math.min(elapsedTime / requiredPressTime * 100, 100);
+
+        // Setze die Breite des Hintergrunds als Fortschrittsanzeige
+        buttonBackground.style.width = progressPercent + '%';
+
+        if (progressPercent < 100 && isPressed) {
+            rafId = requestAnimationFrame(updateProgress);
+        }
+    }
+
+    // Funktion zum Starten des Spiels
     function executeStartAction() {
         console.log("Spiel wird gestartet!");
-        // initializeAudio(); // Audio nach Benutzerinteraktion initialisieren
         startButtonContainer.remove(); // Button entfernen
         loadScene('start'); // Spiel starten
     }
 
-    // Fortschritts-Element erstellen und einfügen
-    function createProgressElement() {
-        // Entferne vorhandene Progress-Elemente, falls vorhanden
-        const existingProgress = buttonWrapper.querySelector('.progress-overlay');
-        if (existingProgress) {
-            buttonWrapper.removeChild(existingProgress);
-        }
+    // Beim Drücken starten
+    function startPress(e) {
+        e.preventDefault(); // Verhindert Standardverhalten
 
-        // Erstelle neues Progress-Element
-        const progressOverlay = document.createElement('div');
-        progressOverlay.className = 'progress-overlay';
-        progressOverlay.style.position = 'absolute';
-        progressOverlay.style.left = '0';
-        progressOverlay.style.top = '0';
-        progressOverlay.style.height = '100%';
-        progressOverlay.style.width = '0%';
-        progressOverlay.style.backgroundColor = 'rgba(80, 120, 140, 0.7)'; // Etwas stärker für bessere Sichtbarkeit
-        progressOverlay.style.borderRadius = '5px';
-        progressOverlay.style.pointerEvents = 'none'; // Damit Klick-Events durchgehen
-        progressOverlay.style.transition = 'width 0.1s linear';
-        progressOverlay.style.zIndex = '1'; // Zwischen Hintergrund und Button
+        if (isPressed) return;
+        isPressed = true;
+        startTime = Date.now();
 
-        buttonWrapper.appendChild(progressOverlay);
-        return progressOverlay;
-    }
+        // Setze eine Mindestzeit, bevor der Timer für die Aktion starten kann
+        // Dies verhindert kurze Klicks auf Mobilgeräten
+        const minPressTime = 100; // 100ms Mindestdruck, um unbeabsichtigte Klicks zu verhindern
 
-    // Touch/Maus-Start: Timer starten
-    function startTimer(e) {
-        // Position speichern, falls es ein Touch-Event ist
-        if (e.type === 'touchstart') {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-        }
-
-        // Progress-Element erstellen
-        const progressElement = createProgressElement();
-
-        // Timer für die Fortschrittsanzeige
-        let elapsedTime = 0;
-        const updateInterval = 20; // Aktualisiere alle 20ms für flüssigere Animation
-
-        // Timer starten, der nach 2 Sekunden die Aktion ausführt
-        pressTimer = setTimeout(() => {
-            // Volle Zeit erreicht - Aktion ausführen
-            progressElement.style.backgroundColor = '#A3C2C3'; // Grünliche Erfolgsfarbe
-            progressElement.style.width = '100%';
+        // Timer für die geforderte Zeit
+        pressTimer = setTimeout(function () {
+            isPressed = false;
+            // Ändern Sie die Farbe für das erfolgreiche Drücken
+            buttonBackground.style.backgroundColor = '#A3C2C3';
+            buttonBackground.style.width = '100%';
 
             // Verzögerung, damit der Nutzer die erfolgreiche Aktivierung sieht
             setTimeout(() => {
@@ -607,86 +395,60 @@ function createStartButton() {
             }, 200);
         }, requiredPressTime);
 
-        // Animation-Timer für die schrittweise Fortschrittsanzeige
-        let progress = 0;
-        animationTimer = setInterval(() => {
-            elapsedTime += updateInterval;
-            progress = (elapsedTime / requiredPressTime) * 100;
-
-            if (progress <= 100) {
-                progressElement.style.width = progress + '%';
-            } else {
-                clearInterval(animationTimer);
-            }
-        }, updateInterval);
+        // Starte die Fortschrittsanzeige
+        rafId = requestAnimationFrame(updateProgress);
     }
 
-    // Touch/Maus-Ende: Timer abbrechen, wenn vorzeitig losgelassen
-    function cancelTimer(e) {
-        // Bei Touch-Events: Prüfen, ob eine signifikante Bewegung stattgefunden hat
-        if (e.type === 'touchend' || e.type === 'touchcancel') {
-            const endX = e.changedTouches[0].clientX;
-            const endY = e.changedTouches[0].clientY;
-
-            // Wenn zu viel Bewegung stattgefunden hat, würden wir hier abbrechen
-            const moveThreshold = 20;
-            if (Math.abs(endX - startX) > moveThreshold || Math.abs(endY - startY) > moveThreshold) {
-                // Signifikante Bewegung - Timer auf jeden Fall abbrechen
-            }
+    // Beim Loslassen beenden
+    function endPress(e) {
+        if (e && e.preventDefault) {
+            e.preventDefault();
         }
 
-        if (pressTimer) {
-            clearTimeout(pressTimer);
-            pressTimer = null;
+        if (!isPressed) return;
+
+        clearTimeout(pressTimer);
+        cancelAnimationFrame(rafId);
+
+        // Auf Mobilgeräten und Desktop: Nur ausführen, wenn der Button lange genug gedrückt wurde
+        // Wir entfernen die Alternative für kurze Klicks
+        {
+            // Fortschrittsanzeige zurücksetzen
+            buttonBackground.style.transition = 'width 0.3s ease-out';
+            buttonBackground.style.width = '0%';
         }
 
-        if (animationTimer) {
-            clearInterval(animationTimer);
-            animationTimer = null;
-        }
-
-        // Fortschrittsanzeige zurücksetzen
-        const progressElement = buttonWrapper.querySelector('.progress-overlay');
-        if (progressElement) {
-            // Sanfte Animation zurück zu 0
-            progressElement.style.transition = 'width 0.3s ease-out';
-            progressElement.style.width = '0%';
-
-            // Nach der Animation entfernen
-            setTimeout(() => {
-                if (progressElement && progressElement.parentNode === buttonWrapper) {
-                    buttonWrapper.removeChild(progressElement);
-                }
-            }, 300);
-        }
+        isPressed = false;
     }
 
-    // Event-Listener für Maus
-    startButton.addEventListener('mousedown', startTimer);
-    startButton.addEventListener('mouseup', cancelTimer);
-    startButton.addEventListener('mouseleave', cancelTimer);
+    // Event-Listener für Desktop
+    startButton.addEventListener('mousedown', startPress);
+    startButton.addEventListener('mouseup', endPress);
+    startButton.addEventListener('mouseleave', endPress);
 
-    // Event-Listener für Touch
-    startButton.addEventListener('touchstart', startTimer);
-    startButton.addEventListener('touchend', cancelTimer);
-    startButton.addEventListener('touchcancel', cancelTimer);
+    // Event-Listener für Mobile
+    startButton.addEventListener('touchstart', startPress, {passive: false});
+    startButton.addEventListener('touchend', endPress, {passive: false});
+    startButton.addEventListener('touchcancel', endPress, {passive: false});
 
-    // Standard-Verhalten verhindern
-    startButton.addEventListener('click', (e) => {
-        e.preventDefault(); // Verhindert Standard-Klick-Verhalten
-    });
+    // Verhindert Kontextmenü bei Rechtsklick
+    startButton.addEventListener('contextmenu', e => e.preventDefault());
 
-    // Elemente zusammenfügen
-    buttonWrapper.appendChild(buttonBackground);
-    buttonWrapper.appendChild(startButton);
-    startButtonContainer.appendChild(buttonWrapper);
+    // Verhindert Scrollen während der Touch-Interaktion
+    startButton.addEventListener('touchmove', e => e.preventDefault(), {passive: false});
+
+    // Alles zusammenbauen
+    startButton.appendChild(buttonBackground);
+    startButton.appendChild(buttonText);
+    buttonContainer.appendChild(startButton);
+    startButtonContainer.appendChild(buttonContainer);
 
     return startButtonContainer;
 }
 
-// Spiel starten mit Start-Button anstelle von automatischem Start
-window.onload = function () {
-    console.log("Seite geladen, erstelle Start-Button...");
+// Für die Seiteninitialisierung - nur ein Event-Handler
+document.addEventListener('DOMContentLoaded', function () {
+    console.log("DOM geladen, erstelle Start-Button...");
     const startButtonContainer = createStartButton();
     document.querySelector('.game-container').appendChild(startButtonContainer);
-};
+});
